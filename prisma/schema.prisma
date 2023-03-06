@@ -1,16 +1,35 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-generator client {
-  provider = "prisma-client-js"
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-model ParkedCar {
-  id        Int      @id @default(autoincrement())
-  plate     String
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator pothos {
+  provider = "prisma-pothos-types"
+}
+
+model VehicleOwner {
+  id           String         @id @unique @default(uuid())
+  firstname    String
+  lastname     String
+  LicensePlate LicensePlate[]
+}
+
+model Vehicle {
+  id               Int          @id @unique @default(autoincrement())
+  licensePlate     LicensePlate @relation(references: [sign], fields: [licensePlateSign])
+  licensePlateSign String
+}
+
+model LicensePlate {
+  owner         VehicleOwner @relation(references: [id], fields: [ownerId])
+  ownerId       String
+  sign          String       @id @unique
+  Vehicle       Vehicle[]
 }

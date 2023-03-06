@@ -13,7 +13,11 @@
     "seed": "ts-node prisma/seed.ts"
   },
   "dependencies": {
+    "@pothos/core": "^3.27.1",
+    "@pothos/plugin-prisma": "^3.41.3",
     "@prisma/client": "^4.11.0",
+    "graphql": "^16.6.0",
+    "graphql-yoga": "^3.7.0",
     "next": "^13.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0"
