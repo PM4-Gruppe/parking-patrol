@@ -3,7 +3,7 @@ import { builder } from '../builder';
 builder.prismaObject('Vehicle', {
   fields: (t) => ({
     id: t.exposeID('id'),
-    licensePlate: t.relation('licensePlate')
+    licensePlate: t.relation('licensePlate'),
   })
 })
 
