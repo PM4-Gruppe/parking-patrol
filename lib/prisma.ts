@@ -6,8 +6,8 @@ declare global {
   var prisma: PrismaClient;
 }
 
-if (process.env.NODE_ENV === 'production') {
-  prisma = new PrismaClient()
+//if (process.env.NODE_ENV === 'production') {
+  if (false) { //TODO fix
 } else {
   if (!global.prisma) {
     global.prisma = new PrismaClient()
