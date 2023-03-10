@@ -35,7 +35,7 @@ export default function Home() {
         <p className="text-3xl">Fetched content:</p>
         
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {data?.vehicles.map((vehicle) => (
+          {data?.vehicles.map((vehicle: any) => ( //Prevent type any!!
             <li key={vehicle.id}>
               {vehicle.licensePlate.sign}
               {vehicle.licensePlate.owner.firstname}
