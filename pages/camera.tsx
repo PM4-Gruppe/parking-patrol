@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { PhotoTaker } from '../components/molecule/photoTaker'
+import { PhotoChoose } from '../components/molecule/PhotoChoose'
 
 export default function Camera() {
     return (
@@ -9,7 +9,7 @@ export default function Camera() {
                 <link rel="icon" href="/favicon.svg" />
             </Head>
             <p>Please select a already taken photo or take a new one!</p>
-            <PhotoTaker />
+            <PhotoChoose />
         </div>
     )
 }

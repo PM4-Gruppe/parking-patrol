@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export const PhotoTaker: React.FC = () => {
+export const PhotoChoose: React.FC = () => {
   const [image, setImage] = useState<string | null>(null);
   const handleImageSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImage = event.target.files?.[0];
@@ -19,4 +19,4 @@ export const PhotoTaker: React.FC = () => {
   );
 };
 
-export default PhotoTaker;
+export default PhotoChoose;
