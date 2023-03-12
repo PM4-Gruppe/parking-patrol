@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { PhotoTaker } from '../components/molecule/photoTaker'
-//import PhotoTaker from '../components/molecule/photoTaker'
 
 export default function Camera() {
     return (
@@ -9,6 +8,7 @@ export default function Camera() {
                 <title>Parking Patrol - Camera</title>
                 <link rel="icon" href="/favicon.svg" />
             </Head>
+            <p>Please select a already taken photo or take a new one!</p>
             <PhotoTaker />
         </div>
     )
