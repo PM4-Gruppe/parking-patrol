@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { PhotoChoose } from '../components/molecule/PhotoChoose'
+import TakePhoto from '../components/molecule/TakePhoto'
 
 export default function Camera() {
     return (
@@ -10,6 +11,9 @@ export default function Camera() {
             </Head>
             <p>Please select a already taken photo or take a new one!</p>
             <PhotoChoose />
+            <TakePhoto />
         </div>
     )
 }
+
+
