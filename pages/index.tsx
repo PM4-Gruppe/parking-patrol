@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { parkedCars } from '../data/parkedCars'
 import { gql, useQuery } from '@apollo/client'
+import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 
 const AllVehiclesQuery = gql(`
   query {
@@ -33,7 +34,7 @@ export default function Home() {
 
       <div className="container mx-auto max-w-5xl my-20">
         <p className="text-3xl">Fetched content:</p>
-        
+
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {data?.vehicles.map((vehicle: any) => ( //Prevent type any!!
             <li key={vehicle.id}>
@@ -45,7 +46,7 @@ export default function Home() {
         </ul>
       </div>
 
-      
+
       <div className="container mx-auto max-w-5xl my-20">
         <p className="text-3xl">Hardcoded content:</p>
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -63,3 +64,5 @@ export default function Home() {
     </div>
   )
 }
+
+export const getServerSideProps = withPageAuthRequired();
