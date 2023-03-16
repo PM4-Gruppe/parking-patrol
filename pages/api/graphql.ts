@@ -1,0 +1,20 @@
+import { createYoga } from 'graphql-yoga'
+import type { NextApiRequest, NextApiResponse } from 'next'
+import { schema } from '../../graphql/schema'
+import { createContext } from '../../graphql/context'
+import { withApiAuthRequired, getSession } from '@auth0/nextjs-auth0';
+
+export default withApiAuthRequired(createYoga<{
+  req: NextApiRequest
+  res: NextApiResponse
+}>({
+  schema,
+  context: createContext,
+  graphqlEndpoint: '/api/graphql'
+}))
+
+export const config = {
+  api: {
+    bodyParser: false
+  }
+}
