@@ -14,22 +14,49 @@ generator pothos {
   provider = "prisma-pothos-types"
 }
 
-model VehicleOwner {
-  id           String         @id @unique @default(uuid())
-  firstname    String
-  lastname     String
-  LicensePlate LicensePlate[]
+model Car_Manufacturer {
+  Name      String      @id @unique
+  Car_Model Car_Model[]
 }
 
-model Vehicle {
-  id               Int          @id @unique @default(autoincrement())
-  licensePlate     LicensePlate @relation(references: [sign], fields: [licensePlateSign])
-  licensePlateSign String
+model Car_Model {
+  Model            String           @id @unique
+  Car_Manufacturer Car_Manufacturer @relation(references: [Name], fields: [Manufacturer])
+  Manufacturer     String
+  Parked_Car       Parked_Car[]
 }
 
-model LicensePlate {
-  owner         VehicleOwner @relation(references: [id], fields: [ownerId])
-  ownerId       String
-  sign          String       @id @unique
-  Vehicle       Vehicle[]
+model Color {
+  Name       String       @id @unique
+  Parked_Car Parked_Car[]
+}
+
+model Parked_Car {
+  Number_Plate String
+  Control_Time DateTime
+  Car_Model    Car_Model @relation(references: [Model], fields: [Model])
+  Model        String
+  Car_Color    Color     @relation(references: [Name], fields: [Color])
+  Color        String
+  Latitude     Float
+  Longitude    Float
+  Controller   String    @db.VarChar(32)
+  Photo_Path   String
+
+  @@id([Number_Plate, Control_Time], name: "Parked_Car_pkey")
+}
+
+model Parkzone_Type {
+  Parkzone_Type String     @id @unique
+  Description   String?
+  Parkzone      Parkzone[]
+}
+
+model Parkzone {
+  Name          String        @id @unique
+  Parkzone_Type Parkzone_Type @relation(references: [Parkzone_Type], fields: [ParkzoneType])
+  ParkzoneType  String
+  Latitude      Float
+  Longitude     Float
+  Radius        Float
 }
