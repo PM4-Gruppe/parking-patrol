@@ -1,0 +1,20 @@
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+interface Props {
+  filePath: string;
+}
+
+const savePhotoToDatabase = async ({ filePath }: Props) => {
+  try {
+    const photo = await prisma.photo.create({
+      data: {
+        path: filePath,
+      },
+    });
+    console.log(`Photo saved to database with ID: ${photo.id}`);
+  } catch (error) {
+    console.error(error);
+  }
+};
