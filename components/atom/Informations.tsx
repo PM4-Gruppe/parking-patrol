@@ -15,7 +15,7 @@ function getPhotoInformations(photoPath: PathLike) {
         },
         body: body,
     })
-        .then((res: Response) => res.json())
+        .then((res: Promise<Response>) => res.json())
         .then((json: JSON) => console.log(json))
         .catch((err: Error) => {
             console.log(err);
