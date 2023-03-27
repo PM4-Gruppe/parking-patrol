@@ -1,16 +1,15 @@
 import { builder } from '../builder';
 
-builder.prismaObject('Vehicle', {
+/*builder.prismaObject('Parked_Car', {
   fields: (t) => ({
-    id: t.exposeID('id'),
-    licensePlate: t.relation('licensePlate'),
+    model: t.exposeID('Model'),
   })
-})
+})*/
 
-builder.queryField('vehicles', (t) =>
+/*builder.queryField('cars', (t) =>
   t.prismaField({
-    type: ['Vehicle'],
+    type: ['Parked_Car'],
     resolve: (query, _parent, _args, _ctx, _info) =>
-      prisma.vehicle.findMany({ ...query })
+      prisma.parked_Car.findMany({ ...query })
   })
-)
+)*/

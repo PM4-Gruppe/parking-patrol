@@ -4,25 +4,18 @@ import { gql, useQuery } from '@apollo/client'
 
 const AllVehiclesQuery = gql(`
   query {
-    vehicles {
-      id
-      licensePlate {
-        sign
-        owner {
-          firstname
-          lastname
-        }
-      }
+    LicensePlates {
+      sign
     }
   }
 `)
 
+
+console.log('Test:', AllVehiclesQuery)
 export default function Home() {
   const { data, loading, error } = useQuery(AllVehiclesQuery)
   if (loading) return <p>Loading...</p>
   if (error) return <p>Oh no... {error.message}</p>
-
-  console.log('hallo', data)
 
   return (
     <div>
@@ -33,19 +26,17 @@ export default function Home() {
 
       <div className="container mx-auto max-w-5xl my-20">
         <p className="text-3xl">Fetched content:</p>
-        
+
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {data?.vehicles.map((vehicle) => (
+          {data?.LicensePlates.map((vehicle: any) => (
             <li key={vehicle.id}>
               {vehicle.licensePlate.sign}
-              {vehicle.licensePlate.owner.firstname}
-              {vehicle.licensePlate.owner.lastname}
             </li>
           ))}
         </ul>
       </div>
 
-      
+
       <div className="container mx-auto max-w-5xl my-20">
         <p className="text-3xl">Hardcoded content:</p>
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">

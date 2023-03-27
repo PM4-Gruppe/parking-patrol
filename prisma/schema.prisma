@@ -32,16 +32,16 @@ model Color {
 }
 
 model Parked_Car {
-  Number_Plate String
-  Control_Time DateTime
-  Car_Model    Car_Model @relation(references: [Model], fields: [Model])
-  Model        String
-  Car_Color    Color     @relation(references: [Name], fields: [Color])
-  Color        String
-  Latitude     Float
-  Longitude    Float
-  Controller   String    @db.VarChar(32)
-  Photo_Path   String
+  Number_Plate  String
+  Control_Time  DateTime
+  Car_Model     Car_Model @relation(references: [Model], fields: [Model])
+  Model         String
+  Car_Color     Color     @relation(references: [Name], fields: [Color])
+  Color         String
+  Latitude      Float
+  Longitude     Float
+  Car_Inspector String    @db.VarChar(256)
+  Photo_Path    String
 
   @@id([Number_Plate, Control_Time], name: "Parked_Car_pkey")
 }
