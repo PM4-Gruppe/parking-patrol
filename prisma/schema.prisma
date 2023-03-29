@@ -14,49 +14,49 @@ generator pothos {
   provider = "prisma-pothos-types"
 }
 
-model Car_Manufacturer {
-  Name      String      @id @unique
-  Car_Model Car_Model[]
+model CarManufacturer {
+  manufacturerName String     @id @unique
+  carModel         CarModel[]
 }
 
-model Car_Model {
-  Model            String           @id @unique
-  Car_Manufacturer Car_Manufacturer @relation(references: [Name], fields: [Manufacturer])
-  Manufacturer     String
-  Parked_Car       Parked_Car[]
+model CarModel {
+  modelName       String          @id @unique
+  carManufacturer CarManufacturer @relation(references: [manufacturerName], fields: [manufacturer])
+  manufacturer    String
+  parkedCar       ParkedCar[]
 }
 
 model Color {
-  Name       String       @id @unique
-  Parked_Car Parked_Car[]
+  colorName String      @id @unique
+  parkedCar ParkedCar[]
 }
 
-model Parked_Car {
-  Number_Plate  String
-  Control_Time  DateTime
-  Car_Model     Car_Model @relation(references: [Model], fields: [Model])
-  Model         String
-  Car_Color     Color     @relation(references: [Name], fields: [Color])
-  Color         String
-  Latitude      Float
-  Longitude     Float
-  Car_Inspector String    @db.VarChar(256)
-  Photo_Path    String
+model ParkedCar {
+  numberPlate  String
+  controlTime  DateTime
+  carModel     CarModel @relation(references: [modelName], fields: [model])
+  model        String
+  carColor     Color    @relation(references: [colorName], fields: [color])
+  color        String
+  latitude     Float
+  longitude    Float
+  carInspector String   @db.VarChar(256)
+  photoPath    String
 
-  @@id([Number_Plate, Control_Time], name: "Parked_Car_pkey")
-}
-
-model Parkzone_Type {
-  Parkzone_Type String     @id @unique
-  Description   String?
-  Parkzone      Parkzone[]
+  @@id([numberPlate, controlTime], name: "Parked_Car_pkey")
 }
 
 model Parkzone {
-  Name          String        @id @unique
-  Parkzone_Type Parkzone_Type @relation(references: [Parkzone_Type], fields: [ParkzoneType])
-  ParkzoneType  String
-  Latitude      Float
-  Longitude     Float
-  Radius        Float
+  parkzoneName     String       @id @unique
+  parkzoneType     ParkzoneType @relation(references: [typeName], fields: [parkzoneTypeName])
+  parkzoneTypeName String
+  latitude         Float
+  longitude        Float
+  radius           Float
+}
+
+model ParkzoneType {
+  typeName    String     @id @unique
+  description String?
+  parkzone    Parkzone[]
 }

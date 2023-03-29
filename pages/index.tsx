@@ -4,14 +4,13 @@ import { gql, useQuery } from '@apollo/client'
 
 const AllVehiclesQuery = gql(`
   query {
-    LicensePlates {
-      sign
+    NumberPlates {
+      numberPlate
     }
   }
 `)
 
 
-console.log('Test:', AllVehiclesQuery)
 export default function Home() {
   const { data, loading, error } = useQuery(AllVehiclesQuery)
   if (loading) return <p>Loading...</p>
@@ -28,7 +27,7 @@ export default function Home() {
         <p className="text-3xl">Fetched content:</p>
 
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {data?.LicensePlates.map((vehicle: any) => (
+          {data?.NumberPlates.map((vehicle: any) => (
             <li key={vehicle.id}>
               {vehicle.licensePlate.sign}
             </li>
@@ -42,10 +41,10 @@ export default function Home() {
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {parkedCars.map((car) => (
             <li key={'missing key'} className="shadow  max-w-md  rounded">
-              <img className="shadow-sm" src={String(car.evidencePhotoUrl)} />
+              <img className="shadow-sm" src={String(car.photoPath)} />
               <div className="p-5 flex flex-col space-y-2">
                 <p className="text-lg font-medium">Titel</p>
-                <p className="text-gray-600">{car.licensePlate.sign}</p>
+                <p className="text-gray-600">{car.numberPlate}</p>
               </div>
             </li>
           ))}

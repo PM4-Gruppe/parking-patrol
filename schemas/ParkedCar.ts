@@ -1,6 +1,13 @@
-import { LicensePlate } from './LicensePlate'
+import { CarModel } from './CarModel'
+import { Color } from './Color'
 
 export interface ParkedCar {
-  evidencePhotoUrl: String
-  licensePlate: LicensePlate
+  numberPlate: String
+  //controlTime: DateTime
+  carModel: CarModel
+  carColor: Color
+  latitude: GLfloat
+  longitude: GLfloat
+  carInspector: String
+  photoPath: String
 }
