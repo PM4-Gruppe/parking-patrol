@@ -32,8 +32,7 @@ model Color {
 }
 
 model ParkedCar {
-  numberPlate  String
-  controlTime  DateTime
+  numberPlate  String   @id @unique
   carModel     CarModel @relation(references: [modelName], fields: [model])
   model        String
   carColor     Color    @relation(references: [colorName], fields: [color])
@@ -42,8 +41,6 @@ model ParkedCar {
   longitude    Float
   carInspector String   @db.VarChar(256)
   photoPath    String
-
-  @@id([numberPlate, controlTime], name: "Parked_Car_pkey")
 }
 
 model Parkzone {

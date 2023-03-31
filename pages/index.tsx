@@ -4,7 +4,7 @@ import { gql, useQuery } from '@apollo/client'
 
 const AllVehiclesQuery = gql(`
   query {
-    NumberPlates {
+    parkedCars {
       numberPlate
     }
   }
@@ -27,9 +27,9 @@ export default function Home() {
         <p className="text-3xl">Fetched content:</p>
 
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {data?.NumberPlates.map((vehicle: any) => (
-            <li key={vehicle.id}>
-              {vehicle.licensePlate.sign}
+          {data.parkedCars.map((plate: any) => (
+            <li key={plate.sign}>
+              {plate.numberPlate}
             </li>
           ))}
         </ul>

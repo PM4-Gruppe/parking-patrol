@@ -1,8 +1,9 @@
+import { prisma } from '../../lib/prisma'
 import { builder } from '../builder'
 
 builder.prismaObject('ParkedCar', {
   fields: (t) => ({
-    numberPlate: t.exposeString('numberPlate'),
+    numberPlate: t.exposeID('numberPlate'),
     // TODO: controlTime: t.exposeInt('controlTime'),
     carModel: t.relation('carModel'),
     carColor: t.relation('carColor'),
@@ -14,7 +15,7 @@ builder.prismaObject('ParkedCar', {
 })
 
 // Write a query to get all license plates
-builder.queryField('NumberPlates', (t) =>
+builder.queryField('parkedCars', (t) =>
   t.prismaField({
     type: ['ParkedCar'],
     resolve: (query, _parent, _args, _ctx, _info) =>
