@@ -11,10 +11,9 @@ export async function getPhotoInformations(photo: File): Promise<PhotoInformatio
     let licensePlate: LicensePlate;
     let location: Location;
     let photoInformation: PhotoInformation;
-    //TODO add return statement and return type
     try {
         const plateNumber = await getCarInformations(photo)
-        //TODO ev. remove LicensePlate interface -> use only PhotoInformation
+        //ev. remove LicensePlate interface -> use only PhotoInformation
         licensePlate = {
             sign: plateNumber
         }
