@@ -1,8 +1,16 @@
 import React from 'react'
+import { getPhotoInformations } from '../../lib/photoAnalyzer'
 
 export const PhotoChoose: React.FC = () => {
   const handleImageSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImage = event.target.files?.[0]
+
+    if (selectedImage) {
+      const photoInformations = await getPhotoInformations(selectedImage)
+      console.log(photoInformations)
+    }
+
+    /*
     const body = new FormData()
 
     body.append('regions', 'ch'); // Change to your country
@@ -18,11 +26,12 @@ export const PhotoChoose: React.FC = () => {
       })
       console.log(await res.json())
       // TODO make something useful with data
+      console.log()
     }
 
     catch {
       // Fileupload not successfull
-    }
+    }*/
   }
 
   return (
@@ -31,5 +40,3 @@ export const PhotoChoose: React.FC = () => {
     </div>
   );
 };
-
-export default PhotoChoose;
