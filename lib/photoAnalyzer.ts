@@ -4,7 +4,7 @@ import EXIF from 'exif-js'
 import { PhotoInformation } from '../schemas/PhotoInformation'
 import { LicensePlate } from '../schemas/LicensePlate'
 import { Location } from '../schemas/Location'
-//export async function getPhotoInformations(photo: File): Promise<PhotoInformation> {
+
 export async function getPhotoInformations(photo: File): Promise<PhotoInformation> {
     //return Promise.resolve('hello world') 
 
@@ -49,50 +49,6 @@ export async function getPhotoInformations(photo: File): Promise<PhotoInformatio
         }
     }
     return photoInformation
-    //return photoInformation
-    /*
-    try {
-        const metadata = await getGeoInformations(photo);
-        const latitude = metadata?.GPSLatitude;
-        const longitude = metadata?.GPSLongitude;
-        console.log('Latitude:', latitude);
-        console.log('Longitude:', longitude);
-        location = {
-            latitude: latitude,
-            longitude: longitude
-        }
-        //location.latitude = latitude;
-        //location.longitude = longitude;
-        
-        
-        
-    } catch (error) {
-        console.error(error);
-    }
-    */
-
-    //TODO remove this if method getCarInformations works
-    /*
-    let plateNumber = '';
-    const body = new FormData();
-    body.append('regions', 'ch'); // Change to your country
-    body.append('upload', photo as Blob)
-    try {
-        const res = await fetch('https://api.platerecognizer.com/v1/plate-reader/', {
-            method: 'POST',
-            headers: {
-                Authorization: 'Token 6bccffbf869875312132100b49cc31466d88bf7c',
-            },
-            body: body,
-        })
-        const json = await res.json() as { results: { plate: string }[] }
-        const plateNumber = json.results[0].plate
-    }
-    catch (error) {
-        console.log(error)
-    }
-    return plateNumber
-    */
 }
 
 export async function getCarInformations(photo: File): Promise<String> {
