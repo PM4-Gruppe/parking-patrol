@@ -24,4 +24,4 @@ COPY .env .
 #COPY styles ./styles
 
 #--- Commands ---
-CMD ["npm", "run", "start:migrate"]
+CMD ["npm", "run", "los"]
