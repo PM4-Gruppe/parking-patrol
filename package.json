@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "start:migrate": "npx prisma migrate deploy && next start",
+    "start:generate:migrate" : "npx prisma generate && npx prisma migrate deploy && next start",
     "lint": "next lint",
     "export": "next build && next export"
   },
