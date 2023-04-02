@@ -4,8 +4,6 @@ import { LicensePlate } from '../schemas/LicensePlate'
 import { Location } from '../schemas/Location'
 
 export async function getPhotoInformations(photo: File): Promise<PhotoInformation> {
-    //return Promise.resolve('hello world') 
-
     let licensePlate: LicensePlate;
     let location: Location;
     let photoInformation: PhotoInformation;
@@ -48,7 +46,8 @@ export async function getPhotoInformations(photo: File): Promise<PhotoInformatio
     return photoInformation
 }
 
-export async function getCarInformations(photo: File): Promise<String> {
+async function getCarInformations(photo: File): Promise<String> {
+    //TODO add error handling when photo is to big
     let plateNumber = '';
     const body = new FormData();
     body.append('regions', 'ch'); // Change to your country
@@ -83,4 +82,3 @@ async function getGeoInformations(photo: File): Promise<any> {
         reader.readAsArrayBuffer(photo);
     });
 }
-

@@ -8,7 +8,6 @@ export default function Camera() {
                 <title>Parking Patrol - Camera</title>
                 <link rel="icon" href="/favicon.svg" />
             </Head>
-            <p>Please select a already taken photo or take a new one!</p>
             <PhotoChoose />
         </div>
     )

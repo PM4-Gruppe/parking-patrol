@@ -9,34 +9,18 @@ export const PhotoChoose: React.FC = () => {
       const photoInformations = await getPhotoInformations(selectedImage)
       console.log(photoInformations)
     }
-
-    /*
-    const body = new FormData()
-
-    body.append('regions', 'ch'); // Change to your country
-    body.append('upload', selectedImage as Blob)
-
-    try {
-      const res = await fetch('https://api.platerecognizer.com/v1/plate-reader/', {
-        method: 'POST',
-        headers: {
-          Authorization: 'Token 6bccffbf869875312132100b49cc31466d88bf7c',
-        },
-        body: body,
-      })
-      console.log(await res.json())
-      // TODO make something useful with data
-      console.log()
-    }
-
-    catch {
-      // Fileupload not successfull
-    }*/
   }
 
   return (
-    <div>
-      <input type="file" accept="image/*" onChange={handleImageSelect} />
+    <div className="flex flex-col items-center justify-center">
+      <p className="text-center mb-4">Please select a photo or take a new one!</p>
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleImageSelect}
+        className="w-full md:w-96 p-2 border-2 border-gray-300 rounded-lg"
+      />
     </div>
   );
+
 };
