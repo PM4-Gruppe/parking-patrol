@@ -1,4 +1,5 @@
 import React from 'react'
+import { saveImage } from '../atom/savePhoto'
 
 export const PhotoChoose: React.FC = () => {
   const handleImageSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,13 +24,18 @@ export const PhotoChoose: React.FC = () => {
     catch {
       // Fileupload not successfull
     }
-  }
+    const handleSaveClick = async () => {
+      if (selectedImage) {
+        await saveImage(selectedImage);
+      }
+    }
 
-  return (
-    <div>
-      <input type="file" accept="image/*" onChange={handleImageSelect} />
-    </div>
-  );
-};
-
+    return (
+      <div>
+        <input type="file" accept="image/*" onChange={handleImageSelect} />
+        <button onClick={handleSaveClick}>Save</button>
+      </div>
+    );
+  };
+}
 export default PhotoChoose;
