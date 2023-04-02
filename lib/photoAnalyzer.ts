@@ -1,5 +1,3 @@
-import fetch from 'node-fetch'
-import FormData from 'form-data'
 import EXIF from 'exif-js'
 import { PhotoInformation } from '../schemas/PhotoInformation'
 import { LicensePlate } from '../schemas/LicensePlate'
