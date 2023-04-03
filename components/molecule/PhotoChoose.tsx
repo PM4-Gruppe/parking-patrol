@@ -1,56 +1,54 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { getPhotoInformations } from '../../lib/photoAnalyzer'
 
 export const PhotoChoose: React.FC = () => {
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+
   const handleImageSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImage = event.target.files?.[0]
-    const body = new FormData()
 
-    body.append('regions', 'ch'); // Change to your country
-    body.append('upload', selectedImage as Blob)
+    if (selectedImage) {
+      const photoInformations = await getPhotoInformations(selectedImage)
+      console.log(photoInformations)
+      setSelectedImage(selectedImage);
+    }
+  }
+
+  const handleSaveClick = async () => {
+    if (!selectedImage) {
+      return;
+    }
+
+    const body = new FormData();
+    body.append('image', selectedImage);
 
     try {
-      const res = await fetch('https://api.platerecognizer.com/v1/plate-reader/', {
+      const res = await fetch('pages/api/image-storage/image-upload.js', {
         method: 'POST',
-        headers: {
-          Authorization: 'Token 6bccffbf869875312132100b49cc31466d88bf7c',
-        },
-        body: body,
-      })
-      console.log(await res.json())
-      // TODO make something useful with data
+        body,
+      });
+
+      console.log(await res.json());
+      // TODO handle response from server
+    } catch (error) {
+      console.error(error);
+      // TODO handle error
     }
+  };
 
-    catch {
-      // Fileupload not successfull
-    }
-    const handleSaveClick = async () => {
-      if (!selectedImage) {
-        return;
-      }
+  return (
+    <div className="flex flex-col items-center justify-center">
+      <p className="text-center mb-4">Please select a photo or take a new one!</p>
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleImageSelect}
+        className="w-full md:w-96 p-2 border-2 border-gray-300 rounded-lg"
+      />
+      <button disabled={!selectedImage} onClick={handleSaveClick}>Save</button>
+    </div>
+  );
 
-      const body = new FormData();
-      body.append('image', selectedImage);
-
-      try {
-        const res = await fetch('pages/api/image-storage/image-upload.js', {
-          method: 'POST',
-          body,
-        });
-
-        console.log(await res.json());
-        // TODO handle response from server
-      } catch (error) {
-        console.error(error);
-        // TODO handle error
-      }
-
-      return (
-        <div>
-          <input type="file" accept="image/*" onChange={handleImageSelect} />
-          <button onClick={handleSaveClick}>Save</button>
-        </div>
-      );
-    };
-  }
 }
-export default PhotoChoose;
+
+
