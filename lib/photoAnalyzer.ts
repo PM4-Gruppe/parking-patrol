@@ -16,8 +16,8 @@ export async function getPhotoInformations(photo: File): Promise<PhotoInformatio
         console.log(licensePlate)
 
         const geoInformations = await getGeoInformations(photo);
-        const latitude = geoInformations?.GPSLatitude;
-        const longitude = geoInformations?.GPSLongitude;
+        const latitude = geoInformations.latitude
+        const longitude = geoInformations.longitude;
         console.log('Latitude:', latitude);
         console.log('Longitude:', longitude);
         location = {
@@ -46,7 +46,7 @@ export async function getPhotoInformations(photo: File): Promise<PhotoInformatio
     return photoInformation
 }
 
-async function getCarInformations(photo: File): Promise<String> {
+async function getCarInformations(photo: File) {
     //TODO add error handling when photo is to big
     let plateNumber = '';
     const body = new FormData();
@@ -69,12 +69,12 @@ async function getCarInformations(photo: File): Promise<String> {
     return plateNumber
 }
 
-async function getGeoInformations(photo: File): Promise<any> {
+async function getGeoInformations(photo: File): Promise<Location> {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
-        reader.onload = function () {
-            const exifData = EXIF.readFromBinaryFile(this.result as ArrayBuffer);
-            resolve(exifData);
+        reader.onload = async function () {
+            const exifData = await EXIF.readFromBinaryFile(this.result as ArrayBuffer);
+            resolve({latitude: exifData.GPSLatitude, longitude: exifData.GPSLongitude} as Location);
         };
         reader.onerror = function () {
             reject('Error reading file');
