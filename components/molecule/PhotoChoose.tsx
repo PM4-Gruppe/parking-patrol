@@ -23,7 +23,7 @@ export const PhotoChoose: React.FC = () => {
     body.append('image', selectedImage);
 
     try {
-      const res = await fetch('pages/api/image-storage/image-upload.js', {
+      const res = await fetch('../../pages/api/image-storage/image-upload.js', {
         method: 'POST',
         body,
       });
