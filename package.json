@@ -10,7 +10,7 @@
     "export": "next build && next export"
   },
   "dependencies": {
-    "exif-js": "2.3.0",
+    "exifreader": "4.12.0",
     "next": "13.1.2",
     "react": "18.2.0",
     "react-dom": "18.2.0"

@@ -1,49 +1,16 @@
-import EXIF from 'exif-js'
 import { PhotoInformation } from '../schemas/PhotoInformation'
-import { LicensePlate } from '../schemas/LicensePlate'
-import { Location } from '../schemas/Location'
+import ExifReader from 'exifreader';
 
-export async function getPhotoInformations(photo: File): Promise<PhotoInformation> {
-    let licensePlate: LicensePlate;
-    let location: Location;
-    let photoInformation: PhotoInformation;
+export async function getPhotoInformations(photo: File): Promise<PhotoInformation | undefined> {
     try {
+        const geoInformations = await getGeoInformations(photo)
         const plateNumber = await getCarInformations(photo)
-        //ev. remove LicensePlate interface -> use only PhotoInformation
-        licensePlate = {
+        return {licensePlate: {
             sign: plateNumber
-        }
-        console.log(licensePlate)
-
-        const geoInformations = await getGeoInformations(photo);
-        const latitude = geoInformations.latitude
-        const longitude = geoInformations.longitude;
-        console.log('Latitude:', latitude);
-        console.log('Longitude:', longitude);
-        location = {
-            latitude: latitude,
-            longitude: longitude
-        }
-
-        photoInformation = {
-            licensePlate: licensePlate,
-            location: location
-        }
+        }, location: geoInformations}
     } catch (error) {
         console.log(error)
-        licensePlate = {
-            sign: 'unknown'
-        }
-        location = {
-            latitude: [0],
-            longitude: [0]
-        }
-        photoInformation = {
-            licensePlate: licensePlate,
-            location: location
-        }
     }
-    return photoInformation
 }
 
 async function getCarInformations(photo: File) {
@@ -69,16 +36,7 @@ async function getCarInformations(photo: File) {
     return plateNumber
 }
 
-async function getGeoInformations(photo: File): Promise<Location> {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = async function () {
-            const exifData = await EXIF.readFromBinaryFile(this.result as ArrayBuffer);
-            resolve({latitude: exifData.GPSLatitude, longitude: exifData.GPSLongitude} as Location);
-        };
-        reader.onerror = function () {
-            reject('Error reading file');
-        };
-        reader.readAsArrayBuffer(photo);
-    });
+async function getGeoInformations(photo: File) {
+    const tags = await ExifReader.load(photo, {expanded: true})
+    return tags.gps
 }
