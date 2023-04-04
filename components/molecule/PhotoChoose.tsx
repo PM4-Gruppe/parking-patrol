@@ -15,24 +15,18 @@ export const PhotoChoose: React.FC = () => {
   }
 
   const handleSaveClick = async () => {
-    if (!selectedImage) {
-      return;
-    }
-
-    const body = new FormData();
-    body.append('image', selectedImage);
-
     try {
-      const res = await fetch('../../pages/api/image-storage/image-upload.js', {
-        method: 'POST',
-        body,
-      });
+      if (!selectedImage) return;
 
+      const body = new FormData();
+      body.append('image', selectedImage);
+      const res = await fetch('/api/image-storage', {
+        method: 'POST',
+        body: body,
+      });
       console.log(await res.json());
-      // TODO handle response from server
     } catch (error) {
       console.error(error);
-      // TODO handle error
     }
   };
 

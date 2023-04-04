@@ -20,10 +20,12 @@
     "@pothos/core": "^3.27.1",
     "@pothos/plugin-prisma": "^3.41.3",
     "@prisma/client": "^4.11.0",
+    "@types/formidable": "^2.0.5",
+    "exifreader": "4.12.0",
+    "formidable": "^2.1.1",
     "graphql": "^16.6.0",
     "graphql-yoga": "^3.7.0",
     "next": "^13.1.2",
-    "exifreader": "4.12.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
