@@ -14,7 +14,6 @@ builder.prismaObject('ParkedCar', {
   })
 })
 
-// Write a query to get all license plates
 builder.queryField('parkedCars', (t) =>
   t.prismaField({
     type: ['ParkedCar'],
