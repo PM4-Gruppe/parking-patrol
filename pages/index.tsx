@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { parkedCars } from '../data/parkedCars'
 import { gql, useQuery } from '@apollo/client'
+import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 
 const AllVehiclesQuery = gql(`
   query {
@@ -53,3 +54,5 @@ export default function Home() {
     </div>
   )
 }
+
+export const getServerSideProps = withPageAuthRequired();
