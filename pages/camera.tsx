@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { PhotoChoose } from '../components/molecule/PhotoChoose'
-import TakePhoto from '../components/molecule/TakePhoto'
 
 export default function Camera() {
     return (
@@ -10,7 +9,6 @@ export default function Camera() {
                 <link rel="icon" href="/favicon.svg" />
             </Head>
             <PhotoChoose />
-            <TakePhoto />
         </div>
     )
 }

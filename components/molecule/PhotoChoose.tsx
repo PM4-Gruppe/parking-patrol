@@ -18,7 +18,7 @@ export const PhotoChoose: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <p className="text-center mb-4">Please select a photo or take a new one!</p>
+      <p className="text-center mb-4">Bitte wählen Sie ein Foto aus oder machen Sie ein neues Foto!</p>
       <input
         type="file"
         accept="image/*"
@@ -26,8 +26,8 @@ export const PhotoChoose: React.FC = () => {
         className="w-full md:w-96 p-2 border-2 border-gray-300 rounded-lg"
       />
       {licensePlate
-        ? `The following sign was recognized: ${licensePlate}`
-        : 'Upload a image'}
+        ? `Das folgende Schild wurde erkannt: ${licensePlate}`
+        : ''}
     </div>
   );
 
