@@ -3,6 +3,7 @@ import { getPhotoInformations } from '../../lib/photoAnalyzer'
 
 export const PhotoChoose: React.FC = () => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
 
   const handleImageSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedImage = event.target.files?.[0]
@@ -15,6 +16,7 @@ export const PhotoChoose: React.FC = () => {
   }
 
   const handleSaveClick = async () => {
+    setUploading(true);
     try {
       if (!selectedImage) return;
 
@@ -28,6 +30,7 @@ export const PhotoChoose: React.FC = () => {
     } catch (error) {
       console.error(error);
     }
+    setUploading(false);
   };
 
   return (
@@ -39,10 +42,9 @@ export const PhotoChoose: React.FC = () => {
         onChange={handleImageSelect}
         className="w-full md:w-96 p-2 border-2 border-gray-300 rounded-lg"
       />
-      <button disabled={!selectedImage} onClick={handleSaveClick}>Save</button>
+      <button disabled={!selectedImage || uploading} onClick={handleSaveClick}>Save</button>
     </div>
   );
-
 }
 
 
