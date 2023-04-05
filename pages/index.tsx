@@ -5,7 +5,8 @@ import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 const AllVehiclesQuery = gql(`
   query {
     parkedCars {
-      numberPlate
+      numberPlate,
+      photoPath
     }
   }
 `)
@@ -24,12 +25,15 @@ export default function Home() {
       </Head>
 
       <div className="container mx-auto max-w-5xl my-20">
-        <p className="text-3xl">Fetched content:</p>
+        <p className="text-3xl">Kontrollierte Fahrzeuge:</p>
 
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           {data.parkedCars.map((plate: any) => (
-            <li key={plate.sign}>
-              {plate.numberPlate}
+            <li key={plate.numberPlate}>
+              <img className="shadow-sm" src={String(plate.photoPath)} />
+              <div className="p-5 flex flex-col space-y-2">
+                <p className="text-gray-600">{plate.numberPlate}</p>
+              </div>
             </li>
           ))}
         </ul>
