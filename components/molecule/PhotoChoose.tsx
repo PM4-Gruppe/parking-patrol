@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { getPhotoInformations } from '../../lib/photoAnalyzer'
 
 export const PhotoChoose: React.FC = () => {
-  const handleImageSelect = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const [licensePlate, setLicensePlate] = useState<String>('')
+
+  const handleImageSelect = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const selectedImage = event.target.files?.[0]
 
     if (selectedImage) {
       const photoInformations = await getPhotoInformations(selectedImage)
-      console.log(photoInformations)
+      if (photoInformations?.licensePlate)
+        setLicensePlate(photoInformations.licensePlate.sign)
     }
   }
 
@@ -20,6 +25,9 @@ export const PhotoChoose: React.FC = () => {
         onChange={handleImageSelect}
         className="w-full md:w-96 p-2 border-2 border-gray-300 rounded-lg"
       />
+      {licensePlate
+        ? `The following sign was recognized: ${licensePlate}`
+        : 'Upload a image'}
     </div>
   );
 
