@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import renderer from 'react-test-renderer';
 import Link from './Link.js';
 
