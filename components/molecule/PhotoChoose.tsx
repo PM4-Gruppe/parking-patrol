@@ -3,6 +3,8 @@ import { getPhotoInformations } from '../../lib/photoAnalyzer'
 
 export const PhotoChoose: React.FC = () => {
   const [licensePlate, setLicensePlate] = useState<String>('')
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [uploading, setUploading] = useState(false);
 
   const handleImageSelect = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -11,10 +13,29 @@ export const PhotoChoose: React.FC = () => {
 
     if (selectedImage) {
       const photoInformations = await getPhotoInformations(selectedImage)
+      setSelectedImage(selectedImage);
       if (photoInformations?.licensePlate)
         setLicensePlate(photoInformations.licensePlate.sign)
     }
   }
+
+  const handleSaveClick = async () => {
+    setUploading(true);
+    try {
+      if (!selectedImage) return;
+
+      const body = new FormData();
+      body.append('image', selectedImage);
+      const res = await fetch('/api/image-storage/image-upload', {
+        method: 'POST',
+        body: body,
+      });
+      console.log(await res.json());
+    } catch (error) {
+      console.error(error);
+    }
+    setUploading(false);
+  };
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -28,6 +49,7 @@ export const PhotoChoose: React.FC = () => {
       {licensePlate
         ? `Das folgende Schild wurde erkannt: ${licensePlate}`
         : ''}
+      <button disabled={!selectedImage || uploading} onClick={handleSaveClick}>Save</button>
     </div>
   );
 
