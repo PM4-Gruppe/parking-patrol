@@ -12,7 +12,7 @@ const customJestConfig = {
     // Add more setup options before each test is run
     // setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 
-    testEnvironment: 'jsdom',
+    //testEnvironment: 'node',
     collectCoverage: true,
     // on node 14.x coverage provider v8 offers good speed and more or less good report
     coverageProvider: 'v8',
@@ -27,15 +27,17 @@ const customJestConfig = {
     ],
     coverageDirectory: '<rootDir>/coverage',
     transform: {
-        '^.+\\.jsx?$': 'babel-jest',
+        '^.+\\.(js|jsx|ts|tsx)$': 'babel-jest',
         '^.+\\.mjs$': 'babel-jest',
-        '^.+\\.js$': 'babel-jest',
         '^.+\\.ts?$': 'ts-jest',
         '^.+\\.tsx?$': 'ts-jest',
         '^.+\\.esm.js$': 'babel-jest',
+        '^.+\\.css$': 'jest-transform-stub',
     },
-    transformIgnorePatterns: ['<rootDir>/node_modules/(?!(jose)/)'],
-    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node']
+    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+    moduleNameMapper: {'\\.(css|less)$': 'identity-obj-proxy'},
+    extensionsToTreatAsEsm: ['.ts', '.tsx', '.jsx'],
+
 }
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

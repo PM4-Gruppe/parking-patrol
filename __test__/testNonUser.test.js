@@ -2,9 +2,9 @@
  * @jest-environment node
  */
 // Import the necessary modules
-const { withPageAuthRequired } = require('@auth0/nextjs-auth0');
-const auth0 = require('auth0');
-const { createMocks } = require('node-mocks-http');
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import auth0 from 'auth0';
+import { createMocks } from 'node-mocks-http';
 
 // Mock the auth0 client
 const auth0Client = new auth0.AuthenticationClient({
