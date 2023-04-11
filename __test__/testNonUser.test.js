@@ -1,6 +1,3 @@
-/**
- * @jest-environment node
- */
 // Import the necessary modules
 import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 import auth0 from 'auth0';
