@@ -5,7 +5,7 @@ interface TextBoxProps {
     inputDefaultValue:string
     informationText: string
     value: string
-    onChange: Function
+    onChange: (inputValue: string) => void
 }
 
 export const TextBox: React.FC<TextBoxProps> = ({ inputType, inputDefaultValue, informationText, value = '', onChange }) => {
