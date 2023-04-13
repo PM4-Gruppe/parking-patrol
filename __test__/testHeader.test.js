@@ -9,7 +9,7 @@ import { useUser } from '@auth0/nextjs-auth0/client';
 
 jest.mock('@auth0/nextjs-auth0/client');
 
-describe('Heade', () => {
+describe('Header', () => {
 
     afterEach(() => {
         jest.resetAllMocks();
