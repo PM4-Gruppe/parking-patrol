@@ -3,25 +3,33 @@ import { getPhotoInformations } from '../../lib/photoAnalyzer'
 import { TextBox } from '../atom/TextBox'
 
 export const PhotoChoose: React.FC = () => {
-  //TODO change informationText to corresponding information
   const [informationLicenceplate, setInformationLicenseplate] = useState<string>('Information')
-  const [informationBrand, setInformationBrand] = useState<string>('Information')
-  const [informationModel, setInformationModel] = useState<string>('Information')
-  const regex = new RegExp('([a-z]{2}|[A-Z]{2})([0-9]{1,6})') //two letters and 1-6 numbers
+  const defaultInformationBrand = 'Bitte geben Sie eine Marke ein.'
+  const [informationBrand, setInformationBrand] = useState<string>(defaultInformationBrand)
+  const defaultInformationModel = 'Bitte geben Sie ein Model ein.'
+  const [informationModel, setInformationModel] = useState<string>(defaultInformationModel)
+  const regex = new RegExp('[a-zA-Z]{2}[0-9]{1,6}$') //two letters and 1-6 numbers
 
   const [licensePlate, setLicensePlate] = useState('')
   const [brand, setBrand] = useState('')
   const [model, setModel] = useState('')
 
-  function checkLicensePlate(licensePlate: string): boolean {
-    return regex.test(licensePlate)
+  function handleLicensePlate(licensePlate: string) {
+    const isValidLicensePlate = regex.test(licensePlate)
+    console.log('isValidLicensePlate', isValidLicensePlate)
+    if (isValidLicensePlate) {
+      setInformationLicenseplate('done')
+      setLicensePlate(licensePlate)
+    } else {
+      setInformationLicenseplate('Autonummer überprüfen!')
+      setLicensePlate(licensePlate)
+    }
   }
-
-  //TODO hier die Funktionalität für die Informationstexte einbauen
+  
   function handleBrand(value: string) {
     setBrand(value)
     if (value.length === 0) {
-      setInformationBrand('Bitte geben Sie eine Marke ein.')
+      setInformationBrand(defaultInformationBrand)
     } else {
       setInformationBrand('done')
     }
@@ -30,7 +38,7 @@ export const PhotoChoose: React.FC = () => {
   function handleModel(value: string) {
     setModel(value)
     if (value.length === 0) {
-      setInformationModel('Bitte geben Sie ein Model ein.')
+      setInformationModel(defaultInformationModel)
     } else {
       setInformationModel('done')
     }
@@ -44,20 +52,15 @@ export const PhotoChoose: React.FC = () => {
     if (selectedImage) {
       const photoInformations = await getPhotoInformations(selectedImage)
       if (photoInformations?.licensePlate) {
-        setLicensePlate(photoInformations.licensePlate.sign)
+        const licensePlate = photoInformations.licensePlate.sign
+        handleLicensePlate(licensePlate)
       }
-    }
-    if (checkLicensePlate(licensePlate)) {
-      setInformationLicenseplate('Die eingegebene Autonummer ist korrekt.')
-    } else {
-      setInformationLicenseplate('Die eingegebene Autonummer ist nicht korrekt.')
     }
   }
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <p className="text-center mb-4">Bitte wählen Sie ein Foto aus oder machen Sie ein neues Foto!</p>
-      <div className="mb-4">
+      <div className="my-2">
         <input
           type="file"
           accept="image/*"
@@ -66,7 +69,7 @@ export const PhotoChoose: React.FC = () => {
         />
       </div>
 
-      <TextBox inputType="text" inputDefaultValue="Autonummer" informationText={informationLicenceplate} value={licensePlate} onChange={setLicensePlate} />
+      <TextBox inputType="text" inputDefaultValue="Autonummer" informationText={informationLicenceplate} value={licensePlate} onChange={handleLicensePlate} />
 
       <TextBox inputType="text" inputDefaultValue="Marke" informationText={informationBrand} value={brand} onChange={handleBrand} />
 

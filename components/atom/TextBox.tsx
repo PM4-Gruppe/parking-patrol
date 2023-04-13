@@ -2,7 +2,7 @@ import React from 'react'
 
 interface TextBoxProps {
     inputType: string
-    inputDefaultValue:string
+    inputDefaultValue: string
     informationText: string
     value: string
     onChange: (inputValue: string) => void
@@ -14,11 +14,7 @@ export const TextBox: React.FC<TextBoxProps> = ({ inputType, inputDefaultValue, 
             <input
                 type={inputType}
                 placeholder={inputDefaultValue}
-                value={
-                    value
-                        ? `${value}`
-                        : ''
-                }
+                value={value}
                 onChange={(event) => {
                     console.log(event.target.value)
                     onChange(event.target.value)
