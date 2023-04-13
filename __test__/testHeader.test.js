@@ -15,7 +15,7 @@ describe('Header', () => {
         jest.resetAllMocks();
     });
 
-    it('should render a header with a login button if no user is logged in', () => {
+    it('shoul render a header with a login button if no user is logged in', () => {
         useUser.mockReturnValue({ user: null });
 
         const { getByText } = render(<Header />);
