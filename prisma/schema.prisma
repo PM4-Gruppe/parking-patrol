@@ -14,22 +14,49 @@ generator pothos {
   provider = "prisma-pothos-types"
 }
 
-model VehicleOwner {
-  id           String         @id @unique @default(uuid())
-  firstname    String
-  lastname     String
-  LicensePlate LicensePlate[]
+model CarManufacturer {
+  manufacturerName String     @id @unique
+  carModel         CarModel[]
 }
 
-model Vehicle {
-  id               Int          @id @unique @default(autoincrement())
-  licensePlate     LicensePlate @relation(references: [sign], fields: [licensePlateSign])
-  licensePlateSign String
+model CarModel {
+  modelName       String          @id @unique
+  carManufacturer CarManufacturer @relation(references: [manufacturerName], fields: [manufacturer])
+  manufacturer    String
+  parkedCar       ParkedCar[]
 }
 
-model LicensePlate {
-  owner         VehicleOwner @relation(references: [id], fields: [ownerId])
-  ownerId       String
-  sign          String       @id @unique
-  Vehicle       Vehicle[]
+model Color {
+  colorName String      @id @unique
+  parkedCar ParkedCar[]
+}
+
+model ParkedCar {
+  numberPlate  String
+  controlTime  DateTime
+  carModel     CarModel @relation(references: [modelName], fields: [model])
+  model        String
+  carColor     Color    @relation(references: [colorName], fields: [color])
+  color        String
+  latitude     Float
+  longitude    Float
+  carInspector String   @db.VarChar(256)
+  photoPath    String
+
+  @@id([numberPlate, controlTime], name: "Parked_Car_pkey")
+}
+
+model Parkzone {
+  parkzoneName     String       @id @unique
+  parkzoneType     ParkzoneType @relation(references: [typeName], fields: [parkzoneTypeName])
+  parkzoneTypeName String
+  latitude         Float
+  longitude        Float
+  radius           Float
+}
+
+model ParkzoneType {
+  typeName    String     @id @unique
+  description String?
+  parkzone    Parkzone[]
 }
