@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { PhotoChoose } from '../components/molecule/PhotoChoose'
-import { Submit } from '../components/atom/Submit'
+import { Submit } from '../components/atom/SubmitButton'
+import { BackButton } from '../components/atom/BackButton'
 
 export default function Camera() {
     return (
@@ -11,6 +12,7 @@ export default function Camera() {
             </Head>
             <PhotoChoose />
             <Submit />
+            <BackButton />
         </div>
     )
 }

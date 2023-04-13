@@ -1,3 +1,3 @@
 export interface LicensePlate {
-  sign: String
+  sign: string
 }

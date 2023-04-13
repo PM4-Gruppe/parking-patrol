@@ -1,13 +1,20 @@
 import React, { useState } from 'react'
 import { getPhotoInformations } from '../../lib/photoAnalyzer'
-import { TextBox } from '../atom/TextBox';
+import { TextBox } from '../atom/TextBox'
 
 export const PhotoChoose: React.FC = () => {
   //TODO change informationText to corresponding information
-  let informationText = 'Information'
-  const [licensePlate, setLicensePlate] = useState<String>('')
-  const [brand, setBrand] = useState<string>('')
-  const [model, setModel] = useState<string>('')
+  const [informationLicenceplate, setInformationLicenseplate] = useState<string>('Information')
+  const [informationBrandModel, setInformationBrandModel] = useState<string>('Information')
+  const regex = new RegExp('([a-z]{2}|[A-Z]{2})([0-9]{1,6})') //two letters and 1-6 numbers
+
+  const [licensePlate, setLicensePlate] = useState('')
+  const [brand, setBrand] = useState('')
+  const [model, setModel] = useState('')
+
+  function checkLicensePlate(licensePlate: string): boolean {
+    return regex.test(licensePlate)
+  }
 
   const handleImageSelect = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -16,8 +23,17 @@ export const PhotoChoose: React.FC = () => {
 
     if (selectedImage) {
       const photoInformations = await getPhotoInformations(selectedImage)
-      if (photoInformations?.licensePlate)
+      if (photoInformations?.licensePlate) {
         setLicensePlate(photoInformations.licensePlate.sign)
+      }
+    }
+    if (checkLicensePlate(licensePlate)) {
+      console.log('licencePlate 1', licensePlate)
+      setInformationLicenseplate('Die eingegebene Autonummer ist korrekt.')
+    } else {
+      console.log('licencePlate 2', licensePlate)
+      console.log(licensePlate === undefined)
+      setInformationLicenseplate('Die eingegebene Autonummer ist nicht korrekt.')
     }
   }
 
@@ -33,13 +49,14 @@ export const PhotoChoose: React.FC = () => {
         />
       </div>
 
-      <TextBox inputType="text" inputDefaultValue="Autonummer" informationText={informationText} value={licensePlate}/>
+      <TextBox inputType="text" inputDefaultValue="Autonummer" informationText={informationLicenceplate} value={licensePlate} onChange={setLicensePlate} />
 
-      <TextBox inputType="text" inputDefaultValue="Marke" informationText={informationText} value="" />
+      <TextBox inputType="text" inputDefaultValue="Marke" informationText={informationBrandModel} value={brand} onChange={setBrand} />
 
-      <TextBox inputType="text" inputDefaultValue="Modell" informationText={informationText} value="" />
+      <TextBox inputType="text" inputDefaultValue="Modell" informationText={informationBrandModel} value={model} onChange={setModel} />
 
     </div >
   );
 
 };
+

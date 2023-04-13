@@ -8,11 +8,11 @@ export const Submit: React.FC = () => {
     return (
         <div className="flex flex-col items-center justify-center">
             <button
-                type="submit"
+                type="button"
                 onClick={handleImageSelect}
-                className="w-full md:w-96 p-2 border-2 border-gray-300 rounded-lg"
+                className="w-full md:w-96 p-2 border-2 border-gray-300 rounded-lg my-1"
             >
-                Submit
+                Prüfen
             </button>
         </div>
     );
