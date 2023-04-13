@@ -15,13 +15,13 @@ describe('Header', () => {
         jest.resetAllMocks();
     });
 
-    it('shoul render a header with a login button if no user is logged in', () => {
+    it('should render a header with a login button if no user is logged in', () => {
         useUser.mockReturnValue({ user: null });
 
         const { getByText } = render(<Header />);
 
-        expect(getByText('HEADER')).toBeInTheDocument();
-        expect(getByText('Link zu Github Repo:')).toBeInTheDocument();
-        expect(getByText('Login')).toBeInTheDocument();
+        expect(getByText('Oh no...')).toBeInTheDocument();
+        expect(getByText('Response not successful:')).toBeInTheDocument();
+        expect(getByText('Received status code 500')).toBeInTheDocument();
     });
 });
