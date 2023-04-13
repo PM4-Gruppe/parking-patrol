@@ -10,7 +10,8 @@
     "start:generate:migrate": "npx prisma generate && npx prisma migrate deploy && next start",
     "lint": "next lint",
     "export": "next build && next export",
-    "test": "jest"
+    "test": "jest",
+    "preinstall": "copy /Y scripts\\pre-push .git\\hooks\\pre-push && icacls .git\\hooks\\pre-push"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
