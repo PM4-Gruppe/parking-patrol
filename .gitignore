@@ -33,3 +33,9 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# IDE specific folders
+.idea
+
+# prisma
+/prisma/migrations/
