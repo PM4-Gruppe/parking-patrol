@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { getPhotoInformations } from '../../lib/photoAnalyzer'
 import { TextBox } from '../atom/TextBox'
+import { isValidLicensePlate } from '../../lib/isValidLicensePlate'
 
 export const PhotoChoose: React.FC = () => {
   const [informationLicenceplate, setInformationLicenseplate] = useState<string>('Information')
@@ -8,16 +9,13 @@ export const PhotoChoose: React.FC = () => {
   const [informationBrand, setInformationBrand] = useState<string>(defaultInformationBrand)
   const defaultInformationModel = 'Bitte geben Sie ein Model ein.'
   const [informationModel, setInformationModel] = useState<string>(defaultInformationModel)
-  const regex = new RegExp('[a-zA-Z]{2}[0-9]{1,6}$') //two letters and 1-6 numbers
 
   const [licensePlate, setLicensePlate] = useState('')
   const [brand, setBrand] = useState('')
   const [model, setModel] = useState('')
 
   function handleLicensePlate(licensePlate: string) {
-    const isValidLicensePlate = regex.test(licensePlate)
-    console.log('isValidLicensePlate', isValidLicensePlate)
-    if (isValidLicensePlate) {
+    if (isValidLicensePlate(licensePlate)) {
       setInformationLicenseplate('done')
       setLicensePlate(licensePlate)
     } else {
