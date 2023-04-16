@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { getPhotoInformations } from '../../lib/photoAnalyzer'
 import { TextBox } from '../atom/TextBox'
 import { isValidLicensePlate } from '../../lib/isValidLicensePlate'
+import Image from 'next/image'
 
 export const PhotoChoose: React.FC = () => {
   const [informationLicenceplate, setInformationLicenseplate] = useState<string>('Information')
@@ -9,6 +10,7 @@ export const PhotoChoose: React.FC = () => {
   const [informationBrand, setInformationBrand] = useState<string>(defaultInformationBrand)
   const defaultInformationModel = 'Bitte geben Sie ein Model ein.'
   const [informationModel, setInformationModel] = useState<string>(defaultInformationModel)
+  const [selectedImageURL, setSelectedImageURL] = useState<string>('')
 
   const [licensePlate, setLicensePlate] = useState('')
   const [brand, setBrand] = useState('')
@@ -23,7 +25,7 @@ export const PhotoChoose: React.FC = () => {
       setLicensePlate(licensePlate)
     }
   }
-  
+
   function handleBrand(value: string) {
     setBrand(value)
     if (value.length === 0) {
@@ -48,6 +50,8 @@ export const PhotoChoose: React.FC = () => {
     const selectedImage = event.target.files?.[0]
 
     if (selectedImage) {
+      const imageURL = URL.createObjectURL(selectedImage)
+      setSelectedImageURL(imageURL)
       const photoInformations = await getPhotoInformations(selectedImage)
       if (photoInformations?.licensePlate) {
         const licensePlate = photoInformations.licensePlate.sign
@@ -66,7 +70,17 @@ export const PhotoChoose: React.FC = () => {
           className="w-full md:w-96 p-2 border-2 border-gray-300 rounded-lg"
         />
       </div>
-
+     
+      {selectedImageURL && (
+        <Image
+          src={selectedImageURL}
+          width={150}
+          height={150}
+          alt="Preview"
+          className="my-2"
+        />
+      )}
+  
       <TextBox inputType="text" inputDefaultValue="Autonummer" informationText={informationLicenceplate} value={licensePlate} onChange={handleLicensePlate} />
 
       <TextBox inputType="text" inputDefaultValue="Marke" informationText={informationBrand} value={brand} onChange={handleBrand} />
