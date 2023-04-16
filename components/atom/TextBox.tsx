@@ -21,7 +21,7 @@ export const TextBox: React.FC<TextBoxProps> = ({ inputType, inputDefaultValue, 
                 }
                 className="w-full md:w-96 p-2 border-2 border-gray-300 rounded-lg"
             />
-            <hr className="width:50%;text-align:left;margin-left:0 my-1" />
+            <hr className="w-1/2 text-left ml-0 my-1" />
             <p>
                 {informationText}
             </p>
