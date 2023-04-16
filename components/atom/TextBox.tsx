@@ -16,7 +16,6 @@ export const TextBox: React.FC<TextBoxProps> = ({ inputType, inputDefaultValue, 
                 placeholder={inputDefaultValue}
                 value={value}
                 onChange={(event) => {
-                    console.log(event.target.value)
                     onChange(event.target.value)
                 }
                 }
