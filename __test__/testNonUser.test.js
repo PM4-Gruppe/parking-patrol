@@ -12,7 +12,7 @@ const auth0Client = new auth0.AuthenticationClient({
 
 // Create a test for when a non-user attempts to access your application
 describe('Authentication and Authorization', () => {
-    test('Non-user is redirected to error page', async () => {
+    it('Non-user is redirected to error page', async () => {
         // Create a mock request with no user information
         const { req, res } = createMocks({
             method: 'GET',
