@@ -16,8 +16,8 @@ jobs:
           node-version: '18'
       - name: Install Npm dependencies
         run: npm install
-      #- name: Test application
-      #  run: npm run test
+      - name: Test application
+        run: npm run test
       - name: Build application
         run: npm run build
       - name: Create .env file
