@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { gql, useQuery } from '@apollo/client'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 
-export const AllVehiclesQuery = gql(`
+const AllVehiclesQuery = gql(`
   query {
     parkedCars {
       numberPlate,
