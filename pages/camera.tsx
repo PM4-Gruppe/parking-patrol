@@ -22,14 +22,6 @@ export default function Camera() {
                 <link rel="icon" href="/favicon.svg" />
             </Head>
             <PhotoChoose />
-            <Button
-                label="Prüfen"
-                onClick={handleSubmitButton}
-            />
-            <Button
-                label="Zurück"
-                onClick={handleBackButton}
-            />
         </div>
     )
 }
