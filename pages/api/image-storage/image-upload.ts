@@ -30,8 +30,9 @@ const saveCompressedImage = async (
 const saveFile = async (req: NextApiRequest): Promise<formidable.File> => {
     const options: formidable.Options = {};
     options.uploadDir = path.join(process.cwd(), '/storage');
+    options.keepExtensions = true;
     options.filename = (name, ext, path, form) => {
-        return Date.now().toString();
+        return Date.now().toString() + ext;
     };
     options.maxFileSize = 4000 * 1024 * 1024;
     const form = formidable(options);
