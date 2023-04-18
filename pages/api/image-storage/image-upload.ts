@@ -37,8 +37,8 @@ const saveFile = async (req: NextApiRequest): Promise<formidable.File> => {
     options.maxFileSize = 10 * 1024 * 1024; //10 mb
     const form = formidable(options);
     return new Promise((resolve, reject) => {
-        form.parse(req, async (err, fields, files) => {
-            if (err) reject;
+        form.parse(req, (err, fields, files) => {
+            if (err) reject(err);
             const image: formidable.File = files['image'] as formidable.File;
             resolve(image);
         });
@@ -59,7 +59,7 @@ const handler: NextApiHandler = async (req, res) => {
         if (fs.existsSync(compressedImagePath)) fs.unlinkSync(compressedImagePath);
         if (fs.existsSync(thumbnailPath)) fs.unlinkSync(thumbnailPath);
         if (fs.existsSync(originalImagePath)) fs.unlinkSync(originalImagePath);
-        res.status(500).json({ message: 'Error saving image.' });
+        res.status(500).json({ message: 'Error saving image: ' + error });
     }
 }
 
