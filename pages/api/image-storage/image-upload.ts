@@ -34,7 +34,7 @@ const saveFile = async (req: NextApiRequest): Promise<formidable.File> => {
     options.filename = (name, ext, path, form) => {
         return Date.now().toString() + ext;
     };
-    options.maxFileSize = 4000 * 1024 * 1024;
+    options.maxFileSize = 10 * 1024 * 1024; //10 mb
     const form = formidable(options);
     return new Promise((resolve, reject) => {
         form.parse(req, async (err, fields, files) => {
