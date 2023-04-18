@@ -27,7 +27,7 @@ const saveCompressedImage = async (
     return imagePath;
 }
 
-const saveFile = async (req: NextApiRequest): Promise<{ fields: formidable.Fields; files: formidable.Files; }> => {
+const saveFile = async (req: NextApiRequest): Promise<formidable.File> => {
     const options: formidable.Options = {};
     options.uploadDir = path.join(process.cwd(), '/storage');
     options.filename = (name, ext, path, form) => {
@@ -38,7 +38,8 @@ const saveFile = async (req: NextApiRequest): Promise<{ fields: formidable.Field
     return new Promise((resolve, reject) => {
         form.parse(req, async (err, fields, files) => {
             if (err) reject;
-            resolve({ fields, files });
+            const image: formidable.File = files['image'] as formidable.File;
+            resolve(image);
         });
     });
 };
@@ -48,10 +49,10 @@ const handler: NextApiHandler = async (req, res) => {
     let thumbnailPath = '';
     let originalImagePath = '';
     try {
-        const { files } = await saveFile(req);
-        originalImagePath = files.image.filepath;
-        compressedImagePath = await saveCompressedImage(originalImagePath, files.image.newFilename, 800, 80, false)
-        thumbnailPath = await saveCompressedImage(originalImagePath, files.image.newFilename, 200, 60, true)
+        const image = await saveFile(req);
+        originalImagePath = image.filepath;
+        compressedImagePath = await saveCompressedImage(originalImagePath, image.newFilename, 800, 80, false)
+        thumbnailPath = await saveCompressedImage(originalImagePath, image.newFilename, 200, 60, true)
         res.status(200).json({ message: 'Image saved successfully.' });
     } catch (error) {
         if (fs.existsSync(compressedImagePath)) fs.unlinkSync(compressedImagePath);
