@@ -2,43 +2,48 @@
  * @jest-environment jsdom
  */
 import React from 'react';
-import {fireEvent, render, screen, waitFor} from '@testing-library/react';
+import {fireEvent, render, screen} from '@testing-library/react';
 import { PhotoChoose } from '../components/molecule/PhotoChoose';
+import { getPhotoInformations } from '../lib/photoAnalyzer';
 import '@testing-library/jest-dom';
 
-jest.mock('@auth0/nextjs-auth0/client');
+jest.mock('../lib/photoAnalyzer', () => ({
+    getPhotoInformations: jest.fn()
+}));
 
 describe('PhotoChoose', () => {
-    beforeEach(() => {
-       render(<PhotoChoose />)
-    });
     it('renders input field for selecting an image', () => {
+        render(<PhotoChoose/>)
         const labelElement = screen.getByText(/Bitte wählen Sie ein Foto aus oder machen Sie ein neues Foto!/i);
         expect(labelElement).toBeInTheDocument();
     });
 
-    // work in progress
-    // it('should display the selected file name', async () => {
-    //    const imageFile = new File(['test file content'], '../storage/npp-1-1.jpg', {type: 'file' });
+    it('calls getPhotoInformations in handleImageSelect when a file is selected', async () => {
+        render(<PhotoChoose/>)
+        const selectedImage = new File(['(⌐□_□)'], 'test.jpg', { type: 'image/jpeg' });
+        const fileInput = screen.getByRole('button', { name: 'Save' }).previousSibling;
+        fireEvent.change(fileInput, { target: { files: [selectedImage] } });
 
-    //    const inputButton = screen.getByRole('button', 'Save').previousSibling;
-    //    fireEvent.change(inputButton, { target: { files: [imageFile] } });
+        expect(getPhotoInformations).toHaveBeenCalledWith(selectedImage);
+    });
 
-    //    const fileName = await waitFor(() => screen.getByText('npp-1-1.jpg'));
-    //    expect(fileName).toBeInTheDocument();
-    //});
+    it('calls handleSaveClick when the save button is clicked', async () => {
 
-    // work in progress
-    it('should call the function handleImageSelect', async () => {
-        const handleImageSelect = jest.fn();
+    });
 
-        const inputButton = screen.getByRole('button', {name: 'Save'}).previousSibling;
-        fireEvent.change(inputButton);
-        fireEvent.click(inputButton);
-        console.log(handleImageSelect.mock.calls);
+    it('calls handleCancelClick when the cancel button is clicked', async () => {
 
-        handleImageSelect();
+    });
 
-        await waitFor(() => expect(handleImageSelect).toHaveBeenCalledTimes(1));
+    it('renders the save button', () => {
+
+    });
+
+    it('renders the cancel button', () => {
+
+    });
+
+    it('renders the input field, to choose a file', () => {
+
     });
 });
