@@ -31,7 +31,7 @@ const saveFile = async (req: NextApiRequest): Promise<{ fields: formidable.Field
     const options: formidable.Options = {};
     options.uploadDir = path.join(process.cwd(), '/storage');
     options.filename = (name, ext, path, form) => {
-        return Date.now().toString() + '_' + path.originalFilename;
+        return Date.now().toString();
     };
     options.maxFileSize = 4000 * 1024 * 1024;
     const form = formidable(options);
