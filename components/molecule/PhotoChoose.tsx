@@ -67,7 +67,7 @@ export const PhotoChoose: React.FC = () => {
           type="file"
           accept="image/*"
           onChange={handleImageSelect}
-          className="w-full md:w-96 p-2 border-2 border-gray-300 rounded-lg"
+          className="displayflex flex-col items-center justify-center w-full p-2 file:bg-green-700 file:hover:bg-green-800 file:text-white text-white file:rounded-lg file:border-transparent my-2"
         />
       </div>
      

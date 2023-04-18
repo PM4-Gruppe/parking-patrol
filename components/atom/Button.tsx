@@ -11,7 +11,7 @@ export const Button: React.FC<ButtonProps> = ({ label, onClick }) => {
         <button
             type="button"
             onClick={onClick}
-            className="flex flex-col items-center justify-center w-full md:w-96 p-2 border-2 border-gray-300 rounded-lg my-1"
+            className="flex flex-col items-center justify-center w-full p-2 bg-green-700 hover:bg-green-800 text-white rounded-lg my-2"
         >
             {label}
         </button>

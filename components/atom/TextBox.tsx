@@ -10,7 +10,7 @@ interface TextBoxProps {
 
 export const TextBox: React.FC<TextBoxProps> = ({ inputType, inputDefaultValue, informationText, value = '', onChange }) => {
     return (
-        <div className="box mb-4">
+        <div className="box mb-4 ">
             <input
                 type={inputType}
                 placeholder={inputDefaultValue}
@@ -19,10 +19,10 @@ export const TextBox: React.FC<TextBoxProps> = ({ inputType, inputDefaultValue, 
                     onChange(event.target.value)
                 }
                 }
-                className="w-full md:w-96 p-2 border-2 border-gray-300 rounded-lg"
+                className="w-full md:w-96 p-0 border-transparent rounded-lg bg-transparent text-white placeholder-neutral-400"
             />
-            <hr className="w-1/2 text-left ml-0 my-1" />
-            <p>
+            <hr className="w-full my-1 text-left ml-0" />
+            <p className="text-white text-xs">
                 {informationText}
             </p>
         </div>
