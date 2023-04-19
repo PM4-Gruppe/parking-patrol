@@ -11,7 +11,7 @@
     "lint": "next lint",
     "export": "next build && next export",
     "test": "jest",
-    "preinstall": "node ./install-hooks.js"
+    "hooks": "node -e \"require('fs-extra').copySync('scripts/pre-commit', '.git/hooks/pre-commit'); require('fs-extra').chmodSync('.git/hooks/pre-commit', '755');\""
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
