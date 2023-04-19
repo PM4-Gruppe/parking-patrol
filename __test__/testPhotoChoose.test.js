@@ -5,16 +5,27 @@ import React from 'react';
 import {fireEvent, render, screen} from '@testing-library/react';
 import { PhotoChoose } from '../components/molecule/PhotoChoose';
 import { getPhotoInformations } from '../lib/photoAnalyzer';
+import { mocked } from 'jest-mock';
+import { useRouter } from 'next/router';
 import '@testing-library/jest-dom';
 
 jest.mock('../lib/photoAnalyzer', () => ({
     getPhotoInformations: jest.fn()
 }));
 
+jest.mock('next/router', () => ({
+    useRouter: jest.fn()
+}));
+
 describe('PhotoChoose', () => {
-    it('renders input field for selecting an image', () => {
+    beforeEach(() => {
+        mocked(useRouter).mockReturnValue({
+            back: jest.fn(),
+        })
+    })
+    it('checks if the text "Bitte geben Sie eine Marke ein." is rendered', () => {
         render(<PhotoChoose/>)
-        const labelElement = screen.getByText(/Bitte wählen Sie ein Foto aus oder machen Sie ein neues Foto!/i);
+        const labelElement = screen.getByText('Bitte geben Sie eine Marke ein.');
         expect(labelElement).toBeInTheDocument();
     });
 
