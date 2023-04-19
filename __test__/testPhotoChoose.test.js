@@ -46,4 +46,20 @@ describe('PhotoChoose', () => {
     it('renders the input field, to choose a file', () => {
 
     });
+
+    it('should display license plate after image selection', async () => {
+
+    });
+
+    it('should render and function correctly', async () => {
+
+    });
+
+    it('should handle file upload error', async () => {
+
+    });
+
+    it('should handle error while getting license plate information', async () => {
+        
+    });
 });
