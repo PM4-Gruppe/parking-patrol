@@ -27,7 +27,7 @@ const saveCompressedImage = async (
     return imagePath;
 }
 
-const saveFile = async (req: NextApiRequest): Promise<formidable.File> => {
+const saveOriginalImage = async (req: NextApiRequest): Promise<formidable.File> => {
     const options: formidable.Options = {};
     options.uploadDir = path.join(process.cwd(), '/storage');
     options.keepExtensions = true;
@@ -50,7 +50,7 @@ const handler: NextApiHandler = async (req, res) => {
     let thumbnailPath = '';
     let originalImagePath = '';
     try {
-        const image = await saveFile(req);
+        const image = await saveOriginalImage(req);
         originalImagePath = image.filepath;
         compressedImagePath = await saveCompressedImage(originalImagePath, image.newFilename, 800, 80, false)
         thumbnailPath = await saveCompressedImage(originalImagePath, image.newFilename, 200, 60, true)
