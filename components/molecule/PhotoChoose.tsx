@@ -5,9 +5,11 @@ import { isValidLicensePlate } from '../../lib/isValidLicensePlate'
 import Image from 'next/image'
 import { Button } from '../atom/Button'
 import { useRouter } from 'next/router'
+import { LocalEndpoint } from '../../lib/ApiEndpoints/LocalEndpoint'
 
 export const PhotoChoose: React.FC = () => {
   const router = useRouter()
+  const api = new LocalEndpoint()
 
   const [informationLicenceplate, setInformationLicenseplate] = useState<string>('Information')
   const defaultInformationBrand = 'Bitte geben Sie eine Marke ein.'
@@ -20,7 +22,6 @@ export const PhotoChoose: React.FC = () => {
   const [licensePlate, setLicensePlate] = useState('')
   const [brand, setBrand] = useState('')
   const [model, setModel] = useState('')
-  const [uploading, setUploading] = useState(false);
 
   function handleLicensePlate(licensePlate: string) {
     if (isValidLicensePlate(licensePlate)) {
@@ -67,28 +68,19 @@ export const PhotoChoose: React.FC = () => {
     }
   }
 
-  const handleSaveClick = async () => {
-    setUploading(true);
+  const handleSubmit = async () => {
     try {
       if (!selectedImage) return;
 
       const body = new FormData();
       body.append('image', selectedImage);
-      const res = await fetch('/api/image-storage/image-upload', {
-        method: 'POST',
-        body: body,
-      });
-      console.log(await res.json());
+      const res = await api.postRequest('/image-storage/image-upload', body)
+      console.log(await res);
+      
     } catch (error) {
       console.error(error);
     }
-    setUploading(false);
   };
-
-  const handleSubmitButton = () => {
-    console.log('Submit button clicked')
-    handleSaveClick()
-  }
 
   const handleBackButton = () => {
     router.back()
@@ -96,7 +88,7 @@ export const PhotoChoose: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="my-2">
+      <div >
         <input
           type="file"
           accept="image/*"
@@ -121,15 +113,16 @@ export const PhotoChoose: React.FC = () => {
 
       <TextBox inputType="text" inputDefaultValue="Modell" informationText={informationModel} value={model} onChange={handleModel} />
 
-      <Button
-        label="Prüfen"
-        onClick={handleSubmitButton}
-      />
-      <Button
-        label="Zurück"
-        onClick={handleBackButton}
-      />
-
+      <div className="flex flex-grow-0 justify-between w-1/2">
+        <Button
+          label="Zurück"
+          onClick={handleBackButton}
+        />
+        <Button
+          label="Prüfen"
+          onClick={handleSubmit}
+        />
+      </div>
     </div >
   );
 
