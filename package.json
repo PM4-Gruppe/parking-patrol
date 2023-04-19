@@ -11,7 +11,7 @@
     "lint": "next lint",
     "export": "next build && next export",
     "test": "jest",
-    "preinstall": "node -e \"require('fs-extra').copySync('scripts/pre-push', '.git/hooks/pre-push'); require('fs-extra').chmodSync('.git/hooks/pre-push', '755');\""
+    "preinstall": "node ./install-hooks.js"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
@@ -30,6 +30,7 @@
     "formidable": "^2.1.1",
     "graphql": "^16.6.0",
     "graphql-yoga": "^3.7.0",
+    "jest-mock": "^29.5.0",
     "jsdom": "^21.1.1",
     "next": "13.1.2",
     "node-mocks-http": "^1.12.2",
