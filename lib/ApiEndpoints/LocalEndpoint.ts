@@ -5,7 +5,7 @@ export class LocalEndpoint {
     return await fetch(this.url + path).then(res => res.json())
   }
 
-  async postRequest(path: string, body: object) {
-    return await fetch(this.url + path, {method: 'POST', ...body}).then(res => res.json())
+  async postRequest(path: string, body: FormData) {
+    return await fetch(this.url + path, { method: 'POST', body: body }).then(res => res.json())
   }
 }
