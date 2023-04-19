@@ -37,7 +37,6 @@ const customJestConfig = {
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
     moduleNameMapper: {'\\.(css|less)$': 'identity-obj-proxy'},
     extensionsToTreatAsEsm: ['.ts', '.tsx', '.jsx'],
-
 }
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async
