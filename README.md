@@ -1,7 +1,5 @@
 ## Night Parking Patrol
 
-## Test für Dev Deployment
-
 ## Beschreibung
 Night Parking Patrol soll Polizisten helfen, die Parkkontrolle durchzuführen. NPP führt eine Liste kontrollierter Autos. So können die Polizisten schneller feststellen, welche Autos gebüsst werden müssen.
 
