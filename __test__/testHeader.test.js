@@ -4,7 +4,7 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import Header from '../components/organism/Header';
+import Header from '../src/components/organism/Header';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
 jest.mock('@auth0/nextjs-auth0/client');

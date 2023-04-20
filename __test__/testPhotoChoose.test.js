@@ -3,8 +3,8 @@
  */
 import React from 'react';
 import {fireEvent, render, screen} from '@testing-library/react';
-import { PhotoChoose } from '../components/molecule/PhotoChoose';
-import { getPhotoInformations } from '../lib/photoAnalyzer';
+import { PhotoChoose } from '../src/components/molecule/PhotoChoose';
+import { getPhotoInformations } from '../src/lib/photoAnalyzer';
 import { mocked } from 'jest-mock';
 import { useRouter } from 'next/router';
 import '@testing-library/jest-dom';
