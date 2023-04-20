@@ -20,7 +20,7 @@ export default function Home() {
           <Widget title={"Aktuelle Parkzone"} content={"Beispielstrasse"} />
         </div>
         <div className="flex flex-row center justify-between">
-          <div className='w-1/2 p-5'>
+          <div className="w-1/2 p-5">
             <Widget title={"Erfasste Fahrzeuge"} content={"-"} />
           </div>
           <div className="w-1/2 p-5">
@@ -32,14 +32,14 @@ export default function Home() {
         <div className="absolute inset-x-0 bottom-0 h-28 bg-neutral-900" />
         <Link className="absolute bottom-16" href="/camera">
           <div className="bg-green-700 hover:bg-green-800 rounded-full p-5 border-solid border-8 border-neutral-800">
-            <BiCamera className='w-20 h-20 p-1 text-white' />
+            <BiCamera className="w-20 h-20 p-1 text-white" />
           </div>
         </Link>
-        <Link className="absolute bottom-5 left-20 rounded-full items-center bg-neutral-900 hover:bg-neutral-700" href={'https://en.wikipedia.org/wiki/Settings_(Windows)'}>
-          <FiSettings className='w-20 h-20 p-4 text-white' />
+        <Link className="absolute bottom-5 left-20 rounded-full items-center bg-neutral-900 hover:bg-neutral-700" href={"https://en.wikipedia.org/wiki/Settings_(Windows)"}>
+          <FiSettings className="w-20 h-20 p-4 text-white" />
         </Link>
-        <Link className="absolute bottom-6 right-20 rounded-full items-center bg-neutral-900 hover:bg-neutral-700" href={'https://en.wikipedia.org/wiki/List_(information)'}>
-          <FaListUl className='w-20 h-20 p-4 text-white' />
+        <Link className="absolute bottom-6 right-20 rounded-full items-center bg-neutral-900 hover:bg-neutral-700" href={"https://en.wikipedia.org/wiki/List_(information)"}>
+          <FaListUl className="w-20 h-20 p-4 text-white" />
         </Link>
       </div>
     </div>

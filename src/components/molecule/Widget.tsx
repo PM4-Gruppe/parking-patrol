@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
-interface MyComponentProps {
+interface WidgetProps {
     title: string;
     content: string;
 }
 
-export const Widget = ({ title, content }: MyComponentProps) => {
+export const Widget: React.FC<WidgetProps> = ({ title, content }) => {
     let fontStyle: string = 'text-white font-light'
     if (content.length < 5) {
         fontStyle += ' text-5xl text-center p-2'
