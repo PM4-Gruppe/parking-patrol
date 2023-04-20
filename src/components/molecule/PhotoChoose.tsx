@@ -75,8 +75,9 @@ export const PhotoChoose: React.FC = () => {
       const body = new FormData();
       body.append('image', selectedImage);
       const res = await api.postRequest('/image-storage/image-upload', body)
+      //TODO check res status 
       console.log(await res);
-      
+
     } catch (error) {
       console.error(error);
     }
