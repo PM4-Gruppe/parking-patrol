@@ -9,7 +9,7 @@ import { mocked } from 'jest-mock';
 import { useRouter } from 'next/router';
 import '@testing-library/jest-dom';
 
-jest.mock('../lib/photoAnalyzer', () => ({
+jest.mock('../src/lib/photoAnalyzer', () => ({
     getPhotoInformations: jest.fn()
 }));
 
