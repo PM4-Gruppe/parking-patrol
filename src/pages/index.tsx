@@ -18,20 +18,20 @@ export default function Home() {
         <div className="p-5">
           <Widget title={"Aktuelle Parkzone"}>
             <div>
-              <p className='text-white text-lg'>aktuell in keiner Parkzone</p>
-              <p className='text-neutral-400 text-sm m-0 p-0'>nächste Parkzone Eulachpassage ist 300m entfernt</p>
+              <p className="text-white text-lg">aktuell in keiner Parkzone</p>
+              <p className="text-neutral-400 text-sm m-0 p-0">nächste Parkzone Eulachpassage ist 300m entfernt</p>
             </div>
           </Widget>
         </div>
         <div className="flex flex-row center justify-between">
           <div className="w-1/2 p-5">
             <Widget title={"Erfasste Fahrzeuge"}>
-              <p className='text-white text-lg'>192 Fahrzeuge</p>
+              <p className="text-white text-lg">192 Fahrzeuge</p>
             </Widget>
           </div>
           <div className="w-1/2 p-5">
             <Widget title={"Offene Vergehen"}>
-              <p className='text-white text-lg'>23 Vergehen</p>
+              <p className="text-white text-lg">23 Vergehen</p>
             </Widget>
           </div>
         </div>
