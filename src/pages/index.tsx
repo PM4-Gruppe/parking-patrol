@@ -2,7 +2,6 @@ import Head from 'next/head'
 import { gql, useQuery } from '@apollo/client'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 import Link from 'next/link'
-import Image from 'next/image'
 import { Widget } from '../components/molecule/Widget'
 import { BiCamera } from 'react-icons/bi'
 import { FiSettings } from 'react-icons/fi'
@@ -17,14 +16,23 @@ export default function Home() {
       </Head>
       <div className="flex flex-col center justify-evenly m-10">
         <div className="p-5">
-          <Widget title={"Aktuelle Parkzone"} content={"Beispielstrasse"} />
+          <Widget title={"Aktuelle Parkzone"}>
+            <div>
+              <p className='text-white text-lg'>aktuell in keiner Parkzone</p>
+              <p className='text-neutral-400 text-sm m-0 p-0'>nächste Parkzone Eulachpassage ist 300m entfernt</p>
+            </div>
+          </Widget>
         </div>
         <div className="flex flex-row center justify-between">
           <div className="w-1/2 p-5">
-            <Widget title={"Erfasste Fahrzeuge"} content={"-"} />
+            <Widget title={"Erfasste Fahrzeuge"}>
+              <p className='text-white text-lg'>192 Fahrzeuge</p>
+            </Widget>
           </div>
           <div className="w-1/2 p-5">
-            <Widget title={"Offene Vergehen"} content={"-"} />
+            <Widget title={"Offene Vergehen"}>
+              <p className='text-white text-lg'>23 Vergehen</p>
+            </Widget>
           </div>
         </div>
       </div>

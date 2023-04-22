@@ -1,26 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 interface WidgetProps {
     title: string;
-    content: string;
+    children: React.ReactNode;
 }
 
-export const Widget: React.FC<WidgetProps> = ({ title, content }) => {
-    let fontStyle: string = 'text-white font-light'
-    if (content.length < 5) {
-        fontStyle += ' text-5xl text-center p-2'
-    } else {
-        fontStyle += ' text-2xl p-4'
-    }
-
+export const Widget: React.FC<WidgetProps> = ({ title, children }) => {
     return (
         <div className="bg-neutral-500/50 rounded-2xl">
             <div className="bg-green-700 p-3 text-xl text-white rounded-t-2xl">
                 {title}
             </div>
-            <p className={fontStyle}>
-                {content}
-            </p>
+            <div className='p-3'>
+              {children}
+            </div>
         </div>
     );
 };
