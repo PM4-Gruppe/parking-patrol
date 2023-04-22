@@ -40,24 +40,37 @@ describe('PhotoChoose', () => {
         expect(getPhotoInformations).toHaveBeenCalledWith(selectedImage);
     });*/
 
-    it('calls handleSaveClick when the save button is clicked', async () => {
+    /*it('calls handleSubmit when the "Prüfen" button is clicked', async () => {
+        const handleSubmit = jest.fn();
+        render(<PhotoChoose onSubmit={handleSubmit} />);
+
+        const checkButton = screen.getByRole('button', { name: 'Prüfen' });
+        fireEvent.click(checkButton);
+
+        expect(handleSubmit).toHaveBeenCalledTimes(1);
+    });*/
+
+    it('calls handleBackButton when the "Zurück" button is clicked', async () => {
 
     });
 
-    it('calls handleCancelClick when the cancel button is clicked', async () => {
-
+    it('renders the "Prüfen" button', () => {
+        render(<PhotoChoose />);
+        const checkButton = screen.getByRole('button', { name: 'Prüfen' });
+        expect(checkButton).toBeInTheDocument();
     });
 
-    it('renders the save button', () => {
-
-    });
-
-    it('renders the cancel button', () => {
-
+    it('renders the "Zurück" button', () => {
+        render(<PhotoChoose />);
+        const backButton = screen.getByRole('button', { name: 'Zurück' });
+        expect(backButton).toBeInTheDocument();
     });
 
     it('renders the input field, to choose a file', () => {
-
+        render(<PhotoChoose />);
+        const fileInput = screen.getByRole('button', { name: 'Prüfen' }).previousSibling;
+        console.log(fileInput);
+        expect(fileInput).toBeInTheDocument();
     });
 
     it('should display license plate after image selection', async () => {
