@@ -3,6 +3,7 @@ import path from 'path';
 import formidable from 'formidable';
 import sharp from 'sharp';
 import fs from 'fs';
+import { withApiAuthRequired } from '@auth0/nextjs-auth0';
 
 export const config = {
     api: {
@@ -63,4 +64,4 @@ const handler: NextApiHandler = async (req, res) => {
     }
 }
 
-export default handler;
+export default withApiAuthRequired(handler);
