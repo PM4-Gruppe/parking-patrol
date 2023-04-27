@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { PhotoChoose } from '../components/molecule/PhotoChoose'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 
 export default function Camera() {
 
@@ -16,3 +17,5 @@ export default function Camera() {
         </div>
     )
 }
+
+export const getServerSideProps = withPageAuthRequired();
