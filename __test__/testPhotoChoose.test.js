@@ -69,7 +69,6 @@ describe('PhotoChoose', () => {
     it('renders the input field, to choose a file', () => {
         render(<PhotoChoose />);
         const fileInput = screen.getByRole('button', { name: 'Prüfen' }).previousSibling;
-        console.log(fileInput);
         expect(fileInput).toBeInTheDocument();
     });
 
