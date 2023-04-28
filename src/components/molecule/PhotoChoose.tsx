@@ -6,6 +6,8 @@ import Image from 'next/image'
 import { Button } from '../atom/Button'
 import { useRouter } from 'next/router'
 import { LocalEndpoint } from '../../lib/ApiEndpoints/LocalEndpoint'
+import { toastSuccess } from '../../lib/toasts'
+import { toastError } from '../../lib/toasts'
 
 export const PhotoChoose: React.FC = () => {
   const router = useRouter()
@@ -22,6 +24,9 @@ export const PhotoChoose: React.FC = () => {
   const [licensePlate, setLicensePlate] = useState('')
   const [brand, setBrand] = useState('')
   const [model, setModel] = useState('')
+
+  const toastSuccessMessage = 'Das Foto wurde erfolgreich hochgeladen!'
+  const toastErrorMessage = 'Das Foto konnte nicht hochgeladen werden!'
 
   function handleLicensePlate(licensePlate: string) {
     if (isValidLicensePlate(licensePlate)) {
@@ -69,18 +74,18 @@ export const PhotoChoose: React.FC = () => {
   }
 
   const handleSubmit = async () => {
+    if (!selectedImage) return
+    const body = new FormData()
+    body.append('image', selectedImage)
     try {
-      if (!selectedImage) return;
-
-      const body = new FormData();
-      body.append('image', selectedImage);
       const res = await api.postRequest('/image-storage/image-upload', body)
-      console.log(await res);
-      
+
+      if (res) toastSuccess(toastSuccessMessage)
+      else toastError(toastErrorMessage)
     } catch (error) {
-      console.error(error);
+      toastError(toastErrorMessage)
     }
-  };
+  }
 
   const handleBackButton = () => {
     router.back()
