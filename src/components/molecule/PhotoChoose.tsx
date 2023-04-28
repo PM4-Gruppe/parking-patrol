@@ -74,17 +74,18 @@ export const PhotoChoose: React.FC = () => {
   }
 
   const handleSubmit = async () => {
-    if (!selectedImage) return;
-    const body = new FormData();
-    body.append('image', selectedImage);
+    if (!selectedImage) return
+    const body = new FormData()
+    body.append('image', selectedImage)
     try {
       const res = await api.postRequest('/image-storage/image-upload', body)
-      toastSuccess(toastSuccessMessage)
+
+      if (res) toastSuccess(toastSuccessMessage)
+      else toastError(toastErrorMessage)
     } catch (error) {
       toastError(toastErrorMessage)
-      console.error(error);
     }
-  };
+  }
 
   const handleBackButton = () => {
     router.back()
