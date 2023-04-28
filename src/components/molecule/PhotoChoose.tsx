@@ -6,8 +6,8 @@ import Image from 'next/image'
 import { Button } from '../atom/Button'
 import { useRouter } from 'next/router'
 import { LocalEndpoint } from '../../lib/ApiEndpoints/LocalEndpoint'
-import { toastSuccess } from '../../lib/toastSuccess'
-import { toastError } from '../../lib/toastError'
+import { toastSuccess } from '../../lib/toasts'
+import { toastError } from '../../lib/toasts'
 
 export const PhotoChoose: React.FC = () => {
   const router = useRouter()
