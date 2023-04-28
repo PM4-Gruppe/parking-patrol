@@ -8,7 +8,7 @@
     "start": "next start",
     "start:migrate": "npx prisma migrate deploy --schema=./src/prisma/schema.prisma && next start",
     "start:generate:migrate": "npx prisma generate --schema=./src/prisma/schema.prisma && npx prisma migrate deploy --schema=./src/prisma/schema.prisma && next start",
-    "digitalocean": "npx prisma generate && npx prisma migrate deploy && npm install --production=false && next build && npm ci",
+    "digitalocean": "npx prisma generate --schema=./src/prisma/schema.prisma && npx prisma migrate deploy && npm install --production=false && next build && npm ci",
     "lint": "next lint",
     "export": "next build && next export",
     "test": "jest",
