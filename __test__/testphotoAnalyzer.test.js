@@ -8,11 +8,12 @@ import fs from 'fs';
 import fetchMock from 'jest-fetch-mock';
 
 global.fetch = fetchMock;
+let PHOTO_FILE = './storage/npp-1-2.jpg';
 
 describe('photoAnalyzer', () => {
     it('gets a plateNumber from getCarInformations', async () => {
         const expected = 'AA-123-AA';
-        const photoData = new File(['./storage/npp-1-2.jpg'], 'npp-1-2.jpg', { type: 'image/jpeg' });
+        const photoData = new File([PHOTO_FILE], 'npp-1-2.jpg', { type: 'image/jpeg' });
 
         // Mocked response from fetch
         const mockedResponse = {
@@ -34,7 +35,7 @@ describe('photoAnalyzer', () => {
     });
 
     it('returns undefined when the file has no GPS information', async () => {
-        const file = fs.readFileSync('./storage/npp-1-2.jpg');
+        const file = fs.readFileSync(PHOTO_FILE);
         const photoData = new File([file], 'npp-1-2.jpg', { type: 'image/jpeg' });
 
         const result = await getGeoInformations(photoData);
