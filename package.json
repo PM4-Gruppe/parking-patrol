@@ -14,7 +14,7 @@
     "hooks": "node -e \"require('fs-extra').copySync('scripts/pre-commit', '.git/hooks/pre-commit'); require('fs-extra').chmodSync('.git/hooks/pre-commit', '755');\""
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node src/prisma/seed.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.7.11",
