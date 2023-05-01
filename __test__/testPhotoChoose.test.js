@@ -2,16 +2,11 @@
  * @jest-environment jsdom
  */
 import React from 'react';
-import {fireEvent, render, screen} from '@testing-library/react';
+import {fireEvent, render, screen, waitFor} from '@testing-library/react';
 import { PhotoChoose } from '../src/components/molecule/PhotoChoose';
-import { getPhotoInformations } from '../src/lib/photoAnalyzer';
 import { mocked } from 'jest-mock';
 import { useRouter } from 'next/router';
-import '@testing-library/jest-dom';
-
-jest.mock('../src/lib/photoAnalyzer', () => ({
-    getPhotoInformations: jest.fn()
-}));
+import '@testing-library/jest-dom'
 
 jest.mock('next/router', () => ({
     useRouter: jest.fn()
@@ -22,37 +17,42 @@ describe('PhotoChoose', () => {
         mocked(useRouter).mockReturnValue({
             back: jest.fn(),
         })
+
     })
+
+    afterEach(() => {
+        jest.resetAllMocks();
+    });
+
     it('checks if the text "Bitte geben Sie eine Marke ein." is rendered', () => {
         render(<PhotoChoose/>)
         const labelElement = screen.getByText('Bitte geben Sie eine Marke ein.');
         expect(labelElement).toBeInTheDocument();
     });
 
-    /*
-    Throws console error :/
-    it('calls getPhotoInformations in handleImageSelect when a file is selected', async () => {
-        render(<PhotoChoose/>)
-        const selectedImage = new File(['(⌐□_□)'], 'test.jpg', { type: 'image/jpeg' });
-        const fileInput = screen.getByRole('button', { name: 'Save' }).previousSibling;
-        fireEvent.change(fileInput, { target: { files: [selectedImage] } });
+    // it('calls handleImageSelect when a file is selected', async () => {
+    //     const handleImageSelectMock = jest.fn();
+    //     const { getByTitle } = render(<PhotoChoose/>);
+    //     const input = getByTitle('file');
+    //     fireEvent.click(input);
+    //     await waitFor(() => expect(handleImageSelectMock).toHaveBeenCalledTimes(1));
+    // });
 
-        expect(getPhotoInformations).toHaveBeenCalledWith(selectedImage);
-    });*/
-
-    /*it('calls handleSubmit when the "Prüfen" button is clicked', async () => {
-        const handleSubmit = jest.fn();
-        render(<PhotoChoose onSubmit={handleSubmit} />);
-
-        const checkButton = screen.getByRole('button', { name: 'Prüfen' });
-        fireEvent.click(checkButton);
-
-        expect(handleSubmit).toHaveBeenCalledTimes(1);
-    });*/
-
-    it('calls handleBackButton when the "Zurück" button is clicked', async () => {
-
-    });
+    // it('calls handleSubmit when the "Prüfen" button is clicked', async () => {
+    //     const handleSubmitMock = jest.fn();
+    //     render(<PhotoChoose/>);
+    //     const checkButton = screen.getByRole('button', { name: 'Prüfen' });
+    //     fireEvent.click(checkButton);
+    //     await waitFor(() => expect(handleSubmitMock).toHaveBeenCalledTimes(1));
+    // });
+    //
+    // it('calls handleBackButton when the "Zurück" button is clicked', async () => {
+    //     const handleBackButtonMock = jest.fn();
+    //     render(<PhotoChoose/>);
+    //     const backButton = screen.getByRole('button', { name: 'Zurück' });
+    //     fireEvent.click(backButton);
+    //     await waitFor(() => expect(handleBackButtonMock).toHaveBeenCalledTimes(1));
+    // });
 
     it('renders the "Prüfen" button', () => {
         render(<PhotoChoose />);
@@ -73,10 +73,6 @@ describe('PhotoChoose', () => {
     });
 
     it('should display license plate after image selection', async () => {
-
-    });
-
-    it('should render and function correctly', async () => {
 
     });
 

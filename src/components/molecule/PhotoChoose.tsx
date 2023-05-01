@@ -76,7 +76,6 @@ export const PhotoChoose: React.FC = () => {
       body.append('image', selectedImage);
       const res = await api.postRequest('/image-storage/image-upload', body)
       console.log(await res);
-      
     } catch (error) {
       console.error(error);
     }
@@ -91,6 +90,7 @@ export const PhotoChoose: React.FC = () => {
       <div >
         <input
           type="file"
+          title={'file'}
           accept="image/*"
           onChange={handleImageSelect}
           className="displayflex flex-col items-center justify-center w-full p-2 file:bg-green-700 file:hover:bg-green-800 file:text-white text-white file:rounded-lg file:border-transparent my-2"
