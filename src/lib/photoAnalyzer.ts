@@ -13,7 +13,7 @@ export async function getPhotoInformations(photo: File): Promise<PhotoInformatio
     }
 }
 
-async function getCarInformations(photo: File) {
+export async function getCarInformations(photo: File) {
     //TODO add error handling when photo is to big
     let plateNumber = '';
     const body = new FormData();
@@ -36,7 +36,7 @@ async function getCarInformations(photo: File) {
     return plateNumber
 }
 
-async function getGeoInformations(photo: File) {
+export async function getGeoInformations(photo: File) {
     const tags = await ExifReader.load(photo, {expanded: true})
     return tags.gps
 }

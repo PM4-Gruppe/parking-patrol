@@ -2,42 +2,42 @@
  * @jest-environment jsdom
  */
 import React from 'react';
-import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { getPhotoInformations } from '../src/lib/photoAnalyzer';
+import { getCarInformations, getGeoInformations } from '../src/lib/photoAnalyzer';
 import fs from 'fs';
 import fetchMock from 'jest-fetch-mock';
 
 global.fetch = fetchMock;
 
 describe('photoAnalyzer', () => {
-    beforeEach(() => {
-        fetchMock.resetMocks();
-    });
-
     it('gets a plateNumber from getCarInformations', async () => {
-        const expectedPhotoInfo = {
-            licensePlate: {
-                sign: 'SG122',
-            },
+        const expected = 'AA-123-AA';
+        const photoData = new File(['./storage/npp-1-2.jpg'], 'npp-1-2.jpg', { type: 'image/jpeg' });
+
+        // Mocked response from fetch
+        const mockedResponse = {
+            json: async () => ({
+                results: [{ plate: expected }]
+            }),
         };
-        const mockFetch = jest.fn().mockImplementation(() =>
-            Promise.resolve({
-                json: () => Promise.resolve({ results: [{ plate: expectedPhotoInfo.licensePlate.sign }]
-                }),
-            })
-        );
-        global.fetch = mockFetch;
 
-        const photoData = fs.readFileSync('./storage/npp-1-2.jpg');
-        const photoFile = new File([photoData], 'npp-1-2.jpeg', { type: 'image/*' });
-        const photoInfo = await getPhotoInformations(photoFile);
+        // Mock the fetch function
+        global.fetch = jest.fn().mockResolvedValue(mockedResponse);
 
-        expect(photoInfo.licensePlate?.sign).toEqual(expectedPhotoInfo.licensePlate?.sign);
-        expect(mockFetch).toHaveBeenCalled();
+        const result = await getCarInformations(photoData);
+
+        expect(result).toEqual(expected);
     });
 
-    it('gets the geoLocation from getGeoInformations', () => {
+    it('gets the geoLocation from getGeoInformations', async () => {
 
+    });
+
+    it('returns undefined when the file has no GPS information', async () => {
+        const file = fs.readFileSync('./storage/npp-1-2.jpg');
+        const photoData = new File([file], 'npp-1-2.jpg', { type: 'image/jpeg' });
+
+        const result = await getGeoInformations(photoData);
+        expect(result).toBeUndefined();
     });
 });
