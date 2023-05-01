@@ -1,4 +1,4 @@
-import { createParkedCar } from '../../../utils/createParkedCar';
+import { createParkedCar } from '../../../lib/createParkedCar';
 
 export default async function handler(req: any, res: any) {
     if (req.method === 'POST') {
