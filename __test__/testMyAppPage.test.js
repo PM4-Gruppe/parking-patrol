@@ -8,6 +8,14 @@ jest.mock('next/router', () => ({
     useRouter: jest.fn(),
 }));
 
+jest.mock('next/link', () => {
+    const Link = ({ children, ...props }) => (
+        <a {...props}>{children}</a>
+    );
+    Link.displayName = 'Link';
+    return Link;
+});
+
 describe('MyApp', () => {
     beforeEach(() => {
         mocked(useRouter).mockReturnValue({
@@ -20,11 +28,11 @@ describe('MyApp', () => {
     });
 
     it('renders correctly', () => {
-        // const tree = renderer
-        //     .create(
-        //         <MyApp Component={() => <div>Test Component</div>} pageProps={{}}/>
-        //     )
-        //     .toJSON()
-        // expect(tree).toMatchSnapshot()
+        const tree = renderer
+            .create(
+                <MyApp Component={() => <div>Test Component</div>} pageProps={{}}/>
+            )
+            .toJSON()
+        expect(tree).toMatchSnapshot()
     })
 })
