@@ -24,6 +24,10 @@ const customJestConfig = {
         '!<rootDir>/.next/**',
         '!<rootDir>/*.config.js',
         '!<rootDir>/coverage/**',
+        '!<rootDir>/src/prisma/**',
+        '!<rootDir>/src/graphql/**',
+        '!<rootDir>/src/schemas/**',
+        '!<rootDir>/src/pages/api/auth/**',
     ],
     coverageDirectory: '<rootDir>/coverage',
     transform: {
