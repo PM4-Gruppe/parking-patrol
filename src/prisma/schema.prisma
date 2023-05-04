@@ -20,10 +20,12 @@ model CarManufacturer {
 }
 
 model CarModel {
-  modelName       String          @id @unique
+  modelName       String
   carManufacturer CarManufacturer @relation(references: [manufacturerName], fields: [manufacturer])
   manufacturer    String
   parkedCar       ParkedCar[]
+
+  @@id([modelName, manufacturer], name: "CarModel_pkey")
 }
 
 model Color {
@@ -34,8 +36,9 @@ model Color {
 model ParkedCar {
   numberPlate  String
   controlTime  DateTime
-  carModel     CarModel @relation(references: [modelName], fields: [model])
+  carModel     CarModel @relation(references: [modelName, manufacturer], fields: [model, manufacturer])
   model        String
+  manufacturer String
   carColor     Color    @relation(references: [colorName], fields: [color])
   color        String
   latitude     Float
@@ -43,7 +46,7 @@ model ParkedCar {
   carInspector String   @db.VarChar(256)
   photoPath    String
 
-  @@id([numberPlate, controlTime], name: "Parked_Car_pkey")
+  @@id([numberPlate, controlTime], name: "ParkedCar_pkey")
 }
 
 model Parkzone {
