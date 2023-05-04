@@ -48,12 +48,6 @@ builder.mutationField('createParkedCar', (t) =>
         photoPath,
       } = args
 
-      /*
-      if (!(await ctx).user) {
-        throw new Error('You have to be logged in to perform this action')
-      }
-      */
-
       return prisma.parkedCar.create({
         ...query,
         data: {
