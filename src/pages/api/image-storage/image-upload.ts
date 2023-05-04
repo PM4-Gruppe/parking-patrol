@@ -55,7 +55,12 @@ const handler: NextApiHandler = async (req, res) => {
         originalImagePath = image.filepath;
         compressedImagePath = await saveCompressedImage(originalImagePath, image.newFilename, 800, 80, false)
         thumbnailPath = await saveCompressedImage(originalImagePath, image.newFilename, 200, 60, true)
-        res.status(200).json({ message: 'Image saved successfully.' });
+        res.status(200).json({
+            message: 'Image saved successfully.',
+            'original image path': originalImagePath,
+            'compressed image path': compressedImagePath,
+            'thumbnail path': thumbnailPath
+        });
     } catch (error) {
         if (fs.existsSync(compressedImagePath)) fs.unlinkSync(compressedImagePath);
         if (fs.existsSync(thumbnailPath)) fs.unlinkSync(thumbnailPath);
