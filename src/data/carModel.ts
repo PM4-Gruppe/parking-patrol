@@ -1,7 +1,7 @@
 export const carModel = [
     {
-        modelName: 'Nicht verfügbar',
-        manufacturer: 'Nicht verfügbar',
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Nicht erkennbar',
     },
     {
         modelName: '1500/1600',
@@ -1098,5 +1098,385 @@ export const carModel = [
     {
         modelName: 'Leon',
         manufacturer: 'CUPRA',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Adria',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Alfa Romeo',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Alpina',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Alpine',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Apollo',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Artega',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Aston Martin',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Audi',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Bentley',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'BMW',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'BMW M',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Borgward',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Brabus',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Brilliance',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Bugatti',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Buick',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Byton',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Cadillac',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Carthago',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Caterham',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Chevrolet',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Chrysler',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Citroën',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'CUPRA',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Dacia',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Daihatsu',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'De Tomaso',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Dodge',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'DS Automobiles',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Faraday Future',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Ferrari',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Fiat',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Fisker',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Ford',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Honda',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Hummer',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Hyundai',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Infiniti',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Ioniq',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Isuzu',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Iveco',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Jaguar',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Jeep',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Kia',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Koenigsegg',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'KTM',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Lada',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Lamborghini',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Lancia',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Land Rover',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'LeEco',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Lexus',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Lincoln',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Lotus',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Lynk & Co',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Mahindra',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Maserati',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Maybach',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Mazda',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'McLaren',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Mercedes-AMG',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Mercedes-Benz',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Mini',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Mitsubishi',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Morgan',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Nissan',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Opel',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Pagani',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Peugeot',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Piaggio',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Polestar',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Porsche',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Qoros',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Renault',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Rolls-Royce',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Rover',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Ruf',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Saab',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Saleen',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'SEAT',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Skoda',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Smart',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Spyker',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'SsangYong',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Subaru',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Suzuki',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Tata',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Tesla',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Toyota',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'TVR',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Venturi',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Volvo',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'VW',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'VW Nutzfahrzeuge',
+    },
+    {
+        modelName: 'Nicht erkennbar',
+        manufacturer: 'Wiesmann',
     },
 ];

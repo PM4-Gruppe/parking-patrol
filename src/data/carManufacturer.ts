@@ -1,6 +1,6 @@
 export const carManufacturer = [
     {
-        manufacturerName: 'Nicht verfügbar',
+        manufacturerName: 'Nicht erkennbar',
     },
     {
         manufacturerName: 'Adria',
