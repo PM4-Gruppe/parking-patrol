@@ -65,9 +65,9 @@ const handler: NextApiHandler = async (req, res) => {
         thumbnailPath = await saveCompressedImage(originalImagePath, image.newFilename, 200, 60, true)
         res.status(200).json({
             message: 'Image saved successfully.',
-            'original image path': originalImagePath,
-            'compressed image path': compressedImagePath,
-            'thumbnail path': thumbnailPath
+            originalImagePath,
+            compressedImagePath,
+            thumbnailPath
         });
     } catch (error) {
         deleteImages(compressedImagePath, thumbnailPath, originalImagePath);
