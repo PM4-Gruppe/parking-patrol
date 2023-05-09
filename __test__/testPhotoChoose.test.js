@@ -7,6 +7,12 @@ import { PhotoChoose } from '../src/components/molecule/PhotoChoose';
 import { mocked } from 'jest-mock';
 import { useRouter } from 'next/router';
 import '@testing-library/jest-dom'
+import fetchMock from 'jest-fetch-mock';
+import {getCarInformations} from "../src/lib/photoAnalyzer";
+
+global.fetch = fetchMock;
+global.URL.createObjectURL = jest.fn();
+let PHOTO_FILE = './storage/npp-1-2.jpg';
 
 jest.mock('next/router', () => ({
     useRouter: jest.fn()
@@ -73,7 +79,24 @@ describe('PhotoChoose', () => {
     });
 
     it('should display license plate after image selection', async () => {
+        /*render(<PhotoChoose/>);
+        const expected = 'AA-123-AA';
+        const photoData = new File([PHOTO_FILE], 'npp-1-2.jpg', { type: 'image/jpeg' });
+        const fileInput = screen.getByTitle('file');
 
+        // Mocked response from fetch
+        const mockedResponse = {
+            json: async () => ({
+                results: [{ plate: expected }]
+            }),
+        };
+
+        global.fetch = jest.fn().mockResolvedValue(mockedResponse);
+        fireEvent.change(fileInput, { target: { files: [photoData] } });
+        await waitFor(() => getCarInformations(photoData));
+        const licensePlate = screen.getByPlaceholderText('Autonummer');
+        console.log(licensePlate);
+        await waitFor(() => expect(licensePlate).toHaveTextContent(expected));*/
     });
 
     it('should handle file upload error', async () => {
@@ -81,6 +104,6 @@ describe('PhotoChoose', () => {
     });
 
     it('should handle error while getting license plate information', async () => {
-        
+
     });
 });

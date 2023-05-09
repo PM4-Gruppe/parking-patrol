@@ -28,6 +28,7 @@ const customJestConfig = {
         '!<rootDir>/src/graphql/**',
         '!<rootDir>/src/schemas/**',
         '!<rootDir>/src/pages/api/auth/**',
+        '!<rootDir>/src/pages/api/graphql.ts',
     ],
     coverageDirectory: '<rootDir>/coverage',
     transform: {
