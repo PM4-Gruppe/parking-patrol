@@ -8,7 +8,7 @@ import { mocked } from 'jest-mock';
 import { useRouter } from 'next/router';
 import '@testing-library/jest-dom'
 import fetchMock from 'jest-fetch-mock';
-import {getCarInformations} from "../src/lib/photoAnalyzer";
+import fs from 'fs';
 
 global.fetch = fetchMock;
 global.URL.createObjectURL = jest.fn();
@@ -36,13 +36,13 @@ describe('PhotoChoose', () => {
         expect(labelElement).toBeInTheDocument();
     });
 
-    // it('calls handleImageSelect when a file is selected', async () => {
-    //     const handleImageSelectMock = jest.fn();
-    //     const { getByTitle } = render(<PhotoChoose/>);
-    //     const input = getByTitle('file');
-    //     fireEvent.click(input);
-    //     await waitFor(() => expect(handleImageSelectMock).toHaveBeenCalledTimes(1));
-    // });
+    /*it('calls handleImageSelect when a file is selected', async () => {
+        const handleImageSelectMock = jest.fn();
+        const { getByTitle } = render(<PhotoChoose/>);
+        const input = getByTitle('file');
+        fireEvent.click(input);
+        await waitFor(() => expect(handleImageSelectMock).toHaveBeenCalledTimes(1));
+    });*/
 
     // it('calls handleSubmit when the "Prüfen" button is clicked', async () => {
     //     const handleSubmitMock = jest.fn();
@@ -79,9 +79,10 @@ describe('PhotoChoose', () => {
     });
 
     it('should display license plate after image selection', async () => {
-        /*render(<PhotoChoose/>);
+        render(<PhotoChoose/>);
         const expected = 'AA-123-AA';
-        const photoData = new File([PHOTO_FILE], 'npp-1-2.jpg', { type: 'image/jpeg' });
+        const photoFile = fs.readFileSync(PHOTO_FILE);
+        const photoData = new File([photoFile], 'npp-1-2.jpg', { type: 'image/jpeg' });
         const fileInput = screen.getByTitle('file');
 
         // Mocked response from fetch
@@ -93,14 +94,12 @@ describe('PhotoChoose', () => {
 
         global.fetch = jest.fn().mockResolvedValue(mockedResponse);
         fireEvent.change(fileInput, { target: { files: [photoData] } });
-        await waitFor(() => getCarInformations(photoData));
-        const licensePlate = screen.getByPlaceholderText('Autonummer');
-        console.log(licensePlate);
-        await waitFor(() => expect(licensePlate).toHaveTextContent(expected));*/
+        await waitFor( () => expect(screen.getByPlaceholderText('Autonummer').value).toEqual(expected));
     });
 
     it('should handle file upload error', async () => {
-
+        /*const checkButton = screen.getByRole('button', { name: 'Prüfen' });
+        fireEvent.click(checkButton);*/
     });
 
     it('should handle error while getting license plate information', async () => {
