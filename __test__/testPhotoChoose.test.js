@@ -23,7 +23,6 @@ describe('PhotoChoose', () => {
         mocked(useRouter).mockReturnValue({
             back: jest.fn(),
         })
-
     })
 
     afterEach(() => {
@@ -36,29 +35,32 @@ describe('PhotoChoose', () => {
         expect(labelElement).toBeInTheDocument();
     });
 
-    /*it('calls handleImageSelect when a file is selected', async () => {
-        const handleImageSelectMock = jest.fn();
-        const { getByTitle } = render(<PhotoChoose/>);
-        const input = getByTitle('file');
-        fireEvent.click(input);
-        await waitFor(() => expect(handleImageSelectMock).toHaveBeenCalledTimes(1));
-    });*/
+    // it('calls handleImageSelect when a file is selected', async () => {
+    //     const handleImageSelectMock = jest.fn();
+    //     const { getByTitle } = render(<PhotoChoose/>);
+    //     const input = getByTitle('file');
+    //     fireEvent.click(input);
+    //     await waitFor(() => expect(handleImageSelectMock).toHaveBeenCalledTimes(1));
+    // });
 
-    // it('calls handleSubmit when the "Prüfen" button is clicked', async () => {
-    //     const handleSubmitMock = jest.fn();
+    // it('checks if compressed files have been added to storage when the "Prüfen" button is clicked', async () => {
     //     render(<PhotoChoose/>);
     //     const checkButton = screen.getByRole('button', { name: 'Prüfen' });
-    //     fireEvent.click(checkButton);
-    //     await waitFor(() => expect(handleSubmitMock).toHaveBeenCalledTimes(1));
-    // });
+    //     const photoFile = fs.readFileSync(PHOTO_FILE);
+    //     const photoData = new File([photoFile], 'npp-1-2.jpg', { type: 'image/jpeg' });
+    //     const fileInput = screen.getByTitle('file');
     //
-    // it('calls handleBackButton when the "Zurück" button is clicked', async () => {
-    //     const handleBackButtonMock = jest.fn();
-    //     render(<PhotoChoose/>);
-    //     const backButton = screen.getByRole('button', { name: 'Zurück' });
-    //     fireEvent.click(backButton);
-    //     await waitFor(() => expect(handleBackButtonMock).toHaveBeenCalledTimes(1));
+    //     fireEvent.change(fileInput, { target: { files: [photoData] } });
+    //     fireEvent.click(checkButton);
+    //     await waitFor(() => expect())
     // });
+
+    it('goes back when the "Zurück" button is clicked', async () => {
+        render(<PhotoChoose/>);
+        const backButton = screen.getByRole('button', { name: 'Zurück' });
+        fireEvent.click(backButton);
+        await waitFor(() => expect(useRouter().back).toHaveBeenCalledTimes(1));
+    });
 
     it('renders the "Prüfen" button', () => {
         render(<PhotoChoose />);
