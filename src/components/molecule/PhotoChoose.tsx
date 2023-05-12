@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { getPhotoInformations } from '../../lib/photoAnalyzer'
 import { TextBox } from '../atom/TextBox'
+import { SelectBox } from '../atom/SelectBox'
 import { isValidLicensePlate } from '../../lib/isValidLicensePlate'
 import Image from 'next/image'
 import { Button } from '../atom/Button'
@@ -114,9 +115,9 @@ export const PhotoChoose: React.FC = () => {
 
       <TextBox inputType="text" inputDefaultValue="Autonummer" informationText={informationLicenceplate} value={licensePlate} onChange={handleLicensePlate} />
 
-      <TextBox inputType="text" inputDefaultValue="Marke" informationText={informationBrand} value={brand} onChange={handleBrand} />
+      <SelectBox inputType="text" inputDefaultValue="Marke" informationText={informationBrand} value={brand} />
 
-      <TextBox inputType="text" inputDefaultValue="Modell" informationText={informationModel} value={model} onChange={handleModel} />
+      <SelectBox inputType="text" inputDefaultValue="Model" informationText={informationModel} value={model} />
 
       <div className="flex flex-grow-0 justify-between w-1/2">
         <Button

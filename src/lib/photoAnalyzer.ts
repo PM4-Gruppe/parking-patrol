@@ -36,7 +36,7 @@ async function getCarInformations(photo: File) {
     return plateNumber
 }
 
-async function getGeoInformations(photo: File) {
+export async function getGeoInformations(photo: File) {
     const tags = await ExifReader.load(photo, {expanded: true})
     return tags.gps
 }
