@@ -107,7 +107,7 @@ export const PhotoChoose: React.FC = () => {
         />
       )}
 
-      <TextBox inputType="text" inputDefaultValue={'Autonummer'} informationText={informationLicenceplate} value={licensePlate} onChange={handleLicensePlate} />
+      <TextBox inputType="text" inputDefaultValue="Autonummer" informationText={informationLicenceplate} value={licensePlate} onChange={handleLicensePlate} />
 
       <TextBox inputType="text" inputDefaultValue="Marke" informationText={informationBrand} value={brand} onChange={handleBrand} />
 
