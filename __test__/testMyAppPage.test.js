@@ -3,10 +3,23 @@ import renderer from 'react-test-renderer';
 import MyApp from '../src/pages/_app';
 import { useRouter } from 'next/router';
 import { mocked } from 'jest-mock'
+import Layout from '../src/components'
 
 jest.mock('next/router', () => ({
     useRouter: jest.fn(),
 }));
+
+jest.mock('../src/components', () => 'Layout')
+jest.mock('@auth0/nextjs-auth0/client', () => ({
+    UserProvider: ({ children }) => <div>{children}</div>,
+}));
+
+jest.mock('../src/lib/apollo', () => ({
+    __esModule: true,
+    default: {
+        query: () => {},
+    },
+}))
 
 jest.mock('next/link', () => {
     const Link = ({ children, ...props }) => (
@@ -28,11 +41,7 @@ describe('MyApp', () => {
     });
 
     it('renders correctly', () => {
-        const tree = renderer
-            .create(
-                <MyApp Component={() => <div>Test Component</div>} pageProps={{}}/>
-            )
-            .toJSON()
+        const tree = renderer.create(<MyApp Component={() => <div>Test Component</div>} pageProps={{}} />).toJSON()
         expect(tree).toMatchSnapshot()
     })
 })
