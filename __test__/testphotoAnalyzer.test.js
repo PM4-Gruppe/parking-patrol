@@ -8,12 +8,13 @@ import fs from 'fs';
 import fetchMock from 'jest-fetch-mock';
 
 global.fetch = fetchMock;
-let PHOTO_FILE = './storage/npp-1-2.jpg';
+let PHOTO_FILE_WITH_GPS = './storage/npp-1-1.jpg';
+let PHOTO_FILE_WITHOUT_GPS = './storage/npp-1-2.jpg';
 
 describe('photoAnalyzer', () => {
     it('gets a plateNumber from getCarInformations', async () => {
         const expected = 'AA-123-AA';
-        const photoData = new File([PHOTO_FILE], 'npp-1-2.jpg', { type: 'image/jpeg' });
+        const photoData = new File([PHOTO_FILE_WITH_GPS], 'npp-1-1.jpg', { type: 'image/jpeg' });
 
         // Mocked response from fetch
         const mockedResponse = {
@@ -31,11 +32,20 @@ describe('photoAnalyzer', () => {
     });
 
     it('gets the geoLocation from getGeoInformations', async () => {
+        const expected = {
+            Altitude: 425.6578185328185,
+            Latitude: 47.41546944444444,
+            Longitude: 8.55948888888889,
+        };
+        const photoFile = fs.readFileSync(PHOTO_FILE_WITH_GPS);
+        const photoData = new File([photoFile], 'npp-1-1.jpg', { type: 'image/jpeg' });
 
+        const result = await getGeoInformations(photoData);
+        expect(result).toEqual(expected);
     });
 
     it('returns undefined when the file has no GPS information', async () => {
-        const file = fs.readFileSync(PHOTO_FILE);
+        const file = fs.readFileSync(PHOTO_FILE_WITHOUT_GPS);
         const photoData = new File([file], 'npp-1-2.jpg', { type: 'image/jpeg' });
 
         const result = await getGeoInformations(photoData);
