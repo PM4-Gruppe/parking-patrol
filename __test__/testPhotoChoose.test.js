@@ -35,26 +35,6 @@ describe('PhotoChoose', () => {
         expect(labelElement).toBeInTheDocument();
     });
 
-    // it('calls handleImageSelect when a file is selected', async () => {
-    //     const handleImageSelectMock = jest.fn();
-    //     const { getByTitle } = render(<PhotoChoose/>);
-    //     const input = getByTitle('file');
-    //     fireEvent.click(input);
-    //     await waitFor(() => expect(handleImageSelectMock).toHaveBeenCalledTimes(1));
-    // });
-
-    // it('checks if compressed files have been added to storage when the "Prüfen" button is clicked', async () => {
-    //     render(<PhotoChoose/>);
-    //     const checkButton = screen.getByRole('button', { name: 'Prüfen' });
-    //     const photoFile = fs.readFileSync(PHOTO_FILE);
-    //     const photoData = new File([photoFile], 'npp-1-2.jpg', { type: 'image/jpeg' });
-    //     const fileInput = screen.getByTitle('file');
-    //
-    //     fireEvent.change(fileInput, { target: { files: [photoData] } });
-    //     fireEvent.click(checkButton);
-    //     await waitFor(() => expect())
-    // });
-
     it('goes back when the "Zurück" button is clicked', async () => {
         render(<PhotoChoose/>);
         const backButton = screen.getByRole('button', { name: 'Zurück' });
