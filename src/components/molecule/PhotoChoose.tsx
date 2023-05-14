@@ -40,6 +40,7 @@ export const PhotoChoose: React.FC = () => {
   }
 
   function handleBrand(value: string) {
+    console.log(value)
     setBrand(value)
     if (value.length === 0) {
       setInformationBrand(defaultInformationBrand)
@@ -75,7 +76,10 @@ export const PhotoChoose: React.FC = () => {
   }
 
   const handleSubmit = async () => {
-    if (!selectedImage) return
+    if (!selectedImage) {
+      toastError('Bitte wählen Sie ein Foto aus!')
+      return
+    }
     const body = new FormData()
     body.append('image', selectedImage)
     try {
@@ -115,9 +119,9 @@ export const PhotoChoose: React.FC = () => {
 
       <TextBox inputType="text" inputDefaultValue="Autonummer" informationText={informationLicenceplate} value={licensePlate} onChange={handleLicensePlate} />
 
-      <SelectBox inputType="text" inputDefaultValue="Marke" informationText={informationBrand} value={brand} />
+      <SelectBox informationText={informationBrand} value={brand} onChange={handleBrand} />
 
-      <SelectBox inputType="text" inputDefaultValue="Model" informationText={informationModel} value={model} />
+      <SelectBox informationText={informationModel} value={model} />
 
       <div className="flex flex-grow-0 justify-between w-1/2">
         <Button
