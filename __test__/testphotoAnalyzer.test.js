@@ -8,8 +8,8 @@ import fs from 'fs';
 import fetchMock from 'jest-fetch-mock';
 
 global.fetch = fetchMock;
-let PHOTO_FILE_WITH_GPS = './storage/npp-1-1.jpg';
-let PHOTO_FILE_WITHOUT_GPS = './storage/npp-1-2.jpg';
+const PHOTO_FILE_WITH_GPS = './__test__/testImages/npp-1-1.jpg';
+const PHOTO_FILE_WITHOUT_GPS = './__test__/testImages/npp-1-2.jpg';
 
 describe('photoAnalyzer', () => {
     it('gets a plateNumber from getCarInformations', async () => {
