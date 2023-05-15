@@ -29,6 +29,8 @@ const customJestConfig = {
         '!<rootDir>/src/schemas/**',
         '!<rootDir>/src/pages/api/auth/**',
         '!<rootDir>/src/pages/api/graphql.ts',
+        '!<rootDir>/src/data/**',
+        '!<rootDir>/src/lib/apollo.ts',
     ],
     coverageDirectory: '<rootDir>/coverage',
     transform: {

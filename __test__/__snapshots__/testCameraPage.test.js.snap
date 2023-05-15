@@ -92,5 +92,8 @@ exports[`Camera should match snapshot 1`] = `
       </button>
     </div>
   </div>
+  <div
+    className="Toastify"
+  />
 </div>
 `;

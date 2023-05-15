@@ -4,7 +4,10 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import handler from '../src/pages/api/image-storage/image-upload';
-import fs from 'fs';
+
+jest.mock('@auth0/nextjs-auth0', () => ({
+    withApiAuthRequired: jest.fn().mockImplementation((handler) => handler),
+}));
 
 describe('image-upload', () => {
     it('calls handler function', async () => {

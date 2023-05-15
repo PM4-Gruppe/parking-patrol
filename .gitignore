@@ -38,4 +38,4 @@ yarn-error.log*
 .idea
 
 # prisma
-/prisma/migrations/
+/src/prisma/migrations
