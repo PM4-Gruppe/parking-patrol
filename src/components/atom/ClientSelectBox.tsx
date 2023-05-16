@@ -9,7 +9,7 @@ interface ClientSelectBoxProps {
   data: string[]
   onChange: (inputValue: string) => void
 }
-//TODO fix param types
+
 export const ClientSelectBox: React.FC<ClientSelectBoxProps> = ({
   informationText,
   value = '',
@@ -21,10 +21,9 @@ export const ClientSelectBox: React.FC<ClientSelectBoxProps> = ({
   useEffect(() => {
     initTE({ Select, Input })
     if (data.length < 1) setDisabled(true)
-  }, [])
+  }, [data.length])
 
   //TODO text color in search bar
-  //TODO add model names
   return (
     <div className="box mb-4 ">
       <select

@@ -18,22 +18,18 @@ export const SelectModel: React.FC<SelectModelProps> = ({ manufacturer }) => {
   const defaultInformation = 'Bitte wählen Sie ein Model aus.'
   const doneMessage = 'Model ausgewählt ✅'
 
+  //TODO: Fix dirty hack => causes Reac Hook Warnings
   if (!manufacturer) return <span></span>
 
   const { loading, error, data } = useQuery(GET_MODELS, {
     variables: { manufacturer },
   })
 
-  console.log('data for: ', manufacturer)
-  console.log(data)
   const [model, setModel] = useState('')
 
-  const [informationModel, setInformationModel] =
-    useState<string>(defaultInformation)
+  const [informationModel, setInformationModel] = useState<string>(defaultInformation)
 
   function handleModel(value: string) {
-    console.log('in handleModel')
-    console.log('Model = ', model)
     setModel(value)
     if (value.length === 0) {
       setInformationModel(defaultInformation)
@@ -43,7 +39,6 @@ export const SelectModel: React.FC<SelectModelProps> = ({ manufacturer }) => {
   }
 
   if (loading) return <p>loading...</p>
-  console.log(data, error)
   if (error) return <p>error...</p>
   return (
     <SelectBox

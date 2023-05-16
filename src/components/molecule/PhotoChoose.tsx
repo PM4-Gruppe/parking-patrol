@@ -1,38 +1,24 @@
 import React, { useState } from 'react'
-import { useMutation } from '@apollo/client'
-import { CREATE_PARKED_CAR } from '../../graphql/mutations/parkedCar.create'
-import { getPhotoInformations } from '../../lib/photoAnalyzer'
-import { TextBox } from '../atom/TextBox'
-import { SelectBox } from '../atom/SelectBox'
-import { ClientTextBox } from '../atom/ClientTextBox'
-import { ClientSelectBox } from '../atom/ClientSelectBox'
-import { isValidLicensePlate } from '../../lib/isValidLicensePlate'
 import Image from 'next/image'
+import { getPhotoInformations } from '../../lib/photoAnalyzer'
+import { isValidLicensePlate } from '../../lib/isValidLicensePlate'
 import { Button } from '../atom/Button'
 import { useRouter } from 'next/router'
 import { LocalEndpoint } from '../../lib/ApiEndpoints/LocalEndpoint'
 import { toastSuccess } from '../../lib/toasts'
 import { toastError } from '../../lib/toasts'
-
-//ff. changes
-import { DocumentNode, gql, useQuery } from '@apollo/client'
 import { SelectModel } from '../atom/SelectModel'
 import { SelectManufacturer } from '../atom/SelectManufacturer'
 import { ParkedCar } from '@prisma/client'
+import { ClientTextBox } from '../atom/ClientTextBox'
 
 export const PhotoChoose: React.FC = () => {
   const router = useRouter()
   const api = new LocalEndpoint()
-  //const [createParkedCar, { data, loading, error }] =
-  // useMutation(CREATE_PARKED_CAR)
 
   const [formData, setFormData] = useState<ParkedCar>()
-  // const { models, setModels } = useState()
 
-  //const addFormData(key: string, value: string)
-
-  const [informationLicenceplate, setInformationLicenseplate] =
-    useState<string>('Information')
+  const [informationLicenceplate, setInformationLicenseplate] = useState<string>('Information')
   const [selectedImageURL, setSelectedImageURL] = useState<string>('')
   const [selectedImage, setSelectedImage] = useState<File>()
 
@@ -42,7 +28,9 @@ export const PhotoChoose: React.FC = () => {
   const toastErrorMessage = 'Das Foto konnte nicht hochgeladen werden!'
   const toastChoosePhotoMessage = 'Bitte wählen Sie ein Foto aus!'
 
+  //TODO: FUnktion auslagern
   function handleLicensePlate(licensePlate: string) {
+    const doneMessage = '✅'
     if (isValidLicensePlate(licensePlate)) {
       setInformationLicenseplate(doneMessage)
       setLicensePlate(licensePlate)
@@ -85,6 +73,7 @@ export const PhotoChoose: React.FC = () => {
       toastError(toastErrorMessage)
     }
 
+    /*
     createParkedCar({
       variables: {
         numberPlate: 'ag 456',
@@ -98,7 +87,9 @@ export const PhotoChoose: React.FC = () => {
           'https://audimediacenter-a.akamaihd.net/system/production/media/88384/images/686b93f028b85460bbd41af80d05cb18571bb383/A1916257_x500.jpg?1582591384',
       },
     })
+    */
   }
+  
 
   const addFormData = (key: string, value: string): void => {
     let data = { ...formData }
@@ -130,7 +121,7 @@ export const PhotoChoose: React.FC = () => {
         />
       )}
 
-      <TextBox
+      <ClientTextBox
         inputType="text"
         inputDefaultValue="Autonummer"
         informationText={informationLicenceplate}
