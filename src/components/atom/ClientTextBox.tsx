@@ -1,6 +1,4 @@
 import React from 'react'
-import { useEffect } from 'react';
-import { Datepicker, Input, initTE } from 'tw-elements'
 
 interface TextBoxProps {
     inputType: string
@@ -11,9 +9,6 @@ interface TextBoxProps {
 }
 
 export const ClientTextBox: React.FC<TextBoxProps> = ({ inputType, inputDefaultValue, informationText, value = '', onChange }) => {
-    useEffect(() => {
-        initTE({ Datepicker, Input })
-    }, [])
 
     return (
         <div className="box mb-4 ">

@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { getPhotoInformations } from '../../lib/photoAnalyzer'
 import { TextBox } from '../atom/TextBox'
 import { SelectBox } from '../atom/SelectBox'
+import { ClientTextBox } from '../atom/ClientTextBox'
+import { ClientSelectBox } from '../atom/ClientSelectBox'
 import { isValidLicensePlate } from '../../lib/isValidLicensePlate'
 import Image from 'next/image'
 import { Button } from '../atom/Button'
@@ -9,6 +11,10 @@ import { useRouter } from 'next/router'
 import { LocalEndpoint } from '../../lib/ApiEndpoints/LocalEndpoint'
 import { toastSuccess } from '../../lib/toasts'
 import { toastError } from '../../lib/toasts'
+
+//ff. changes
+import { DocumentNode, gql, useQuery } from '@apollo/client';
+
 
 export const PhotoChoose: React.FC = () => {
   const router = useRouter()
@@ -26,12 +32,23 @@ export const PhotoChoose: React.FC = () => {
   const [brand, setBrand] = useState('')
   const [model, setModel] = useState('')
 
+  const doneMessage = '✅'
   const toastSuccessMessage = 'Das Foto wurde erfolgreich hochgeladen!'
   const toastErrorMessage = 'Das Foto konnte nicht hochgeladen werden!'
+  const toastChoosePhotoMessage = 'Bitte wählen Sie ein Foto aus!'
+
+  //ff. Code ist noch nicht fertig
+  const GET_CARMANUFACTURERS = gql`
+  query {
+    carManufacturers {
+      manufacturerName
+    }
+  }
+`;
 
   function handleLicensePlate(licensePlate: string) {
     if (isValidLicensePlate(licensePlate)) {
-      setInformationLicenseplate('done')
+      setInformationLicenseplate(doneMessage)
       setLicensePlate(licensePlate)
     } else {
       setInformationLicenseplate('Autonummer überprüfen!')
@@ -40,12 +57,13 @@ export const PhotoChoose: React.FC = () => {
   }
 
   function handleBrand(value: string) {
-    console.log(value)
+    console.log('in handleBrand')
+    console.log('Brand = ', brand)
     setBrand(value)
     if (value.length === 0) {
       setInformationBrand(defaultInformationBrand)
     } else {
-      setInformationBrand('done')
+      setInformationBrand(doneMessage)
     }
   }
 
@@ -54,7 +72,7 @@ export const PhotoChoose: React.FC = () => {
     if (value.length === 0) {
       setInformationModel(defaultInformationModel)
     } else {
-      setInformationModel('done')
+      setInformationModel(doneMessage)
     }
   }
 
@@ -77,7 +95,7 @@ export const PhotoChoose: React.FC = () => {
 
   const handleSubmit = async () => {
     if (!selectedImage) {
-      toastError('Bitte wählen Sie ein Foto aus!')
+      toastError(toastChoosePhotoMessage)
       return
     }
     const body = new FormData()
@@ -119,9 +137,9 @@ export const PhotoChoose: React.FC = () => {
 
       <TextBox inputType="text" inputDefaultValue="Autonummer" informationText={informationLicenceplate} value={licensePlate} onChange={handleLicensePlate} />
 
-      <SelectBox informationText={informationBrand} value={brand} onChange={handleBrand} />
+      <SelectBox informationText={informationBrand} value={brand} query={GET_CARMANUFACTURERS} onChange={handleBrand} />
 
-      <SelectBox informationText={informationModel} value={model} />
+      <SelectBox informationText={informationModel} value={model} query={GET_CARMANUFACTURERS} onChange={handleModel} />
 
       <div className="flex flex-grow-0 justify-between w-1/2">
         <Button
