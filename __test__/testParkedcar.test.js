@@ -1,5 +1,5 @@
 import handler from '../src/pages/api/parkedcar/parkedcar';
-import { createParkedCar, findCarModel } from '../src/lib/createParkedCar';
+import { createParkedCar } from '../src/lib/createParkedCar';
 
 
 jest.mock('../src/lib/createParkedCar', () => ({
@@ -42,7 +42,6 @@ describe('handler', () => {
     });
 
     test('should handle errors and return status 500 with error message', async () => {
-        const errorMessage = 'Method not allowed.';
 
     });
 
@@ -53,7 +52,6 @@ describe('handler', () => {
 
         expect(res.status).toHaveBeenCalledWith(405);
         expect(res.json).toHaveBeenCalledWith({ message: 'Method not allowed.' });
-        expect(findCarModel).not.toHaveBeenCalled();
         expect(createParkedCar).not.toHaveBeenCalled();
     });
 });

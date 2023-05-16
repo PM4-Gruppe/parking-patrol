@@ -12,7 +12,7 @@ import fs from 'fs';
 
 global.fetch = fetchMock;
 global.URL.createObjectURL = jest.fn();
-let PHOTO_FILE = './storage/npp-1-2.jpg';
+let PHOTO_FILE = './__test__/testImages/npp-1-2.jpg';
 
 jest.mock('next/router', () => ({
     useRouter: jest.fn()
