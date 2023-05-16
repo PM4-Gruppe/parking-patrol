@@ -57,8 +57,9 @@ export default function Home() {
   if (allParkedCars && allParkedCars.parkedCars) {
     allParkedCars.parkedCars.map((parkedCar: ParkedCar) => {
       console.log(parkedCar)
-
-      parkedCarList.push(<CarListItem plateNumber={parkedCar.numberPlate} date={'12.07.2043 19:47'} carType={parkedCar.carModel.carManufacturer.manufacturerName + " " + parkedCar.carModel.modelName} />)
+      const modelName = parkedCar.carModel.modelName;
+      const manufacturer = parkedCar.carModel.carManufacturer.manufacturerName;
+      parkedCarList.push(<CarListItem plateNumber={parkedCar.numberPlate} date={'12.07.2043 19:47'} carType={manufacturer + " " + modelName} />)
     })
   }
 
