@@ -8,9 +8,33 @@ import { FiSettings } from 'react-icons/fi'
 import { FaListUl } from 'react-icons/fa'
 import { CarListItem } from '../components/atom/CarListItem'
 import { Button } from '../components/atom/Button'
+import { empty, gql, useQuery } from '@apollo/client'
+import { Parkzone } from '@prisma/client';
 
 export default function Home() {
   const router = useRouter()
+
+  const AllParkingArea = gql(`
+    query {
+      parkzones {
+        parkzoneName,
+        latitude,
+        longitude,
+        radius
+      }
+    }
+  `)
+
+  const { data } = useQuery(AllParkingArea)
+
+  console.log(data)
+  let options = [<option>alle</option>];
+  if (data && data.parkzones) {
+    data.parkzones.map((parkzone: Parkzone) => {
+      options.push(<option>{parkzone.parkzoneName}</option>)
+    })
+  }
+
 
   const handleClickGoToIndex = () => {
     router.push('/')
@@ -119,10 +143,7 @@ export default function Home() {
       <p className='m-5 text-white text-3xl'>Offene Bussen</p>
       <div className='my-10 mx-5'>
         <select className='p-0 pb-1 w-full text-white bg-transparent border-transparent border-0 border-neutral-400 border-b'>
-          <option>alle</option>
-          {parkzones.map((item: any) =>
-            <option>{item.name}</option>
-          )}
+          {options}
         </select>
         <p className='text-white text-xs'>Parkzone</p>
       </div>
