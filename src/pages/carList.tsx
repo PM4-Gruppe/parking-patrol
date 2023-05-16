@@ -9,7 +9,8 @@ import { FaListUl } from 'react-icons/fa'
 import { CarListItem } from '../components/atom/CarListItem'
 import { Button } from '../components/atom/Button'
 import { empty, gql, useQuery } from '@apollo/client'
-import { Parkzone } from '@prisma/client';
+import { Parkzone, ParkedCar } from '@prisma/client';
+
 
 export default function Home() {
   const router = useRouter()
@@ -25,16 +26,41 @@ export default function Home() {
     }
   `)
 
-  const { data } = useQuery(AllParkingArea)
+  const AllParkedCars = gql(`
+    query {
+      parkedCars {
+        numberPlate,
+        carModel{
+          modelName,
+          carManufacturer{
+            manufacturerName
+          }
+        },
+        carInspector,
+        latitude,
+        longitude,
+      }
+    }
+  `)
 
-  console.log(data)
-  let options = [<option>alle</option>];
-  if (data && data.parkzones) {
-    data.parkzones.map((parkzone: Parkzone) => {
-      options.push(<option>{parkzone.parkzoneName}</option>)
+  const { data: allParkzones } = useQuery(AllParkingArea)
+  const { data: allParkedCars } = useQuery(AllParkedCars)
+
+  let parkzoneOption = [<option>alle</option>];
+  if (allParkzones && allParkzones.parkzones) {
+    allParkzones.parkzones.map((parkzone: Parkzone) => {
+      parkzoneOption.push(<option>{parkzone.parkzoneName}</option>)
     })
   }
 
+  let parkedCarList: JSX.Element[] = [];
+  if (allParkedCars && allParkedCars.parkedCars) {
+    allParkedCars.parkedCars.map((parkedCar: ParkedCar) => {
+      console.log(parkedCar)
+
+      parkedCarList.push(<CarListItem plateNumber={parkedCar.numberPlate} date={'12.07.2043 19:47'} carType={parkedCar.carModel.carManufacturer.manufacturerName + " " + parkedCar.carModel.modelName} />)
+    })
+  }
 
   const handleClickGoToIndex = () => {
     router.push('/')
@@ -123,17 +149,6 @@ export default function Home() {
     }
   ]
 
-  const parkzones = [
-    {
-      id: 1304,
-      name: "Eulachpassage ZHAW",
-    },
-    {
-      id: 3953,
-      name: "Technikum ZHAW",
-    }
-  ]
-
   return (
     <div className=''>
       <Head>
@@ -143,15 +158,13 @@ export default function Home() {
       <p className='m-5 text-white text-3xl'>Offene Bussen</p>
       <div className='my-10 mx-5'>
         <select className='p-0 pb-1 w-full text-white bg-transparent border-transparent border-0 border-neutral-400 border-b'>
-          {options}
+          {parkzoneOption}
         </select>
         <p className='text-white text-xs'>Parkzone</p>
       </div>
       <div className='flex flex-col'>
         <div className='m-5 p-1 grow rounded-lg bg-neutral-700 overflow-auto drop-shadow-xl'>
-          {entries.map((item: any) =>
-            <CarListItem plateNumber={item.plateNumber} date={item.date} carType={item.carModel} />
-          )}
+          {parkedCarList}
         </div>
       </div>
       <div className='m-5'>
