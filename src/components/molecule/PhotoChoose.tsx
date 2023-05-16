@@ -16,43 +16,31 @@ import { toastError } from '../../lib/toasts'
 
 //ff. changes
 import { DocumentNode, gql, useQuery } from '@apollo/client'
+import { SelectModel } from '../atom/SelectModel'
+import { SelectManufacturer } from '../atom/SelectManufacturer'
+import { ParkedCar } from '@prisma/client'
 
 export const PhotoChoose: React.FC = () => {
   const router = useRouter()
   const api = new LocalEndpoint()
-  const [createParkedCar, { data, loading, error }] =
-    useMutation(CREATE_PARKED_CAR)
+  //const [createParkedCar, { data, loading, error }] =
+  // useMutation(CREATE_PARKED_CAR)
+
+  const [formData, setFormData] = useState<ParkedCar>()
+  // const { models, setModels } = useState()
+
+  //const addFormData(key: string, value: string)
 
   const [informationLicenceplate, setInformationLicenseplate] =
     useState<string>('Information')
-  const defaultInformationBrand = 'Bitte geben Sie eine Marke ein.'
-  const [informationBrand, setInformationBrand] = useState<string>(
-    defaultInformationBrand
-  )
-  const defaultInformationModel = 'Bitte geben Sie ein Model ein.'
-  const [informationModel, setInformationModel] = useState<string>(
-    defaultInformationModel
-  )
   const [selectedImageURL, setSelectedImageURL] = useState<string>('')
   const [selectedImage, setSelectedImage] = useState<File>()
 
   const [licensePlate, setLicensePlate] = useState('')
-  const [brand, setBrand] = useState('')
-  const [model, setModel] = useState('')
 
-  const doneMessage = '✅'
   const toastSuccessMessage = 'Das Foto wurde erfolgreich hochgeladen!'
   const toastErrorMessage = 'Das Foto konnte nicht hochgeladen werden!'
   const toastChoosePhotoMessage = 'Bitte wählen Sie ein Foto aus!'
-
-  //ff. Code ist noch nicht fertig
-  const GET_CARMANUFACTURERS = gql`
-    query {
-      carManufacturers {
-        manufacturerName
-      }
-    }
-  `
 
   function handleLicensePlate(licensePlate: string) {
     if (isValidLicensePlate(licensePlate)) {
@@ -61,26 +49,6 @@ export const PhotoChoose: React.FC = () => {
     } else {
       setInformationLicenseplate('Autonummer überprüfen!')
       setLicensePlate(licensePlate)
-    }
-  }
-
-  function handleBrand(value: string) {
-    console.log('in handleBrand')
-    console.log('Brand = ', brand)
-    setBrand(value)
-    if (value.length === 0) {
-      setInformationBrand(defaultInformationBrand)
-    } else {
-      setInformationBrand(doneMessage)
-    }
-  }
-
-  function handleModel(value: string) {
-    setModel(value)
-    if (value.length === 0) {
-      setInformationModel(defaultInformationModel)
-    } else {
-      setInformationModel(doneMessage)
     }
   }
 
@@ -132,6 +100,11 @@ export const PhotoChoose: React.FC = () => {
     })
   }
 
+  const addFormData = (key: string, value: string): void => {
+    let data = { ...formData }
+    //TODO setFormData()
+  }
+
   const handleBackButton = () => {
     router.back()
   }
@@ -165,19 +138,12 @@ export const PhotoChoose: React.FC = () => {
         onChange={handleLicensePlate}
       />
 
-      <SelectBox
-        informationText={informationBrand}
-        value={brand}
-        query={GET_CARMANUFACTURERS}
-        onChange={handleBrand}
+      <SelectManufacturer
+        addFormData={(value: string) =>
+          setFormData({ ...formData, manufacturer: value })
+        }
       />
-
-      <SelectBox
-        informationText={informationModel}
-        value={model}
-        query={GET_CARMANUFACTURERS}
-        onChange={handleModel}
-      />
+      <SelectModel manufacturer={formData?.manufacturer} />
 
       <div className="flex flex-grow-0 justify-between w-1/2">
         <Button label="Zurück" onClick={handleBackButton} />
