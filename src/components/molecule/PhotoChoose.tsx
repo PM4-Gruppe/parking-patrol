@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useMutation } from '@apollo/client'
+import { CREATE_PARKED_CAR } from '../../graphql/mutations/parkedCar.create'
 import { getPhotoInformations } from '../../lib/photoAnalyzer'
 import { TextBox } from '../atom/TextBox'
 import { isValidLicensePlate } from '../../lib/isValidLicensePlate'
@@ -12,6 +14,7 @@ import { toastError } from '../../lib/toasts'
 export const PhotoChoose: React.FC = () => {
   const router = useRouter()
   const api = new LocalEndpoint()
+  const [createParkedCar, { data, loading, error }] = useMutation(CREATE_PARKED_CAR)
 
   const [informationLicenceplate, setInformationLicenseplate] = useState<string>('Information')
   const defaultInformationBrand = 'Bitte geben Sie eine Marke ein.'
@@ -75,6 +78,7 @@ export const PhotoChoose: React.FC = () => {
 
   const handleSubmit = async () => {
     if (!selectedImage) return
+
     const body = new FormData()
     body.append('image', selectedImage)
     try {
@@ -85,6 +89,20 @@ export const PhotoChoose: React.FC = () => {
     } catch (error) {
       toastError(toastErrorMessage)
     }
+
+    createParkedCar({
+      variables: {
+        numberPlate: 'ag 456',
+        carModel: 'X5',
+        carManufacturer: 'BMW',
+        carColor: 'Schwarz',
+        latitude: 2000,
+        longitude: 2000,
+        carInspector: 'Maximilian',
+        photoPath:
+          'https://audimediacenter-a.akamaihd.net/system/production/media/88384/images/686b93f028b85460bbd41af80d05cb18571bb383/A1916257_x500.jpg?1582591384',
+      },
+    })
   }
 
   const handleBackButton = () => {
@@ -93,7 +111,7 @@ export const PhotoChoose: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center justify-center">
-      <div >
+      <div>
         <input
           type="file"
           accept="image/*"
@@ -112,24 +130,34 @@ export const PhotoChoose: React.FC = () => {
         />
       )}
 
-      <TextBox inputType="text" inputDefaultValue="Autonummer" informationText={informationLicenceplate} value={licensePlate} onChange={handleLicensePlate} />
+      <TextBox
+        inputType="text"
+        inputDefaultValue="Autonummer"
+        informationText={informationLicenceplate}
+        value={licensePlate}
+        onChange={handleLicensePlate}
+      />
 
-      <TextBox inputType="text" inputDefaultValue="Marke" informationText={informationBrand} value={brand} onChange={handleBrand} />
+      <TextBox
+        inputType="text"
+        inputDefaultValue="Marke"
+        informationText={informationBrand}
+        value={brand}
+        onChange={handleBrand}
+      />
 
-      <TextBox inputType="text" inputDefaultValue="Modell" informationText={informationModel} value={model} onChange={handleModel} />
+      <TextBox
+        inputType="text"
+        inputDefaultValue="Modell"
+        informationText={informationModel}
+        value={model}
+        onChange={handleModel}
+      />
 
       <div className="flex flex-grow-0 justify-between w-1/2">
-        <Button
-          label="Zurück"
-          onClick={handleBackButton}
-        />
-        <Button
-          label="Prüfen"
-          onClick={handleSubmit}
-        />
+        <Button label="Zurück" onClick={handleBackButton} />
+        <Button label="Prüfen" onClick={handleSubmit} />
       </div>
-    </div >
-  );
-
-};
-
+    </div>
+  )
+}
