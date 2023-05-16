@@ -1,6 +1,5 @@
 import { prisma } from '../../lib/prisma'
 import { builder } from '../builder'
-import { prisma } from '../../lib/prisma'
 
 builder.prismaObject('CarManufacturer', {
   fields: (t) => ({
