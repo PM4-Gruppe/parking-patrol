@@ -37,15 +37,43 @@ describe('handler', () => {
         jest.clearAllMocks();
     });
 
-    test('should create a new parked car and return it with status 201', async () => {
+    it('should create a new parked car and return it with status 201', async () => {
+        const parkedCar = {
+            numberPlate: 'ABC123',
+            controlTime: '2023-05-16T12:00:00Z',
+            carModel: {
+                modelName: 'ExampleModel',
+                manufacturer: 'ExampleManufacturer',
+            },
+            carColor: {
+                colorName: 'Red',
+            },
+            latitude: 123.456,
+            longitude: 789.012,
+            carInspector: 'John Doe',
+            photoPath: './testImages/npp-1-2.jpg',
+        };
+
+        createParkedCar.mockResolvedValueOnce(parkedCar);
+
+        await handler(req, res);
+
+        expect(res.status).toHaveBeenCalledWith(201);
+        expect(res.json).toHaveBeenCalledWith(parkedCar);
+    });
+
+    it('should handle errors and return status 500 with error message', async () => {
+        const errorMessage = 'Error message';
+        createParkedCar.mockRejectedValueOnce(new Error(errorMessage));
+
+        await handler(req, res);
+
+        expect(res.status).toHaveBeenCalledWith(500);
+        expect(res.json).toHaveBeenCalledWith({ message: errorMessage });
 
     });
 
-    test('should handle errors and return status 500 with error message', async () => {
-
-    });
-
-    test('should return status 405 for any other HTTP method', async () => {
+    it('should return status 405 for any other HTTP method', async () => {
         req.method = 'GET';
 
         await handler(req, res);
