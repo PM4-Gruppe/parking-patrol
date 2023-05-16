@@ -28,6 +28,14 @@ const saveCompressedImage = async (
     return imagePath;
 }
 
+const deleteImages = (...imagePaths: string[]) => {
+    for (const imagePath of imagePaths) {
+        if (fs.existsSync(imagePath)) {
+            fs.unlinkSync(imagePath);
+        }
+    }
+}
+
 const saveOriginalImage = async (req: NextApiRequest): Promise<formidable.File> => {
     const options: formidable.Options = {};
     options.uploadDir = path.join(process.cwd(), '/storage');
@@ -55,11 +63,14 @@ const handler: NextApiHandler = async (req, res) => {
         originalImagePath = image.filepath;
         compressedImagePath = await saveCompressedImage(originalImagePath, image.newFilename, 800, 80, false)
         thumbnailPath = await saveCompressedImage(originalImagePath, image.newFilename, 200, 60, true)
-        res.status(200).json({ message: 'Image saved successfully.' });
+        res.status(200).json({
+            message: 'Image saved successfully.',
+            originalImagePath,
+            compressedImagePath,
+            thumbnailPath
+        });
     } catch (error) {
-        if (fs.existsSync(compressedImagePath)) fs.unlinkSync(compressedImagePath);
-        if (fs.existsSync(thumbnailPath)) fs.unlinkSync(thumbnailPath);
-        if (fs.existsSync(originalImagePath)) fs.unlinkSync(originalImagePath);
+        deleteImages(compressedImagePath, thumbnailPath, originalImagePath);
         res.status(500).json({ message: 'Error saving image: ' + error });
     }
 }
