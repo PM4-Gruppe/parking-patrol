@@ -31,6 +31,9 @@ const customJestConfig = {
         '!<rootDir>/src/pages/api/graphql.ts',
         '!<rootDir>/src/data/**',
         '!<rootDir>/src/lib/apollo.ts',
+        '!<rootDir>/src/lib/prisma.ts',
+        '!<rootDir>/src/lib/toasts.ts',
+        '!<rootDir>/src/lib/createParkedCar.js',
     ],
     coverageDirectory: '<rootDir>/coverage',
     transform: {
