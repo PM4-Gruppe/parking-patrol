@@ -12,7 +12,7 @@ export const config = {
     }
 }
 
-const saveCompressedImage = async (
+export const saveCompressedImage = async (
     originalImagePath: string,
     originalImageName: string,
     maxWidth: number,
