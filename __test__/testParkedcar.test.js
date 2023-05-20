@@ -1,6 +1,7 @@
 import handler from '../src/pages/api/parkedcar/parkedcar';
 import { createParkedCar } from '../src/lib/createParkedCar';
 
+const PHOTO_PATH = './__test__/testImages/npp-1-2.jpg';
 
 jest.mock('../src/lib/createParkedCar', () => ({
     createParkedCar: jest.fn(),
@@ -23,7 +24,7 @@ describe('handler', () => {
                 latitude: 123.456,
                 longitude: 789.012,
                 carInspector: 'John Doe',
-                photoPath: './testImages/npp-1-2.jpg',
+                photoPath: PHOTO_PATH,
             },
         };
 
@@ -51,7 +52,7 @@ describe('handler', () => {
             latitude: 123.456,
             longitude: 789.012,
             carInspector: 'John Doe',
-            photoPath: './testImages/npp-1-2.jpg',
+            photoPath: PHOTO_PATH,
         };
 
         createParkedCar.mockResolvedValueOnce(parkedCar);
