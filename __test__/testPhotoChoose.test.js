@@ -6,6 +6,8 @@ import {fireEvent, render, screen, waitFor} from '@testing-library/react';
 import { PhotoChoose } from '../src/components/molecule/PhotoChoose';
 import { mocked } from 'jest-mock';
 import { useRouter } from 'next/router';
+import { LocalEndpoint } from '../src/lib/ApiEndpoints/LocalEndpoint';
+import {toastSuccess} from '../src/lib/toasts';
 import '@testing-library/jest-dom'
 import fetchMock from 'jest-fetch-mock';
 import fs from 'fs';
@@ -17,6 +19,12 @@ let PHOTO_FILE = './__test__/testImages/npp-1-2.jpg';
 jest.mock('next/router', () => ({
     useRouter: jest.fn()
 }));
+
+jest.mock('../src/lib/toasts', () => ({
+    toastSuccess: jest.fn(),
+}));
+
+jest.mock('../src/lib/ApiEndpoints/LocalEndpoint');
 
 describe('PhotoChoose', () => {
     beforeEach(() => {
@@ -87,4 +95,49 @@ describe('PhotoChoose', () => {
     it('should handle error while getting license plate information', async () => {
 
     });
+
+    it('should update brand state and informationBrand state correctly', () => {
+        render(<PhotoChoose />);
+        const brandInput = screen.getByPlaceholderText('Marke');
+
+        fireEvent.change(brandInput, { target: { value: 'New Brand' } });
+        expect(brandInput.value).toBe('New Brand');
+
+        const informationBrandText = screen.getByText('done');
+        expect(informationBrandText).toBeInTheDocument();
+    });
+
+    it('should update model state and informationModel state correctly', () => {
+       render(<PhotoChoose />);
+       const modelInput = screen.getByPlaceholderText('Modell');
+
+       fireEvent.change(modelInput, { target: { value: 'New Model' } });
+       expect(modelInput.value).toBe('New Model');
+
+       const informationModelText = screen.getByText('done');
+       expect(informationModelText).toBeInTheDocument();
+    });
+
+    it('should handle submit correctly', async () => {
+        const mockPostRequest = jest.fn();
+        const photoFile = fs.readFileSync(PHOTO_FILE);
+        const photoData = new File([photoFile], 'npp-1-2.jpg', { type: 'image/jpeg' });
+        LocalEndpoint.prototype.postRequest = mockPostRequest;
+
+        render(<PhotoChoose />);
+
+        const imageInput = screen.getByTitle('file');
+        const submitButton = screen.getByText('Prüfen');
+
+        fireEvent.change(imageInput, { target: { files: [photoData] } });
+
+        mockPostRequest.mockResolvedValueOnce({ success: true });
+        fireEvent.click(submitButton);
+
+        await waitFor(() => {
+            expect(toastSuccess).toHaveBeenCalledTimes(1);
+            expect(toastSuccess).toHaveBeenCalledWith('Das Foto wurde erfolgreich hochgeladen!');
+        });
+    });
+
 });

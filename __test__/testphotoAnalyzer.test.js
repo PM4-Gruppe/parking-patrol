@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import '@testing-library/jest-dom';
-import { getCarInformations, getGeoInformations } from '../src/lib/photoAnalyzer';
+import {getCarInformations, getGeoInformations, getPhotoInformations} from '../src/lib/photoAnalyzer';
 import fs from 'fs';
 import fetchMock from 'jest-fetch-mock';
 
@@ -51,4 +51,31 @@ describe('photoAnalyzer', () => {
         const result = await getGeoInformations(photoData);
         expect(result).toBeUndefined();
     });
+
+    it('get from getPhotoInformations the plate-number and geolocation', async () => {
+        const expectedGeoLocation = {
+            Altitude: 425.6578185328185,
+            Latitude: 47.41546944444444,
+            Longitude: 8.55948888888889,
+        };
+
+        const expectedPlateNumber = 'AA-123-AA';
+        const photoFile = fs.readFileSync(PHOTO_FILE_WITH_GPS);
+        const photoData = new File([photoFile], 'npp-1-1.jpg', { type: 'image/jpeg' });
+
+        // Mocked response from fetch
+        const mockedResponse = {
+            json: async () => ({
+                results: [{ plate: expectedPlateNumber }]
+            }),
+        };
+
+        // Mock the fetch function
+        global.fetch = jest.fn().mockResolvedValue(mockedResponse);
+
+        const result = await getPhotoInformations(photoData);
+
+        expect(result.licensePlate.sign).toEqual(expectedPlateNumber);
+        expect(result.location).toEqual(expectedGeoLocation);
+    })
 });
