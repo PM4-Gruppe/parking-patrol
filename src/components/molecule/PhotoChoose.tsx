@@ -8,6 +8,7 @@ import { SelectModel } from '../atom/SelectModel'
 import { SelectManufacturer } from '../atom/SelectManufacturer'
 import { ParkedCar } from '@prisma/client'
 import { ClientTextBox } from '../atom/ClientTextBox'
+import { SelectColor } from '../atom/SelectColor'
 
 export const PhotoChoose: React.FC = () => {
   const [formData, setFormData] = useState<ParkedCar>()
@@ -56,6 +57,7 @@ export const PhotoChoose: React.FC = () => {
         console.log('Longitude: ', longitude)
         setFormData({ ...formData, latitude: latitude, longitude: longitude })
       } else {
+        //ev. default value for latitude and longitude extern setzen?
         const defaultLatitude = 0
         const defaultLongitude = 0
         setFormData({ ...formData, latitude: defaultLatitude, longitude: defaultLongitude })
@@ -63,7 +65,7 @@ export const PhotoChoose: React.FC = () => {
       }
     }
   }
-  
+
   /*
   createParkedCar({
     variables: {
@@ -84,7 +86,7 @@ export const PhotoChoose: React.FC = () => {
   //@ValiSensei: Wieso ist das hier?
   const addFormData = (key: string, value: any): void => {
     let data = { ...formData }
-    setFormData({data, key: value})
+    setFormData({ data, key: value })
   }
 
   return (
@@ -121,11 +123,20 @@ export const PhotoChoose: React.FC = () => {
           setFormData({ ...formData, manufacturer: value })
         }
       />
+
       <SelectModel
         manufacturer={formData?.manufacturer}
         addFormData={(value: string) =>
           setFormData({ ...formData, model: value })
-        } />
+        }
+      />
+      
+      <SelectColor
+        model={formData?.model}
+        addFormData={(value: string) =>
+          setFormData({ ...formData, color: value })
+        }
+      />
 
       <div className="flex flex-grow-0 justify-between w-1/2">
         <BackButton label="Zurück" />

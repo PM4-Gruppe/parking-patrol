@@ -23,7 +23,7 @@ export const SelectManufacturer: React.FC<SelectManufacturerProps> = ({
   const [manufacturer, setManufacturer] = useState('')
   const { loading, error, data } = useQuery(GET_MANUFACTURERS)
 
-  function handleChange(value: string) {
+  function handleManufacturer(value: string) {
     setManufacturer(value)
     addFormData(value)
     if (value.length === 0) {
@@ -40,7 +40,7 @@ export const SelectManufacturer: React.FC<SelectManufacturerProps> = ({
       informationText={information}
       value={''}
       data={data.carManufacturers.map((item: any) => item.manufacturerName)}
-      onChange={handleChange}
+      onChange={handleManufacturer}
     />
   )
 }
