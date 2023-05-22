@@ -36,7 +36,7 @@ export const PhotoChoose: React.FC = () => {
       setInformationLicenseplate(doneMessage)
       setLicensePlate(upperLicensePlate)
       console.log('in handleLicensePlate', upperLicensePlate)
-      setFormData({ ...formData, numberPlate: upperLicensePlate })
+      setFormData({ numberPlate: upperLicensePlate })
       console.log('FormData = ', formData)
     } else {
       setInformationLicenseplate('Autonummer überprüfen!')
@@ -81,10 +81,15 @@ export const PhotoChoose: React.FC = () => {
     const body = new FormData()
     body.append('image', selectedImage)
     try {
-      console.log(formData)
+      console.log('Last FormData Status:', formData)
       const res = await api.postRequest('/image-storage/image-upload', body)
 
-      if (res) toastSuccess(toastSuccessMessage)
+      if (res) {
+        toastSuccess(toastSuccessMessage)
+        setTimeout(() => {
+          router.push('/')
+        }, 5500)
+      }
       else toastError(toastErrorMessage)
     } catch (error) {
       toastError(toastErrorMessage)
