@@ -63,16 +63,6 @@ describe('image-upload', () => {
         expect(res.status).toHaveBeenCalledWith(500);
     });
 
-    /*it('returns a 200 status code', async () => {
-        const req = fs.readFileSync('./storage/npp-1-2.jpg');
-        const res = {
-
-        };
-
-        await handler(req, res);
-        expect(res.status).toHaveBeenCalledWith(200);
-    });*/
-
     it('should resize the image and save it with the correct name', async () => {
         const originalImagePath = './__test__/testImages/npp-1-2.jpg';
         const originalImageName = 'npp-1-2.jpg';
