@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import Image from 'next/image'
+import jwt_decode from 'jwt-decode'
 import { getPhotoInformations } from '../../lib/photoAnalyzer'
 import { isValidLicensePlate } from '../../lib/isValidLicensePlate'
 import { Button } from '../atom/Button'
+import { BackButton } from '../atom/BackButton'
 import { useRouter } from 'next/router'
 import { LocalEndpoint } from '../../lib/ApiEndpoints/LocalEndpoint'
 import { toastSuccess } from '../../lib/toasts'
@@ -28,7 +30,7 @@ export const PhotoChoose: React.FC = () => {
   const toastErrorMessage = 'Das Foto konnte nicht hochgeladen werden!'
   const toastChoosePhotoMessage = 'Bitte wählen Sie ein Foto aus!'
 
-  //TODO: FUnktion auslagern
+  //TODO: Funktion auslagern
   function handleLicensePlate(licensePlate: string) {
     const doneMessage = '✅'
     const upperLicensePlate = licensePlate.toUpperCase()
@@ -44,6 +46,7 @@ export const PhotoChoose: React.FC = () => {
     }
   }
 
+  //TODO: Funktion auslagern
   const handleImageSelect = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -82,13 +85,24 @@ export const PhotoChoose: React.FC = () => {
     body.append('image', selectedImage)
     try {
       console.log('Last FormData Status:', formData)
+      /*
+      DOES NOT WORK
+      const token = localStorage.getItem('token')
+      const decodedToken: any = jwt_decode(token)
+      const carInspector = decodedToken.name
+      console.log('carInspector', carInspector)
+      */
       const res = await api.postRequest('/image-storage/image-upload', body)
 
       if (res) {
         toastSuccess(toastSuccessMessage)
+
+        //TODO: no redirection => reset form
+        /*
         setTimeout(() => {
           router.push('/')
-        }, 5500)
+        }, 1000)
+        */
       }
       else toastError(toastErrorMessage)
     } catch (error) {
@@ -101,27 +115,30 @@ export const PhotoChoose: React.FC = () => {
         numberPlate: 'ag 456', DONE
         carModel: 'X5', DONE
         carManufacturer: 'BMW', DONE
-        carColor: 'Schwarz',
+        carColor: 'Schwarz', => add SelectColor JSX Component
         latitude: 2000, DONE => test with working picture
         longitude: 2000, => test with working picture
-        carInspector: 'Maximilian',
+        carInspector: 'Maximilian', => get from Auth0
         photoPath:
           'https://audimediacenter-a.akamaihd.net/system/production/media/88384/images/686b93f028b85460bbd41af80d05cb18571bb383/A1916257_x500.jpg?1582591384',
       },
     })
     */
+
   }
 
-
-  const addFormData = (key: string, value: string): void => {
+  //TODO
+  //@ValiSensei: Wieso ist das hier?
+  const addFormData = (key: string, value: any): void => {
     let data = { ...formData }
-    //TODO setFormData()
+    setFormData({data, key: value})
   }
 
+  /*
   const handleBackButton = () => {
     router.back()
   }
-
+  */
   return (
     <div className="flex flex-col items-center justify-center">
       <div>
@@ -163,7 +180,7 @@ export const PhotoChoose: React.FC = () => {
         } />
 
       <div className="flex flex-grow-0 justify-between w-1/2">
-        <Button label="Zurück" onClick={handleBackButton} />
+        <BackButton label="Zurück" />
         <Button label="Prüfen" onClick={handleSubmit} />
       </div>
     </div>
