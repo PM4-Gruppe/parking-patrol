@@ -18,8 +18,8 @@ export const PhotoChoose: React.FC = () => {
 
   const [formData, setFormData] = useState<ParkedCar>()
 
-  const [informationLicenceplate, setInformationLicenseplate] = useState<string>('Information')
-  const [selectedImageURL, setSelectedImageURL] = useState<string>('')
+  const [informationLicenceplate, setInformationLicenseplate] = useState('Information')
+  const [selectedImageURL, setSelectedImageURL] = useState('')
   const [selectedImage, setSelectedImage] = useState<File>()
 
   const [licensePlate, setLicensePlate] = useState('')
@@ -31,12 +31,16 @@ export const PhotoChoose: React.FC = () => {
   //TODO: FUnktion auslagern
   function handleLicensePlate(licensePlate: string) {
     const doneMessage = '✅'
+    const upperLicensePlate = licensePlate.toUpperCase()
     if (isValidLicensePlate(licensePlate)) {
       setInformationLicenseplate(doneMessage)
-      setLicensePlate(licensePlate)
+      setLicensePlate(upperLicensePlate)
+      console.log('in handleLicensePlate', upperLicensePlate)
+      setFormData({ ...formData, numberPlate: upperLicensePlate })
+      console.log('FormData = ', formData)
     } else {
       setInformationLicenseplate('Autonummer überprüfen!')
-      setLicensePlate(licensePlate)
+      setLicensePlate(upperLicensePlate)
     }
   }
 
@@ -54,6 +58,18 @@ export const PhotoChoose: React.FC = () => {
         const licensePlate = photoInformations.licensePlate.sign
         handleLicensePlate(licensePlate)
       }
+      if (photoInformations?.location) {
+        const latitude = photoInformations.location.Latitude
+        const longitude = photoInformations.location.Longitude
+        console.log('latitude', latitude)
+        console.log('Longitude: ', longitude)
+        setFormData({ ...formData, latitude: latitude, longitude: longitude })
+      } else {
+        const defaultLatitude = 0
+        const defaultLongitude = 0
+        setFormData({ ...formData, latitude: defaultLatitude, longitude: defaultLongitude })
+        console.log('FormData = ', formData)
+      }
     }
   }
 
@@ -65,6 +81,7 @@ export const PhotoChoose: React.FC = () => {
     const body = new FormData()
     body.append('image', selectedImage)
     try {
+      console.log(formData)
       const res = await api.postRequest('/image-storage/image-upload', body)
 
       if (res) toastSuccess(toastSuccessMessage)
@@ -76,12 +93,12 @@ export const PhotoChoose: React.FC = () => {
     /*
     createParkedCar({
       variables: {
-        numberPlate: 'ag 456',
-        carModel: 'X5',
-        carManufacturer: 'BMW',
+        numberPlate: 'ag 456', DONE
+        carModel: 'X5', DONE
+        carManufacturer: 'BMW', DONE
         carColor: 'Schwarz',
-        latitude: 2000,
-        longitude: 2000,
+        latitude: 2000, DONE => test with working picture
+        longitude: 2000, => test with working picture
         carInspector: 'Maximilian',
         photoPath:
           'https://audimediacenter-a.akamaihd.net/system/production/media/88384/images/686b93f028b85460bbd41af80d05cb18571bb383/A1916257_x500.jpg?1582591384',
@@ -89,7 +106,7 @@ export const PhotoChoose: React.FC = () => {
     })
     */
   }
-  
+
 
   const addFormData = (key: string, value: string): void => {
     let data = { ...formData }
@@ -134,7 +151,11 @@ export const PhotoChoose: React.FC = () => {
           setFormData({ ...formData, manufacturer: value })
         }
       />
-      <SelectModel manufacturer={formData?.manufacturer} />
+      <SelectModel
+        manufacturer={formData?.manufacturer}
+        addFormData={(value: string) =>
+          setFormData({ ...formData, model: value })
+        } />
 
       <div className="flex flex-grow-0 justify-between w-1/2">
         <Button label="Zurück" onClick={handleBackButton} />

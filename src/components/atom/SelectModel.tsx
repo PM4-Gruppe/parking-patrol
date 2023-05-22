@@ -12,9 +12,10 @@ const GET_MODELS = gql`
 
 interface SelectModelProps {
   manufacturer?: string
+  addFormData: (arg0: string) => void
 }
 
-export const SelectModel: React.FC<SelectModelProps> = ({ manufacturer }) => {
+export const SelectModel: React.FC<SelectModelProps> = ({ manufacturer, addFormData }) => {
   const defaultInformation = 'Bitte wählen Sie ein Model aus.'
   const doneMessage = 'Model ausgewählt ✅'
 
@@ -34,6 +35,7 @@ export const SelectModel: React.FC<SelectModelProps> = ({ manufacturer }) => {
     if (value.length === 0) {
       setInformationModel(defaultInformation)
     } else {
+      addFormData(value)
       setInformationModel(doneMessage)
     }
   }

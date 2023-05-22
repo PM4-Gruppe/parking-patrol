@@ -30,7 +30,7 @@ export const ClientSelectBox: React.FC<ClientSelectBoxProps> = ({
         disabled={disabled}
         data-te-select-init
         data-te-select-filter="true"
-        className="w-full md:w-96 p-0 bg-neutral-700 hover:bg-neutral-800 rounded-lg bg- text-white placeholder-neutral-400"
+        className="w-full md:w-96 p-0 bg-neutral-700 hover:bg-neutral-800 rounded-lg text-white placeholder-neutral-400"
         onChange={(e) => onChange(e.target.value)}
       >
         {data.map((item: string) => (
