@@ -1,6 +1,6 @@
 export const color = [
     {
-        colorName: 'Nicht verfügbar',
+        colorName: 'Nicht erkennbar',
     },
     {
         colorName: 'Schwarz',
