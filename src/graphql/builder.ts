@@ -5,12 +5,28 @@ import { prisma } from '../lib/prisma'
 
 export const builder = new SchemaBuilder<{
   PrismaTypes: PrismaTypes
+  Scalars: {
+    Date: {
+      Input: Date;
+      Output: Date;
+    };
+  };
 }>({
   plugins: [PrismaPlugin],
   prisma: {
     client: prisma,
   },
 })
+
+builder.scalarType('Date', {
+  serialize: (date) => date,
+  parseValue: (date) => {
+    if(date) return new Date(date.toString())
+
+    throw new Error('Date value cant be parsed');
+  },
+});
+
 
 builder.queryType({
   fields: (t) => ({
