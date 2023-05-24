@@ -1,47 +1,39 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { SelectBox } from './SelectBox'
 import { gql, useQuery } from '@apollo/client'
+import { ParkedCarContext } from '../../lib/parkedCar'
 
 const GET_COLORS = gql`
-query {
-  colors {
-    colorName
+  query {
+    colors {
+      colorName
+    }
   }
-}
 `
 
-interface SelectColorProps {
-  model?: string
-  addFormData: (arg0: string) => void
-}
-
-export const SelectColor: React.FC<SelectColorProps> = ( model, addFormData ) => {
+export const SelectColor: React.FC = () => {
   const defaultInformation = 'Bitte wählen Sie eine Autofarbe aus.'
   const doneMessage = 'Autofarbe ausgewählt ✅'
-
-  if (!model) return <span></span>
-
+  const { carInformations, setCarInformations } = useContext(ParkedCarContext)
   const { loading, error, data } = useQuery(GET_COLORS)
 
-  const [color, setColor] = useState('')
-  const [informationColor, setInformationColor] = useState<string>(defaultInformation)
-
   function handleColor(value: string) {
-    setColor(value)
-    if (value.length === 0) {
-      setInformationColor(defaultInformation)
-    } else {
-      addFormData(value)
-      setInformationColor(doneMessage)
-    }
+    if (!carInformations) return
+    setCarInformations({
+      ...carInformations,
+      parkedCar: { ...carInformations.parkedCar, color: value },
+    })
   }
 
   if (loading) return <p>loading...</p>
   if (error) return <p>error...</p>
+  if (!carInformations) return <p>missing context...</p>
   return (
     <SelectBox
-      informationText={informationColor}
-      value={color}
+      informationText={
+        carInformations.parkedCar.color ? doneMessage : defaultInformation
+      }
+      value={carInformations.parkedCar.color}
       data={data.colors.map((color: any) => color.colorName)}
       onChange={handleColor}
     />

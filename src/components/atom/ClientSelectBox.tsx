@@ -7,7 +7,8 @@ interface ClientSelectBoxProps {
   informationText: string
   value: string
   data: string[]
-  onChange: (inputValue: string) => void
+  onChange?: (inputValue: string) => void
+  disable?: boolean
 }
 
 export const ClientSelectBox: React.FC<ClientSelectBoxProps> = ({
@@ -16,25 +17,22 @@ export const ClientSelectBox: React.FC<ClientSelectBoxProps> = ({
   data,
   onChange,
 }) => {
-  const [disabled, setDisabled] = useState(false)
-
   useEffect(() => {
     initTE({ Select, Input })
-    if (data.length < 1) setDisabled(true)
   }, [data.length])
 
-  //TODO text color in search bar
   return (
     <div className="box mb-4 ">
       <select
-        disabled={disabled}
         data-te-select-init
         data-te-select-filter="true"
         className="w-full md:w-96 p-0 bg-neutral-700 hover:bg-neutral-800 rounded-lg text-white placeholder-neutral-400"
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => {
+          onChange ? onChange(e.target.value) : ''
+        }}
       >
         {data.map((item: string) => (
-          <option className={'hallo ' + item} key={item} value={item}>
+          <option key={item} value={item}>
             {item}
           </option>
         ))}

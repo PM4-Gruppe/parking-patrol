@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { gql, useQuery } from '@apollo/client'
 import { SelectBox } from './SelectBox'
+import { ParkedCarContext } from '../../lib/parkedCar'
 
 const GET_MODELS = gql`
   query ($manufacturer: String!) {
@@ -11,33 +12,28 @@ const GET_MODELS = gql`
 `
 
 interface SelectModelProps {
-  manufacturer?: string
-  addFormData: (arg0: string) => void
+  manufacturer: string
 }
 
-export const SelectModel: React.FC<SelectModelProps> = ({ manufacturer, addFormData }) => {
+export const SelectModel: React.FC<SelectModelProps> = ({ manufacturer }) => {
   const defaultInformation = 'Bitte wählen Sie ein Model aus.'
   const doneMessage = 'Model ausgewählt ✅'
 
-  //TODO: Fix dirty hack => causes Reac Hook Warnings
-  if (!manufacturer) return <span></span>
+  const { carInformations, setCarInformations } = useContext(ParkedCarContext)
 
   const { loading, error, data } = useQuery(GET_MODELS, {
     variables: { manufacturer },
   })
 
-  const [model, setModel] = useState('')
-
-  const [informationModel, setInformationModel] = useState<string>(defaultInformation)
+  const [informationModel, setInformationModel] =
+    useState<string>(defaultInformation)
 
   function handleModel(value: string) {
-    setModel(value)
-    if (value.length === 0) {
-      setInformationModel(defaultInformation)
-    } else {
-      addFormData(value)
-      setInformationModel(doneMessage)
-    }
+    if (!carInformations) return
+    setCarInformations({
+      ...carInformations,
+      parkedCar: { ...carInformations.parkedCar, model: value },
+    })
   }
 
   if (loading) return <p>loading...</p>
@@ -45,7 +41,7 @@ export const SelectModel: React.FC<SelectModelProps> = ({ manufacturer, addFormD
   return (
     <SelectBox
       informationText={informationModel}
-      value={model}
+      value={manufacturer}
       data={data.carModels.map((model: any) => model.modelName)}
       onChange={handleModel}
     />
