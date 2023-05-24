@@ -1,9 +1,7 @@
-import React from 'react';
 import renderer from 'react-test-renderer';
 import MyApp from '../src/pages/_app';
 import { useRouter } from 'next/router';
 import { mocked } from 'jest-mock'
-import Layout from '../src/components'
 
 jest.mock('next/router', () => ({
     useRouter: jest.fn(),

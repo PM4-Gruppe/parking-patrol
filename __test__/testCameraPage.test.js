@@ -1,4 +1,3 @@
-import React from 'react';
 import renderer from 'react-test-renderer';
 import Camera from '../src/pages/camera';
 import { useRouter } from 'next/router';

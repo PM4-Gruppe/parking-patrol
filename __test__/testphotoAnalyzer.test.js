@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-import React from 'react';
 import '@testing-library/jest-dom';
 import {getCarInformations, getGeoInformations, getPhotoInformations} from '../src/lib/photoAnalyzer';
 import fs from 'fs';

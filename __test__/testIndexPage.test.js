@@ -1,6 +1,5 @@
 import Home from '../src/pages/index'
 import renderer from 'react-test-renderer'
-import React from 'react'
 
 jest.mock('next/link', () => {
     const Link = ({ children, ...props }) => (

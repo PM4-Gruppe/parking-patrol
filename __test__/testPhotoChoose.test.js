@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-import React from 'react';
 import {fireEvent, render, screen, waitFor} from '@testing-library/react';
 import { PhotoChoose } from '../src/components/molecule/PhotoChoose';
 import { mocked } from 'jest-mock';
@@ -87,15 +86,6 @@ describe('PhotoChoose', () => {
         await waitFor( () => expect(screen.getByPlaceholderText('Autonummer').value).toEqual(expected));
     });
 
-    it('should handle file upload error', async () => {
-        /*const checkButton = screen.getByRole('button', { name: 'Prüfen' });
-        fireEvent.click(checkButton);*/
-    });
-
-    it('should handle error while getting license plate information', async () => {
-
-    });
-
     it('should update brand state and informationBrand state correctly', () => {
         render(<PhotoChoose />);
         const brandInput = screen.getByPlaceholderText('Marke');
@@ -139,5 +129,4 @@ describe('PhotoChoose', () => {
             expect(toastSuccess).toHaveBeenCalledWith('Das Foto wurde erfolgreich hochgeladen!');
         });
     });
-
 });

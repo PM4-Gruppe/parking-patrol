@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-import React from 'react';
 import {render} from '@testing-library/react';
 import { Widget } from '../src/components/molecule/Widget';
 import '@testing-library/jest-dom'

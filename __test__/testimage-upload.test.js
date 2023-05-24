@@ -1,8 +1,3 @@
-/**
- * @jest-environment jsdom
- */
-import React from 'react';
-import '@testing-library/jest-dom';
 import handler from '../src/pages/api/image-storage/image-upload';
 import { saveCompressedImage} from '../src/pages/api/image-storage/image-upload';
 import path from 'path';
