@@ -32,7 +32,7 @@ const handler: NextApiHandler = async (req, res) => {
         headers: {
           Authorization: 'Token 6bccffbf869875312132100b49cc31466d88bf7c', // Needs to be stored in env variables
         },
-        body: body,
+        body: body as any,
     })
     alprStat = await alprResponse.json() as AlprStatistic
   }
