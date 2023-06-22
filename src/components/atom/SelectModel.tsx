@@ -12,10 +12,11 @@ const GET_MODELS = gql`
 `
 
 interface SelectModelProps {
-  manufacturer: string
+  manufacturer: string,
+  model: string
 }
 
-export const SelectModel: React.FC<SelectModelProps> = ({ manufacturer }) => {
+export const SelectModel: React.FC<SelectModelProps> = ({ manufacturer, model }) => {
   const defaultInformation = 'Bitte wählen Sie ein Model aus.'
   const doneMessage = 'Model ausgewählt ✅'
 
@@ -41,7 +42,7 @@ export const SelectModel: React.FC<SelectModelProps> = ({ manufacturer }) => {
       informationText={
         carInformations.parkedCar.model == 'Nicht erkennbar' ? defaultInformation : doneMessage
       }
-      value={manufacturer}
+      value={model}
       data={data.carModels.map((model: any) => model.modelName)}
       onChange={handleModel}
     />

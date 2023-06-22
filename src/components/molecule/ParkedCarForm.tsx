@@ -66,7 +66,10 @@ export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage }) => {
       <SelectManufacturer />
 
       {carInformations.parkedCar.manufacturer ? (
-        <SelectModel manufacturer={carInformations.parkedCar.manufacturer} />
+        <SelectModel
+          manufacturer={carInformations.parkedCar.manufacturer}
+          model={carInformations.parkedCar.model}
+        />
       ) : (
         <SelectBox value="VALUE" informationText="infomation" data={[]} />
       )}

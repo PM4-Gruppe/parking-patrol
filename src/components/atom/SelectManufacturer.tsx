@@ -21,7 +21,7 @@ export const SelectManufacturer: React.FC = () => {
     if (!carInformations) return
     setCarInformations({
       ...carInformations,
-      parkedCar: { ...carInformations.parkedCar, manufacturer: value },
+      parkedCar: { ...carInformations.parkedCar, manufacturer: value, model: 'Nicht erkennbar' },
     })
   }
 
