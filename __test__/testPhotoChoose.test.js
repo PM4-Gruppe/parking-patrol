@@ -1,19 +1,17 @@
 /**
  * @jest-environment jsdom
  */
-import {fireEvent, render, screen, waitFor} from '@testing-library/react';
-import { PhotoChoose } from '../src/components/molecule/PhotoChoose';
+import React from 'react';
+import {fireEvent, render, screen} from '@testing-library/react';
+import { CreateParkedCar } from '../src/components/organism/CreateParkedCar';
+import { getPhotoInformations } from '../src/lib/photoAnalyzer';
 import { mocked } from 'jest-mock';
 import { useRouter } from 'next/router';
-import { LocalEndpoint } from '../src/lib/ApiEndpoints/LocalEndpoint';
-import {toastSuccess} from '../src/lib/toasts';
-import '@testing-library/jest-dom'
-import fetchMock from 'jest-fetch-mock';
-import fs from 'fs';
+import '@testing-library/jest-dom';
 
-global.fetch = fetchMock;
-global.URL.createObjectURL = jest.fn();
-let PHOTO_FILE = './__test__/testImages/npp-1-2.jpg';
+jest.mock('../src/lib/photoAnalyzer', () => ({
+    getPhotoInformations: jest.fn()
+}));
 
 jest.mock('next/router', () => ({
     useRouter: jest.fn()
@@ -25,7 +23,7 @@ jest.mock('../src/lib/toasts', () => ({
 
 jest.mock('../src/lib/ApiEndpoints/LocalEndpoint');
 
-describe('PhotoChoose', () => {
+describe('CreateParkedCar', () => {
     beforeEach(() => {
         mocked(useRouter).mockReturnValue({
             back: jest.fn(),
