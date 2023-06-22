@@ -19,6 +19,7 @@ export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage }) => {
   const api = new LocalEndpoint()
   const [selectedImageURL, setSelectedImageURL] = useState('')
   const { carInformations, setCarInformations } = useContext(ParkedCarContext)
+  const [loadingImageInfo, setLoadingImageInfo] = useState(false)
 
   const handleImageSelect = async (selectedImage: File) => {
     if (!carInformations) return
@@ -27,7 +28,9 @@ export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage }) => {
       setImage(selectedImage)
       setSelectedImageURL(URL.createObjectURL(selectedImage))
 
+      setLoadingImageInfo(true)
       const alprRes = await api.readAlprStats(selectedImage)
+      setLoadingImageInfo(false)
       const geoInformations = await getGeoInformations(selectedImage)
 
       if (alprRes)
@@ -39,7 +42,7 @@ export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage }) => {
           alprStats: alprRes,
           geoLocation: geoInformations,
         })
-      else toastError("Can't process image")
+      else toastError('Can\'t process image')
     }
   }
 
@@ -58,7 +61,7 @@ export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage }) => {
         />
       )}
 
-      <LicensePlateTextBox />
+      <LicensePlateTextBox loading={loadingImageInfo} />
 
       <SelectManufacturer />
 
