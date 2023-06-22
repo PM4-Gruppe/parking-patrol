@@ -35,6 +35,7 @@ export const SelectModel: React.FC<SelectModelProps> = ({ manufacturer }) => {
 
   if (loading) return <p>loading...</p>
   if (error) return <p>error...</p>
+  if (!carInformations) return <p>missing context...</p>
   return (
     <SelectBox
       informationText={
