@@ -10,7 +10,7 @@ import {CarListItem} from '../components/atom/CarListItem'
 import {Button} from '../components/atom/Button'
 import {empty, gql, useQuery} from '@apollo/client'
 import {Parkzone, ParkedCar} from '@prisma/client';
-import {useState} from "react";
+import {useState} from 'react';
 
 
 export default function Home() {
@@ -60,6 +60,7 @@ export default function Home() {
     const {data: allParkzones} = useQuery(AllParkingArea)
     const {data: allParkedCars} = useQuery(AllParkedCars)
 
+    // eslint-disable-next-line react/jsx-key
     let parkzoneOption = [<option>alle</option>];
     if (allParkzones && allParkzones.parkzones) {
         allParkzones.parkzones.map((parkzone: Parkzone) => {
@@ -71,22 +72,26 @@ export default function Home() {
     if (allParkedCars && allParkedCars.parkedCars) {
         allParkedCars.parkedCars.map((parkedCar: ParkedCar) => {
             if(selectedParkzone === 'alle'){
+                // @ts-ignore
                 const modelName = parkedCar.carModel.modelName;
+                // @ts-ignore
                 const manufacturer = parkedCar.carModel.carManufacturer.manufacturerName;
                 const carPath = parkedCar.photoPath;
                 parkedCarList.push(<CarListItem plateNumber={parkedCar.numberPlate} date={'TODO'}
-                                                carType={manufacturer + " " + modelName} carPath={carPath}/>)
+                                                carType={manufacturer + ' ' + modelName} carPath={carPath}/>)
             }
             for (let i = 0; i < allParkzones.parkzones.length; i++) {
                 if (allParkzones.parkzones[i].parkzoneName === selectedParkzone) {
                     const distance = getDistance(parkedCar.latitude, parkedCar.longitude, allParkzones.parkzones[i].latitude, allParkzones.parkzones[i].longitude)
                     console.log(distance)
                     if (distance*1000 < allParkzones.parkzones[i].radius) {
+                        // @ts-ignore
                         const modelName = parkedCar.carModel.modelName;
+                        // @ts-ignore
                         const manufacturer = parkedCar.carModel.carManufacturer.manufacturerName;
                         const carPath = parkedCar.photoPath;
                         parkedCarList.push(<CarListItem plateNumber={parkedCar.numberPlate} date={'TODO'}
-                                                        carType={manufacturer + " " + modelName} carPath={carPath}/>)
+                                                        carType={manufacturer + ' ' + modelName} carPath={carPath}/>)
                     }
                 }
             }
@@ -102,26 +107,26 @@ export default function Home() {
     }
 
     return (
-        <div className=''>
+        <div className="">
             <Head>
                 <title>Parking Patrol</title>
                 <link rel="icon" href="/favicon.svg"/>
             </Head>
-            <p className='m-5 text-white text-3xl'>Offene Bussen</p>
-            <div className='my-10 mx-5'>
+            <p className="m-5 text-white text-3xl">Offene Bussen</p>
+            <div className="my-10 mx-5">
                 <select onChange={(changeSelectedParkzone)}
-                        className='p-0 pb-1 w-full text-white bg-transparent border-transparent border-0 border-neutral-400 border-b'>
+                        className="p-0 pb-1 w-full text-white bg-transparent border-transparent border-0 border-neutral-400 border-b">
                     {parkzoneOption}
                 </select>
-                <p className='text-white text-xs'>Parkzone</p>
+                <p className="text-white text-xs">Parkzone</p>
             </div>
-            <div className='flex flex-col'>
-                <div className='m-5 p-1 grow rounded-lg bg-neutral-700 overflow-auto drop-shadow-xl'>
+            <div className="flex flex-col">
+                <div className="m-5 p-1 grow rounded-lg bg-neutral-700 overflow-auto drop-shadow-xl">
                     {parkedCarList}
                 </div>
             </div>
-            <div className='m-5'>
-                <Button label='Zurück' onClick={handleClickGoToIndex}/>
+            <div className="m-5">
+                <Button label="Zurück" onClick={handleClickGoToIndex}/>
             </div>
         </div>
     )

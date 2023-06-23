@@ -20,14 +20,14 @@ const Cardetails = () => {
     const router = useRouter()
     const {carpath} = router.query
     return (
-        <div className=''>
+        <div className="">
             <Head>
                 <title>Parking Patrol</title>
                 <link rel="icon" href="/favicon.svg"/>
             </Head>
-            <p className='m-5 text-white text-3xl'>Car Details</p>
-            <div className='flex flex-col'>
-                <div className='m-5 p-1 grow rounded-lg bg-neutral-700 overflow-auto drop-shadow-xl'>
+            <p className="m-5 text-white text-3xl">Car Details</p>
+            <div className="flex flex-col">
+                <div className="m-5 p-1 grow rounded-lg bg-neutral-700 overflow-auto drop-shadow-xl">
                     <Image
                         src={String(carpath)}
                         width={500}
@@ -36,8 +36,8 @@ const Cardetails = () => {
                     />
                 </div>
             </div>
-            <div className='m-5'>
-                <Button label='Zurück' onClick={handleClickGoToIndex}/>
+            <div className="m-5">
+                <Button label="Zurück" onClick={handleClickGoToIndex}/>
             </div>
         </div>
     );
