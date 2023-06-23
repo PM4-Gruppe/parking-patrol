@@ -72,7 +72,7 @@ export default function Home() {
             if(selectedParkzone === 'alle'){
                 const modelName = parkedCar.carModel.modelName;
                 const manufacturer = parkedCar.carModel.carManufacturer.manufacturerName;
-                parkedCarList.push(<CarListItem plateNumber={parkedCar.numberPlate} date={'12.07.2043 19:47'}
+                parkedCarList.push(<CarListItem plateNumber={parkedCar.numberPlate} date={'TODO'}
                                                 carType={manufacturer + " " + modelName}/>)
             }
             for (let i = 0; i < allParkzones.parkzones.length; i++) {
@@ -82,7 +82,7 @@ export default function Home() {
                     if (distance*1000 < allParkzones.parkzones[i].radius) {
                         const modelName = parkedCar.carModel.modelName;
                         const manufacturer = parkedCar.carModel.carManufacturer.manufacturerName;
-                        parkedCarList.push(<CarListItem plateNumber={parkedCar.numberPlate} date={'12.07.2043 19:47'}
+                        parkedCarList.push(<CarListItem plateNumber={parkedCar.numberPlate} date={'TODO'}
                                                         carType={manufacturer + " " + modelName}/>)
                     }
                 }
