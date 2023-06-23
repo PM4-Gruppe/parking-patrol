@@ -41,6 +41,7 @@ export default function Home() {
         carInspector,
         latitude,
         longitude,
+        photoPath
       }
     }
   `)
@@ -72,8 +73,9 @@ export default function Home() {
             if(selectedParkzone === 'alle'){
                 const modelName = parkedCar.carModel.modelName;
                 const manufacturer = parkedCar.carModel.carManufacturer.manufacturerName;
+                const carPath = parkedCar.photoPath;
                 parkedCarList.push(<CarListItem plateNumber={parkedCar.numberPlate} date={'TODO'}
-                                                carType={manufacturer + " " + modelName}/>)
+                                                carType={manufacturer + " " + modelName} carPath={carPath}/>)
             }
             for (let i = 0; i < allParkzones.parkzones.length; i++) {
                 if (allParkzones.parkzones[i].parkzoneName === selectedParkzone) {
@@ -82,8 +84,9 @@ export default function Home() {
                     if (distance*1000 < allParkzones.parkzones[i].radius) {
                         const modelName = parkedCar.carModel.modelName;
                         const manufacturer = parkedCar.carModel.carManufacturer.manufacturerName;
+                        const carPath = parkedCar.photoPath;
                         parkedCarList.push(<CarListItem plateNumber={parkedCar.numberPlate} date={'TODO'}
-                                                        carType={manufacturer + " " + modelName}/>)
+                                                        carType={manufacturer + " " + modelName} carPath={carPath}/>)
                     }
                 }
             }
