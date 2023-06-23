@@ -29,7 +29,7 @@ export const saveCompressedImage = async (
   return imagePath
 }
 
-const deleteImages = (...imagePaths: string[]) => {
+export const deleteImages = (...imagePaths: string[]) => {
   for (const imagePath of imagePaths) {
     if (fs.existsSync(imagePath)) {
       fs.unlinkSync(imagePath)

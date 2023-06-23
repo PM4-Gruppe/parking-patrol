@@ -3,7 +3,7 @@
  */
 import fs from 'fs'
 import { withApiAuthRequired } from '@auth0/nextjs-auth0'
-import { saveOriginalImage, saveCompressedImage } from './upload'
+import { saveOriginalImage, saveCompressedImage, deleteImages } from './upload'
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 import FormData from 'form-data'
 import { AlprStatistic } from '../../../schemas/AlprStatistic'
@@ -45,6 +45,7 @@ const handler: NextApiHandler = async (req, res) => {
   } catch (error) {
     console.log(error)
   }
+  deleteImages(image.filepath, compressedImagePath)
 
   return res.status(200).json(alprStat)
 }
