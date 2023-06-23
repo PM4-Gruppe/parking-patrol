@@ -35,38 +35,38 @@ describe('CreateParkedCar', () => {
     });
 
     it('checks if the text "Bitte geben Sie eine Marke ein." is rendered', () => {
-        render(<PhotoChoose/>)
+        render(<CreateParkedCar/>)
         const labelElement = screen.getByText('Bitte geben Sie eine Marke ein.');
         expect(labelElement).toBeInTheDocument();
     });
 
     it('goes back when the "Zurück" button is clicked', async () => {
-        render(<PhotoChoose/>);
+        render(<CreateParkedCar/>);
         const backButton = screen.getByRole('button', { name: 'Zurück' });
         fireEvent.click(backButton);
         await waitFor(() => expect(useRouter().back).toHaveBeenCalledTimes(1));
     });
 
     it('renders the "Prüfen" button', () => {
-        render(<PhotoChoose />);
+        render(<CreateParkedCar />);
         const checkButton = screen.getByRole('button', { name: 'Prüfen' });
         expect(checkButton).toBeInTheDocument();
     });
 
     it('renders the "Zurück" button', () => {
-        render(<PhotoChoose />);
+        render(<CreateParkedCar />);
         const backButton = screen.getByRole('button', { name: 'Zurück' });
         expect(backButton).toBeInTheDocument();
     });
 
     it('renders the input field, to choose a file', () => {
-        render(<PhotoChoose />);
+        render(<CreateParkedCar />);
         const fileInput = screen.getByTitle('file');
         expect(fileInput).toBeInTheDocument();
     });
 
     it('should display license plate after image selection', async () => {
-        render(<PhotoChoose/>);
+        render(<CreateParkedCar/>);
         const expected = 'AA-123-AA';
         const photoFile = fs.readFileSync(PHOTO_FILE);
         const photoData = new File([photoFile], 'npp-1-2.jpg', { type: 'image/jpeg' });
@@ -85,7 +85,7 @@ describe('CreateParkedCar', () => {
     });
 
     it('should update brand state and informationBrand state correctly', () => {
-        render(<PhotoChoose />);
+        render(<CreateParkedCar />);
         const brandInput = screen.getByPlaceholderText('Marke');
 
         fireEvent.change(brandInput, { target: { value: 'New Brand' } });
@@ -96,7 +96,7 @@ describe('CreateParkedCar', () => {
     });
 
     it('should update model state and informationModel state correctly', () => {
-       render(<PhotoChoose />);
+       render(<CreateParkedCar />);
        const modelInput = screen.getByPlaceholderText('Modell');
 
        fireEvent.change(modelInput, { target: { value: 'New Model' } });
@@ -112,7 +112,7 @@ describe('CreateParkedCar', () => {
         const photoData = new File([photoFile], 'npp-1-2.jpg', { type: 'image/jpeg' });
         LocalEndpoint.prototype.postRequest = mockPostRequest;
 
-        render(<PhotoChoose />);
+        render(<CreateParkedCar />);
 
         const imageInput = screen.getByTitle('file');
         const submitButton = screen.getByText('Prüfen');

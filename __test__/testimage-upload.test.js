@@ -1,5 +1,5 @@
-import handler from '../src/pages/api/image-storage/image-upload';
-import { saveCompressedImage} from '../src/pages/api/image-storage/image-upload';
+import handler from '../src/pages/api/image/upload';
+import { saveCompressedImage} from '../src/pages/api/image/upload';
 import path from 'path';
 import fs from 'fs/promises';
 
