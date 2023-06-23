@@ -29,7 +29,7 @@ const Cardetails = () => {
             <div className="flex flex-col">
                 <div className="m-5 p-1 grow rounded-lg bg-neutral-700 overflow-auto drop-shadow-xl">
                     <Image
-                        src={String(carpath)}
+                        src={'/storage/' + String(carpath)}
                         width={500}
                         height={500}
                         alt="Picture of the author"
