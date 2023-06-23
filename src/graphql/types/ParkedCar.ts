@@ -4,7 +4,10 @@ import { builder } from '../builder'
 builder.prismaObject('ParkedCar', {
   fields: (t) => ({
     numberPlate: t.exposeID('numberPlate'),
-    // TODO: controlTime: t.exposeInt('controlTime'),
+    controlTime: t.field({
+      type: 'Date',
+      resolve: () => new Date()
+    }),
     carModel: t.relation('carModel'),
     carColor: t.relation('carColor'),
     latitude: t.exposeFloat('latitude'),

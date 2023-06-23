@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { PhotoChoose } from '../components/molecule/PhotoChoose'
+import { CreateParkedCar } from '../components/organism/CreateParkedCar'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
@@ -12,7 +12,7 @@ export default function Camera() {
                 <title>Parking Patrol - Camera</title>
                 <link rel="icon" href="/favicon.svg" />
             </Head>
-            <PhotoChoose />
+            <CreateParkedCar />
             <ToastContainer />
         </div>
     )
