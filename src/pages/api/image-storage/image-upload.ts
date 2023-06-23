@@ -20,7 +20,7 @@ const saveCompressedImage = async (
     thumbnail: boolean,
 ): Promise<string> => {
     const imageName = `${thumbnail ? 'thumbnail' : 'compressed'}` + '_' + originalImageName;
-    const imagePath = path.join(process.cwd(), '/storage', imageName)
+    const imagePath = path.join(process.cwd(), '/public/storage', imageName)
     await sharp(originalImagePath)
         .resize(maxWidth)
         .jpeg({ quality })
@@ -38,7 +38,7 @@ const deleteImages = (...imagePaths: string[]) => {
 
 const saveOriginalImage = async (req: NextApiRequest): Promise<formidable.File> => {
     const options: formidable.Options = {};
-    options.uploadDir = path.join(process.cwd(), '/storage');
+    options.uploadDir = path.join(process.cwd(), '/public/storage');
     options.keepExtensions = true;
     options.filename = (name, ext, path, form) => {
         return Date.now().toString() + ext;
