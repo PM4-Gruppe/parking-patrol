@@ -17,30 +17,38 @@ interface ParkedCarFormProps {
 
 export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage }) => {
   const api = new LocalEndpoint()
+  const [analyzing, setAnalyzing] = useState(false)
   const [selectedImageURL, setSelectedImageURL] = useState('')
   const { carInformations, setCarInformations } = useContext(ParkedCarContext)
 
   const handleImageSelect = async (selectedImage: File) => {
     if (!carInformations) return
 
+    setAnalyzing(true)
+
     if (selectedImage) {
       setImage(selectedImage)
       setSelectedImageURL(URL.createObjectURL(selectedImage))
 
-      const alprRes = await api.readAlprStats(selectedImage)
-      const geoInformations = await getGeoInformations(selectedImage)
+      try {
+        const alprRes = await api.readAlprStats(selectedImage)
+        const geoInformations = await getGeoInformations(selectedImage)
 
-      if (alprRes)
-        setCarInformations({
-          parkedCar: {
-            ...carInformations.parkedCar,
-            numberPlate: alprRes.results[0].plate.toUpperCase(),
-          },
-          alprStats: alprRes,
-          geoLocation: geoInformations,
-        })
-      else toastError("Can't process image")
+        if (alprRes)
+          setCarInformations({
+            parkedCar: {
+              ...carInformations.parkedCar,
+              numberPlate: alprRes.results[0].plate.toUpperCase(),
+            },
+            alprStats: alprRes,
+            geoLocation: geoInformations,
+          })
+        else toastError("Can't process image")
+      } catch (err) {
+        toastError('Error analyzing image')
+      }
     }
+    setAnalyzing(false)
   }
 
   if (!carInformations) return <p>missing context...</p>
@@ -58,7 +66,7 @@ export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage }) => {
         />
       )}
 
-      <LicensePlateTextBox />
+      <LicensePlateTextBox loading={analyzing} />
 
       <SelectManufacturer />
 

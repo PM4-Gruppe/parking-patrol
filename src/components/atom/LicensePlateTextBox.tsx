@@ -2,7 +2,13 @@ import React, { useContext, useState, useEffect } from 'react'
 import { TextBox } from './TextBox'
 import { ParkedCarContext } from '../../lib/parkedCar'
 
-export const LicensePlateTextBox: React.FC = () => {
+interface LicensePlateTextBoxProps {
+  loading: boolean
+}
+
+export const LicensePlateTextBox: React.FC<LicensePlateTextBoxProps> = ({
+  loading,
+}) => {
   const { carInformations, setCarInformations } = useContext(ParkedCarContext)
   const [informationLicenceplate, setInformationLicenseplate] =
     useState('Information')
@@ -32,7 +38,9 @@ export const LicensePlateTextBox: React.FC = () => {
     <TextBox
       inputType="text"
       inputDefaultValue="Autonummer"
-      informationText={informationLicenceplate}
+      informationText={
+        loading ? 'Bild wird verarbeitet...' : informationLicenceplate
+      }
       value={carInformations?.parkedCar.numberPlate}
       onChange={setLicensePlate}
     />
