@@ -24,4 +24,4 @@ COPY .env .
 #COPY styles ./styles
 
 #--- Commands ---
-CMD ["npm", "run", "start:generate:migrate"]
+CMD ["npm", "run", "kubernetes"]
