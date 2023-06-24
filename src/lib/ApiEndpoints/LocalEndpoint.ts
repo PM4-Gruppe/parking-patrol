@@ -5,7 +5,7 @@ import { SavedImageDetails } from '../../schemas/PhotoInformation'
 export class LocalEndpoint {
   url = '/api'
 
-  async #getRequest(path: string): Promise<Object> {
+  async getRequest(path: string): Promise<Object> {
     try {
       return await fetch(this.url + path).then((res) => res.json())
     } catch (err) {

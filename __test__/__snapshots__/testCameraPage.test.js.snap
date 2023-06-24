@@ -8,69 +8,41 @@ exports[`Camera should match snapshot 1`] = `
     className="flex flex-col items-center justify-center"
   >
     <div>
-      <input
-        accept="image/*"
-        className="displayflex flex-col items-center justify-center w-full p-2 file:bg-green-700 file:hover:bg-green-800 file:text-white text-white file:rounded-lg file:border-transparent my-2"
-        onChange={[Function]}
-        title="file"
-        type="file"
-      />
-    </div>
-    <div
-      className="box mb-4 "
-    >
-      <input
-        className="w-full md:w-96 p-0 border-transparent rounded-lg bg-transparent text-white placeholder-neutral-400"
-        onChange={[Function]}
-        placeholder="Autonummer"
-        type="text"
-        value=""
-      />
-      <hr
-        className="w-full my-1 text-left ml-0"
-      />
-      <p
-        className="text-white text-xs"
+      <div>
+        <input
+          accept="image/*"
+          className="displayflex flex-col items-center justify-center w-full p-2 file:bg-green-700 file:hover:bg-green-800 file:text-white text-white file:rounded-lg file:border-transparent my-2"
+          onChange={[Function]}
+          type="file"
+        />
+      </div>
+      <div
+        className="box mb-4 "
       >
-        Information
+        <input
+          className="w-full md:w-96 p-0 border-transparent rounded-lg bg-transparent text-white placeholder-neutral-400"
+          onChange={[Function]}
+          placeholder="Autonummer"
+          type="text"
+          value=""
+        />
+        <hr
+          className="w-full my-1 text-left ml-0"
+        />
+        <p
+          className="text-white text-xs"
+        >
+          Information
+        </p>
+      </div>
+      <p>
+        loading...
       </p>
-    </div>
-    <div
-      className="box mb-4 "
-    >
-      <input
-        className="w-full md:w-96 p-0 border-transparent rounded-lg bg-transparent text-white placeholder-neutral-400"
-        onChange={[Function]}
-        placeholder="Marke"
-        type="text"
-        value=""
-      />
-      <hr
-        className="w-full my-1 text-left ml-0"
-      />
-      <p
-        className="text-white text-xs"
-      >
-        Bitte geben Sie eine Marke ein.
+      <p>
+        loading...
       </p>
-    </div>
-    <div
-      className="box mb-4 "
-    >
-      <input
-        className="w-full md:w-96 p-0 border-transparent rounded-lg bg-transparent text-white placeholder-neutral-400"
-        onChange={[Function]}
-        placeholder="Modell"
-        type="text"
-        value=""
-      />
-      <hr
-        className="w-full my-1 text-left ml-0"
-      />
-      <p
-        className="text-white text-xs"
-      >
-        Bitte geben Sie ein Model ein.
+      <p>
+        loading...
       </p>
     </div>
     <div
@@ -88,7 +60,7 @@ exports[`Camera should match snapshot 1`] = `
         onClick={[Function]}
         type="button"
       >
-        Prüfen
+        Speichern
       </button>
     </div>
   </div>

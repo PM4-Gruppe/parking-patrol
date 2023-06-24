@@ -8,6 +8,7 @@ jest.mock('next/router', () => ({
 }));
 
 jest.mock('../src/components', () => 'Layout')
+
 jest.mock('@auth0/nextjs-auth0/client', () => ({
     UserProvider: ({ children }) => <div>{children}</div>,
 }));
