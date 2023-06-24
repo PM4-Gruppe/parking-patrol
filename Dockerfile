@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 #--- Install dependencies
-RUN npm install --production=false
+RUN npm ci
 COPY . .
 
 
@@ -26,4 +26,4 @@ COPY .env .
 #COPY styles ./styles
 
 #--- Commands ---
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "kubernetes"]
