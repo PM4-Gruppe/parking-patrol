@@ -10,17 +10,19 @@ export const LicensePlateTextBox: React.FC<LicensePlateTextBoxProps> = ({
   loading,
 }) => {
   const { carInformations, setCarInformations } = useContext(ParkedCarContext)
-  const [informationLicenceplate, setInformationLicenseplate] =
-    useState('Bild auswählen, um Nummernschild aus Bild zu laden.')
+  const [informationLicenceplate, setInformationLicenseplate] = useState('')
 
   useEffect(() => {
-    if (!carInformations || !carInformations.alprStats) return
-    const plate = carInformations.alprStats.results[0].plate.toUpperCase()
-    const score = (carInformations.alprStats.results[0].score * 100).toFixed(1)
+    if (!carInformations || !carInformations.alprStats) {
+      setInformationLicenseplate('Lade ein Bild hoch um es zu analysieren.')
+    } else {
+      const plate = carInformations.alprStats.results[0].plate.toUpperCase()
+      const score = carInformations.alprStats.results[0].score * 100
 
-    setInformationLicenseplate(
-      `Vorhersage mit ${score}% Wahrscheinlichkeit (${plate})`
-    )
+      setInformationLicenseplate(
+        `Vorhersage mit ${score}% Wahrscheinlichkeit (${plate})`
+      )
+    }
   }, [carInformations, informationLicenceplate])
 
   const setLicensePlate = (value: string) => {
@@ -38,7 +40,9 @@ export const LicensePlateTextBox: React.FC<LicensePlateTextBoxProps> = ({
     <TextBox
       inputType="text"
       inputDefaultValue="Autonummer"
-      informationText={loading ? 'Bitte warten... Nummernschild wird aus dem Bild gelesen...' : informationLicenceplate}
+      informationText={
+        loading ? 'Bild wird verarbeitet...' : informationLicenceplate
+      }
       value={carInformations?.parkedCar.numberPlate}
       onChange={setLicensePlate}
     />

@@ -25,6 +25,7 @@ export const ClientSelectBox: React.FC<ClientSelectBoxProps> = ({
     <div className="box mb-4 ">
       <select
         data-te-select-init
+        data-te-select-clear-button="true"
         data-te-select-filter="true"
         className="w-full md:w-96 p-0 bg-neutral-700 hover:bg-neutral-800 rounded-lg text-white placeholder-neutral-400"
         value={value}
