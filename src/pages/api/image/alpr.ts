@@ -28,7 +28,7 @@ const handler: NextApiHandler = async (req, res) => {
 
   const body = new FormData()
   body.append('regions', 'ch') // Change to your country
-  body.append('upload', fs.createReadStream(compressedImagePath))
+  body.append('upload', fs.createReadStream(compressedImagePath.filepath))
 
   try {
     const alprResponse = await fetch(
@@ -45,7 +45,7 @@ const handler: NextApiHandler = async (req, res) => {
   } catch (error) {
     console.log(error)
   }
-  deleteImages(image.filepath, compressedImagePath)
+  deleteImages(image.filepath, compressedImagePath.filepath)
 
   return res.status(200).json(alprStat)
 }

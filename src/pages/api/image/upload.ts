@@ -18,7 +18,7 @@ export const saveCompressedImage = async (
   maxWidth: number,
   quality: number,
   thumbnail: boolean
-): Promise<string> => {
+): Promise<{ filename: string; filepath: string }> => {
   const imageName =
     `${thumbnail ? 'thumbnail' : 'compressed'}` + '_' + originalImageName
   const imagePath = path.join(process.cwd(), '/public/storage', imageName)
@@ -26,7 +26,7 @@ export const saveCompressedImage = async (
     .resize(maxWidth)
     .jpeg({ quality })
     .toFile(imagePath)
-  return imagePath
+  return { filename: imageName, filepath: imagePath }
 }
 
 export const deleteImages = (...imagePaths: string[]) => {
@@ -61,20 +61,18 @@ export const saveOriginalImage = async (
 }
 
 const handler: NextApiHandler = async (req, res) => {
-  let compressedImagePath = ''
-  let thumbnailPath = ''
-  let originalImagePath = ''
+  let compressedImagePath
+  const image = await saveOriginalImage(req)
+  const originalImagePath = image.filepath
+  compressedImagePath = await saveCompressedImage(
+    originalImagePath,
+    image.newFilename,
+    800,
+    80,
+    false
+  )
   try {
-    const image = await saveOriginalImage(req)
-    originalImagePath = image.filepath
-    compressedImagePath = await saveCompressedImage(
-      originalImagePath,
-      image.newFilename,
-      800,
-      80,
-      false
-    )
-    thumbnailPath = await saveCompressedImage(
+    const thumbnailPath = await saveCompressedImage(
       originalImagePath,
       image.newFilename,
       200,
@@ -83,12 +81,12 @@ const handler: NextApiHandler = async (req, res) => {
     )
     res.status(200).json({
       message: 'Image saved successfully.',
-      originalImagePath,
-      compressedImagePath,
-      thumbnailPath,
+      originalImagePath: image.newFilename,
+      compressedImagePath: compressedImagePath.filename,
+      thumbnailPath: thumbnailPath.filename,
     } as SavedImageDetails)
   } catch (error) {
-    deleteImages(compressedImagePath, thumbnailPath, originalImagePath)
+    deleteImages(compressedImagePath.filepath, originalImagePath)
     res.status(500).json({ message: 'Error saving image: ' + error })
   }
 }
