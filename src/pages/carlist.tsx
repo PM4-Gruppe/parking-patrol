@@ -77,7 +77,7 @@ export default function Home() {
                 // @ts-ignore
                 const manufacturer = parkedCar.carModel.carManufacturer.manufacturerName;
                 const carPath = parkedCar.photoPath;
-                parkedCarList.push(<CarListItem plateNumber={parkedCar.numberPlate} date={'TODO'}
+                parkedCarList.push(<CarListItem plateNumber={parkedCar.numberPlate} date={''}
                                                 carType={manufacturer + ' ' + modelName} carPath={carPath}/>)
             }
             for (let i = 0; i < allParkzones.parkzones.length; i++) {
@@ -112,7 +112,7 @@ export default function Home() {
                 <title>Parking Patrol</title>
                 <link rel="icon" href="/favicon.svg"/>
             </Head>
-            <p className="m-5 text-white text-3xl">Offene Bussen</p>
+            <p className="m-5 text-white text-3xl">Erfasste Fahrzeuge</p>
             <div className="my-10 mx-5">
                 <select onChange={(changeSelectedParkzone)}
                         className="p-0 pb-1 w-full text-white bg-transparent border-transparent border-0 border-neutral-400 border-b">
