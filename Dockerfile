@@ -1,5 +1,5 @@
 #--- Select target os ---
-FROM node:18
+FROM node:18-alpine
 
 #--- Setup Work directory ---
 WORKDIR /app
@@ -8,8 +8,10 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 #--- Install dependencies
-RUN npm install
+RUN npm install --production=false
 COPY . .
+
+
 
 #--- For Production ---
 #COPY .next ./.next
@@ -24,4 +26,4 @@ COPY .env .
 #COPY styles ./styles
 
 #--- Commands ---
-CMD ["npm", "run", "digitalocean"]
+CMD ["npm", "run", "start"]
