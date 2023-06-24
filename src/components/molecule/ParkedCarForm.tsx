@@ -14,9 +14,10 @@ import { AlprStatistic } from '../../schemas/AlprStatistic'
 
 interface ParkedCarFormProps {
   setImage: (arg0: File) => void
+  selectedImage: File | undefined
 }
 
-export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage }) => {
+export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage, selectedImage }) => {
   const api = new LocalEndpoint()
   const [analyzing, setAnalyzing] = useState(false)
   const [selectedImageURL, setSelectedImageURL] = useState('')
@@ -67,7 +68,7 @@ export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage }) => {
     <div>
       <ImageSelect handleImage={handleImageSelect} />
 
-      {selectedImageURL && (
+      {selectedImageURL && selectedImage && (
         <Image
           src={selectedImageURL}
           width={150}

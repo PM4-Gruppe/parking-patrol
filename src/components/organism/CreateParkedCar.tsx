@@ -67,6 +67,7 @@ export const CreateParkedCar: React.FC = () => {
   }
 
   const resetForm = () => {
+    setSelectedImage(undefined)
     setCarInformations({
       parkedCar: { ...emptyParkedCar },
       alprStats: undefined,
@@ -83,6 +84,7 @@ export const CreateParkedCar: React.FC = () => {
           setImage={(file) => {
             setSelectedImage(file)
           }}
+          selectedImage={selectedImage}
         />
       </ParkedCarContext.Provider>
 
