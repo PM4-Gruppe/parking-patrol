@@ -36,6 +36,7 @@ const handler: NextApiHandler = async (req, res) => {
       {
         method: 'POST',
         headers: {
+          'Content-Type': 'multipart/form-data',
           Authorization: 'Token 6bccffbf869875312132100b49cc31466d88bf7c', // Needs to be stored in env variables
         },
         body: body as any,
