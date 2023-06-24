@@ -30,13 +30,15 @@ const handler: NextApiHandler = async (req, res) => {
   body.append('regions', 'ch') // Change to your country
   body.append('upload', fs.createReadStream(compressedImagePath.filepath))
 
+  const contentType = 'multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW'
+
   try {
     const alprResponse = await fetch(
       'https://api.platerecognizer.com/v1/plate-reader/',
       {
         method: 'POST',
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': contentType,
           Authorization: 'Token 6bccffbf869875312132100b49cc31466d88bf7c', // Needs to be stored in env variables
         },
         body: body as any,
