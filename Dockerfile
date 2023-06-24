@@ -19,6 +19,7 @@ COPY . .
 #COPY prisma ./prisma
 COPY .env .
 
+
 #--- For Development ---
 #COPY next.config.js ./next.condig.js
 #COPY pages ./pages
