@@ -24,5 +24,4 @@ COPY .env .
 #COPY styles ./styles
 
 #--- Commands ---
-CMD ["npx", "prisma", "generate"]
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "kubernetes"]
