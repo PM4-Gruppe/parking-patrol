@@ -34,6 +34,7 @@ const customJestConfig = {
         '!<rootDir>/src/lib/prisma.ts',
         '!<rootDir>/src/lib/toasts.ts',
         '!<rootDir>/src/lib/createParkedCar.js',
+        '!<rootDir>/src/pages/api/image/[filename].ts',
     ],
     coverageDirectory: '<rootDir>/coverage',
     transform: {
