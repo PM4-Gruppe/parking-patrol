@@ -8,14 +8,17 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 
 #--- Install dependencies
-RUN npm install
+RUN npm ci
 COPY . .
+
+
 
 #--- For Production ---
 #COPY .next ./.next
 #COPY public ./public
 #COPY prisma ./prisma
 COPY .env .
+
 
 #--- For Development ---
 #COPY next.config.js ./next.condig.js
