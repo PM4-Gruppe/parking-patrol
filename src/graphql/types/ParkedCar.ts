@@ -6,7 +6,7 @@ builder.prismaObject('ParkedCar', {
     numberPlate: t.exposeID('numberPlate'),
     controlTime: t.field({
       type: 'Date',
-      resolve: () => new Date()
+      resolve: (car) => car.controlTime,
     }),
     carModel: t.relation('carModel'),
     carColor: t.relation('carColor'),
