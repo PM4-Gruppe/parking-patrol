@@ -59,20 +59,17 @@ export const CreateParkedCar: React.FC = () => {
     }
     try {
       await saveForm()
-      resetForm()
       toastSuccess(toastSuccessMessage)
+      resetForm()
     } catch (error) {
       toastError(toastErrorMessage)
     }
   }
 
   const resetForm = () => {
-    setSelectedImage(undefined)
-    setCarInformations({
-      parkedCar: { ...emptyParkedCar },
-      alprStats: undefined,
-      geoLocation: undefined,
-    })
+    setTimeout(() => {
+      window.location.reload()
+    }, 4500)
   }
 
   return (

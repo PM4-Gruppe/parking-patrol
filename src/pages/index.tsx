@@ -43,9 +43,6 @@ export default function Home() {
             <BiCamera className="w-20 h-20 p-1 text-white" />
           </div>
         </Link>
-        <Link className="absolute bottom-5 left-20 rounded-full items-center bg-neutral-900 hover:bg-neutral-700" href={"https://en.wikipedia.org/wiki/Settings_(Windows)"}>
-          <FiSettings className="w-20 h-20 p-4 text-white" />
-        </Link>
         <Link className="absolute bottom-6 right-20 rounded-full items-center bg-neutral-900 hover:bg-neutral-700" href="/carlist">
           <FaListUl className="w-20 h-20 p-4 text-white" />
         </Link>
