@@ -1,4 +1,5 @@
 import { uploadImage, downloadImage } from '../src/lib/imageProvider';
+import { S3 } from '@aws-sdk/client-s3';
 
 jest.mock('@aws-sdk/client-s3');
 
