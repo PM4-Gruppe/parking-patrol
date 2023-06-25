@@ -5,6 +5,7 @@ import sharp from 'sharp'
 import fs from 'fs'
 import { withApiAuthRequired } from '@auth0/nextjs-auth0'
 import { SavedImageDetails } from '../../../schemas/PhotoInformation'
+import { uploadImage } from '../../../lib/imageProvider'
 
 export const config = {
   api: {
@@ -61,34 +62,43 @@ export const saveOriginalImage = async (
 }
 
 const handler: NextApiHandler = async (req, res) => {
-  let compressedImagePath
   const image = await saveOriginalImage(req)
-  const originalImagePath = image.filepath
-  compressedImagePath = await saveCompressedImage(
-    originalImagePath,
+
+  const compressedImagePath = await saveCompressedImage(
+    image.filepath,
     image.newFilename,
     800,
     80,
     false
   )
-  try {
-    const thumbnailPath = await saveCompressedImage(
-      originalImagePath,
-      image.newFilename,
-      200,
-      60,
-      true
-    )
-    res.status(200).json({
-      message: 'Image saved successfully.',
-      originalImagePath: image.newFilename,
-      compressedImagePath: compressedImagePath.filename,
-      thumbnailPath: thumbnailPath.filename,
-    } as SavedImageDetails)
-  } catch (error) {
-    deleteImages(compressedImagePath.filepath, originalImagePath)
-    res.status(500).json({ message: 'Error saving image: ' + error })
-  }
+  const thumbnailPath = await saveCompressedImage(
+    image.filepath,
+    image.newFilename,
+    200,
+    60,
+    true
+  )
+
+  // Upload images to digitalocean spaces
+  await uploadImage(
+    image.newFilename,
+    await fs.promises.readFile(image.filepath)
+  )
+  await uploadImage(
+    compressedImagePath.filename,
+    await fs.promises.readFile(compressedImagePath.filepath)
+  )
+  await uploadImage(
+    thumbnailPath.filename,
+    await fs.promises.readFile(thumbnailPath.filepath)
+  )
+
+  res.status(200).json({
+    message: 'Image saved successfully.',
+    originalImagePath: image.newFilename,
+    compressedImagePath: compressedImagePath.filename,
+    thumbnailPath: thumbnailPath.filename,
+  } as SavedImageDetails)
 }
 
 export default withApiAuthRequired(handler)
