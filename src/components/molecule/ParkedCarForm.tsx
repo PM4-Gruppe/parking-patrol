@@ -10,6 +10,7 @@ import { ImageSelect } from '../atom/ImageSelect'
 import { getGeoInformations } from '../../lib/photoAnalyzer'
 import { LocalEndpoint } from '../../lib/ApiEndpoints/LocalEndpoint'
 import { toastError } from '../../lib/toasts'
+import { AlprStatistic } from '../../schemas/AlprStatistic'
 
 interface ParkedCarFormProps {
   setImage: (arg0: File) => void
@@ -17,30 +18,48 @@ interface ParkedCarFormProps {
 
 export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage }) => {
   const api = new LocalEndpoint()
+  const [analyzing, setAnalyzing] = useState(false)
   const [selectedImageURL, setSelectedImageURL] = useState('')
   const { carInformations, setCarInformations } = useContext(ParkedCarContext)
 
   const handleImageSelect = async (selectedImage: File) => {
-    if (!carInformations) return
+    if (!carInformations || !selectedImage) return
 
-    if (selectedImage) {
-      setImage(selectedImage)
-      setSelectedImageURL(URL.createObjectURL(selectedImage))
+    let alprRes
+    setAnalyzing(true)
 
-      const alprRes = await api.readAlprStats(selectedImage)
-      const geoInformations = await getGeoInformations(selectedImage)
+    setImage(selectedImage)
+    setSelectedImageURL(URL.createObjectURL(selectedImage))
 
-      if (alprRes)
-        setCarInformations({
-          parkedCar: {
-            ...carInformations.parkedCar,
-            numberPlate: alprRes.results[0].plate.toUpperCase(),
-          },
-          alprStats: alprRes,
-          geoLocation: geoInformations,
-        })
-      else toastError("Can't process image")
+    try {
+      alprRes = await api.readAlprStats(selectedImage)
+    } catch (err) {
+      toastError('Error analyzing image')
     }
+
+    const geoInformations = await getGeoInformations(selectedImage)
+
+    if (alprRes && alprRes.results.length > 0) {
+      setCarInformations({
+        parkedCar: {
+          ...carInformations.parkedCar,
+          numberPlate: alprRes.results[0].plate.toUpperCase(),
+        },
+        alprStats: alprRes,
+        geoLocation: geoInformations,
+      })
+    } else {
+      setCarInformations({
+        parkedCar: {
+          ...carInformations.parkedCar,
+          numberPlate: '',
+        },
+        alprStats: undefined,
+        geoLocation: geoInformations,
+      })
+      toastError('Kein Kennzeichen erkannt')
+    }
+    setAnalyzing(false)
   }
 
   if (!carInformations) return <p>missing context...</p>
@@ -58,7 +77,7 @@ export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage }) => {
         />
       )}
 
-      <LicensePlateTextBox />
+      <LicensePlateTextBox loading={analyzing} />
 
       <SelectManufacturer />
 

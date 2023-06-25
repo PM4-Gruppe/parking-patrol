@@ -81,7 +81,6 @@ export const CreateParkedCar: React.FC = () => {
       >
         <ParkedCarForm
           setImage={(file) => {
-            console.log('save file', file)
             setSelectedImage(file)
           }}
         />
