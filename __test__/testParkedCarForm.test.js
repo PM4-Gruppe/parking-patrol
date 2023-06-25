@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { render, screen } from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import { ApolloProvider } from '@apollo/client';
 import '@testing-library/jest-dom';
 import fetchMock from 'jest-fetch-mock';
