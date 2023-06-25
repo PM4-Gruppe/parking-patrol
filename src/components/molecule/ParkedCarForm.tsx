@@ -10,7 +10,6 @@ import { ImageSelect } from '../atom/ImageSelect'
 import { getGeoInformations } from '../../lib/photoAnalyzer'
 import { LocalEndpoint } from '../../lib/ApiEndpoints/LocalEndpoint'
 import { toastError } from '../../lib/toasts'
-import { AlprStatistic } from '../../schemas/AlprStatistic'
 
 interface ParkedCarFormProps {
   setImage: (arg0: File) => void
