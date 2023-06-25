@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { gql, useQuery } from '@apollo/client'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Widget } from '../components/molecule/Widget'
 import { BiCamera } from 'react-icons/bi'
@@ -16,21 +17,23 @@ export default function Home() {
       </Head>
       <div className="flex flex-col center justify-evenly m-10">
         <div className="p-5">
-          <Widget title={"Aktuelle Parkzone"}>
+          <Widget title={'Aktuelle Parkzone'}>
             <div>
               <p className="text-white text-lg">aktuell in keiner Parkzone</p>
-              <p className="text-neutral-400 text-sm m-0 p-0">nächste Parkzone Eulachpassage ist 300m entfernt</p>
+              <p className="text-neutral-400 text-sm m-0 p-0">
+                nächste Parkzone Eulachpassage ist 300m entfernt
+              </p>
             </div>
           </Widget>
         </div>
         <div className="flex flex-row center justify-between">
           <div className="w-1/2 p-5">
-            <Widget title={"Erfasste Fahrzeuge"}>
+            <Widget title={'Erfasste Fahrzeuge'}>
               <p className="text-white text-lg">192 Fahrzeuge</p>
             </Widget>
           </div>
           <div className="w-1/2 p-5">
-            <Widget title={"Offene Vergehen"}>
+            <Widget title={'Offene Vergehen'}>
               <p className="text-white text-lg">23 Vergehen</p>
             </Widget>
           </div>
@@ -43,10 +46,16 @@ export default function Home() {
             <BiCamera className="w-20 h-20 p-1 text-white" />
           </div>
         </Link>
-        <Link className="absolute bottom-5 left-20 rounded-full items-center bg-neutral-900 hover:bg-neutral-700" href={"https://en.wikipedia.org/wiki/Settings_(Windows)"}>
+        <Link
+          className="absolute bottom-5 left-20 rounded-full items-center bg-neutral-900 hover:bg-neutral-700"
+          href={'https://en.wikipedia.org/wiki/Settings_(Windows)'}
+        >
           <FiSettings className="w-20 h-20 p-4 text-white" />
         </Link>
-        <Link className="absolute bottom-6 right-20 rounded-full items-center bg-neutral-900 hover:bg-neutral-700" href="/carlist">
+        <Link
+          className="absolute bottom-6 right-20 rounded-full items-center bg-neutral-900 hover:bg-neutral-700"
+          href="/carlist"
+        >
           <FaListUl className="w-20 h-20 p-4 text-white" />
         </Link>
       </div>
@@ -54,4 +63,4 @@ export default function Home() {
   )
 }
 
-export const getServerSideProps = withPageAuthRequired();
+export const getServerSideProps = withPageAuthRequired()

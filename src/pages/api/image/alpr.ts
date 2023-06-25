@@ -15,7 +15,6 @@ export const config = {
 }
 
 const handler: NextApiHandler = async (req, res) => {
-  //TODO add error handling when photo is to big
   let alprStat
   let image = await saveOriginalImage(req)
   const compressedImagePath = await saveCompressedImage(
@@ -31,12 +30,13 @@ const handler: NextApiHandler = async (req, res) => {
   body.append('upload', fs.createReadStream(compressedImagePath.filepath))
 
   try {
+    console.log('SERVER LOG: ', `Token ${process.env.PR_TOKEN as string}`)
     const alprResponse = await fetch(
       'https://api.platerecognizer.com/v1/plate-reader/',
       {
         method: 'POST',
         headers: {
-          Authorization: 'Token 6bccffbf869875312132100b49cc31466d88bf7c', // Needs to be stored in env variables
+          Authorization: `Token ${process.env.PR_TOKEN as string}`,
         },
         body: body as any,
       }
