@@ -35,7 +35,7 @@ export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage, selected
     try {
       alprRes = await api.readAlprStats(selectedImage)
     } catch (err) {
-      toastError('Error bei Fotoanalyse')
+      toastError('Error bei PlateRecognizer API')
     }
 
     const geoInformations = await getGeoInformations(selectedImage)
@@ -58,6 +58,7 @@ export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage, selected
         alprStats: undefined,
         geoLocation: geoInformations,
       })
+      console.log('Kein Kennzeichen erkannt')
       toastError('Kein Kennzeichen erkannt')
     }
     setAnalyzing(false)
