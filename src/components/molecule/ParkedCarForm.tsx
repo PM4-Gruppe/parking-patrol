@@ -13,10 +13,9 @@ import { toastError } from '../../lib/toasts'
 
 interface ParkedCarFormProps {
   setImage: (arg0: File) => void
-  selectedImage: File | undefined
 }
 
-export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage, selectedImage }) => {
+export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage }) => {
   const api = new LocalEndpoint()
   const [analyzing, setAnalyzing] = useState(false)
   const [selectedImageURL, setSelectedImageURL] = useState('')
@@ -67,7 +66,7 @@ export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage, selected
     <div>
       <ImageSelect handleImage={handleImageSelect} />
 
-      {selectedImageURL && selectedImage && (
+      {selectedImageURL && (
         <Image
           src={selectedImageURL}
           width={150}
@@ -82,10 +81,7 @@ export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage, selected
       <SelectManufacturer />
 
       {carInformations.parkedCar.manufacturer ? (
-        <SelectModel
-          manufacturer={carInformations.parkedCar.manufacturer}
-          model={carInformations.parkedCar.model}
-        />
+        <SelectModel manufacturer={carInformations.parkedCar.manufacturer} />
       ) : (
         <SelectBox value="VALUE" informationText="infomation" data={[]} />
       )}
