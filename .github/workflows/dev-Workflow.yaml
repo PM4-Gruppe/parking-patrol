@@ -27,6 +27,7 @@ jobs:
             echo "AUTH0_SECRET=${{ secrets.AUTH0_SECRET }}" >> .env
             echo "SPACES_KEY=${{ secrets.SPACES_KEY }}" >> .env
             echo "SPACES_SECRET=${{ secrets.SPACES_SECRET }}" >> .env
+            echo "PR_TOKEN=${{ secrets.PR_TOKEN }}" >> .env
       - name: Test application
         run: npm run test
       - name: Build application
