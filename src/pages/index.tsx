@@ -1,10 +1,8 @@
 import Head from 'next/head'
-import { gql, useQuery } from '@apollo/client'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 import Link from 'next/link'
 import { Widget } from '../components/molecule/Widget'
 import { BiCamera } from 'react-icons/bi'
-import { FiSettings } from 'react-icons/fi'
 import { FaListUl } from 'react-icons/fa'
 
 export default function Home() {
@@ -19,7 +17,9 @@ export default function Home() {
           <Widget title={'Aktuelle Parkzone'}>
             <div>
               <p className="text-white text-lg">aktuell in keiner Parkzone</p>
-              <p className="text-neutral-400 text-sm m-0 p-0">nächste Parkzone Eulachpassage ist 300m entfernt</p>
+              <p className="text-neutral-400 text-sm m-0 p-0">
+                nächste Parkzone Eulachpassage ist 300m entfernt
+              </p>
             </div>
           </Widget>
         </div>
@@ -51,4 +51,4 @@ export default function Home() {
   )
 }
 
-export const getServerSideProps = withPageAuthRequired();
+export const getServerSideProps = withPageAuthRequired()
