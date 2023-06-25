@@ -10,6 +10,12 @@ jest.mock('../src/pages/api/image/upload', () => ({
     saveOriginalImage: jest.fn().mockImplementation(() => ({
         filepath: './__test__/testImages/npp-1-2.jpg',
     })),
+    saveCompressedImage: jest.fn().mockImplementation(() => ({
+        filepath: './__test__/testImages/npp-1-2.jpg',
+    })),
+    deleteImages: jest.fn().mockImplementation(() => ({
+        filepath: './__test__/testImages/npp-1-2.jpg',
+    })),
 }));
 
 jest.mock('node-fetch');
