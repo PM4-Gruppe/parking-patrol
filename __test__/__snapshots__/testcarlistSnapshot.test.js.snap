@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home should match snapshot 1`] = `
+<div
+  className=""
+>
+  <p
+    className="m-5 text-white text-3xl"
+  >
+    Erfasste Fahrzeuge
+  </p>
+  <div
+    className="my-10 mx-5"
+  >
+    <select
+      className="p-0 pb-1 w-full text-white bg-transparent border-transparent border-0 border-neutral-400 border-b"
+      onChange={[Function]}
+    >
+      <option>
+        alle
+      </option>
+    </select>
+    <p
+      className="text-white text-xs"
+    >
+      Parkzone
+    </p>
+  </div>
+  <div
+    className="flex flex-col"
+  >
+    <div
+      className="m-5 p-1 grow rounded-lg bg-neutral-700 overflow-auto drop-shadow-xl"
+    />
+  </div>
+  <div
+    className="m-5"
+  >
+    <button
+      className="p-2 bg-green-700 hover:bg-green-800 text-white rounded-lg my-2"
+      onClick={[Function]}
+      type="button"
+    >
+      Zurück
+    </button>
+  </div>
+</div>
+`;
