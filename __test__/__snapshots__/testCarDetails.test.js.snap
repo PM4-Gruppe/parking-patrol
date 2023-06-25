@@ -23,8 +23,8 @@ exports[`Cardetails should match snapshot 1`] = `
         loading="lazy"
         onError={[Function]}
         onLoad={[Function]}
-        src="/_next/image?url=%2Fstorage%2Ftest-carpath.jpg&w=1080&q=75"
-        srcSet="/_next/image?url=%2Fstorage%2Ftest-carpath.jpg&w=640&q=75 1x, /_next/image?url=%2Fstorage%2Ftest-carpath.jpg&w=1080&q=75 2x"
+        src="/_next/image?url=%2Fapi%2Fimage%2Ftest-carpath.jpg&w=1080&q=75"
+        srcSet="/_next/image?url=%2Fapi%2Fimage%2Ftest-carpath.jpg&w=640&q=75 1x, /_next/image?url=%2Fapi%2Fimage%2Ftest-carpath.jpg&w=1080&q=75 2x"
         style={
           {
             "color": "transparent",
