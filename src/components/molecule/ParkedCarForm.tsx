@@ -58,7 +58,6 @@ export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage, selected
         alprStats: undefined,
         geoLocation: geoInformations,
       })
-      console.log('Kein Kennzeichen erkannt')
       toastError('Kein Kennzeichen erkannt')
     }
     setAnalyzing(false)

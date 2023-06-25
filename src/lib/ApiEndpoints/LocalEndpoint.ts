@@ -22,7 +22,6 @@ export class LocalEndpoint {
       }).then((res) => res.json())
       return res
     } catch (err) {
-      console.error(err)
       return undefined
     }
   }
