@@ -31,7 +31,7 @@ export const SelectColor: React.FC = () => {
   return (
     <SelectBox
       informationText={
-        carInformations.parkedCar.color ? doneMessage : defaultInformation
+        carInformations.parkedCar.color == 'Nicht verfügbar' ? defaultInformation : doneMessage
       }
       value={carInformations.parkedCar.color}
       data={data.colors.map((color: any) => color.colorName)}

@@ -28,6 +28,7 @@ export const ClientSelectBox: React.FC<ClientSelectBoxProps> = ({
         data-te-select-clear-button="true"
         data-te-select-filter="true"
         className="w-full md:w-96 p-0 bg-neutral-700 hover:bg-neutral-800 rounded-lg text-white placeholder-neutral-400"
+        value={value}
         onChange={(e) => {
           onChange ? onChange(e.target.value) : ''
         }}

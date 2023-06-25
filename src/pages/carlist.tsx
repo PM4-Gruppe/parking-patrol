@@ -38,8 +38,8 @@ export default function Home() {
     router.push('/')
   }
 
-  if (!data || error) return <p>Error...</p>
-  if (loading) return <p>Loading...</p>
+  if ( error) return <p>Error...</p>
+  if (!data || loading) return <p>Loading...</p>
   return (
     <div className="">
       <Head>

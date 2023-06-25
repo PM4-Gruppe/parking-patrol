@@ -25,9 +25,6 @@ export const SelectModel: React.FC<SelectModelProps> = ({ manufacturer }) => {
     variables: { manufacturer },
   })
 
-  const [informationModel, setInformationModel] =
-    useState<string>(defaultInformation)
-
   function handleModel(value: string) {
     if (!carInformations) return
     setCarInformations({
@@ -38,10 +35,13 @@ export const SelectModel: React.FC<SelectModelProps> = ({ manufacturer }) => {
 
   if (loading) return <p>loading...</p>
   if (error) return <p>error...</p>
+  if (!carInformations) return <p>missing context...</p>
   return (
     <SelectBox
-      informationText={informationModel}
-      value={manufacturer}
+      informationText={
+        carInformations.parkedCar.model == 'Nicht erkennbar' ? defaultInformation : doneMessage
+      }
+      value={carInformations.parkedCar.model}
       data={data.carModels.map((model: any) => model.modelName)}
       onChange={handleModel}
     />
