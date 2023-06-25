@@ -30,7 +30,6 @@ builder.mutationField('createParkedCar', (t) =>
     type: 'ParkedCar',
     args: {
       numberPlate: t.arg.string({ required: true }),
-      // TODO: controlTime: t.exposeInt('controlTime'),
       carModel: t.arg.string({ required: true }),
       carManufacturer: t.arg.string({ required: true }),
       carColor: t.arg.string({ required: true }),

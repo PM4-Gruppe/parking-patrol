@@ -33,7 +33,7 @@ export const ParkedCarForm: React.FC<ParkedCarFormProps> = ({ setImage }) => {
     try {
       alprRes = await api.readAlprStats(selectedImage)
     } catch (err) {
-      toastError('Error analyzing image')
+      toastError('Error bei PlateRecognizer API')
     }
 
     const geoInformations = await getGeoInformations(selectedImage)

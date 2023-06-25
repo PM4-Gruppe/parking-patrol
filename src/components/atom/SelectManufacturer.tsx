@@ -15,21 +15,14 @@ export const SelectManufacturer: React.FC = () => {
   const defaultInformation = 'Bitte wählen Sie eine Marke aus.'
   const doneMessage = 'Marke ausgewählt ✅'
   const { carInformations, setCarInformations } = useContext(ParkedCarContext)
-  const [information, setInformation] = useState<string>(defaultInformation)
-  const [manufacturer, setManufacturer] = useState('')
   const { loading, error, data } = useQuery(GET_MANUFACTURERS)
 
   function handleManufacturer(value: string) {
     if (!carInformations) return
     setCarInformations({
       ...carInformations,
-      parkedCar: { ...carInformations.parkedCar, manufacturer: value },
+      parkedCar: { ...carInformations.parkedCar, manufacturer: value, model: 'Nicht erkennbar' },
     })
-    if (value.length === 0) {
-      setInformation(defaultInformation)
-    } else {
-      setInformation(doneMessage)
-    }
   }
 
   if (loading) return <p>loading...</p>
@@ -38,7 +31,9 @@ export const SelectManufacturer: React.FC = () => {
 
   return (
     <SelectBox
-      informationText={information}
+      informationText={
+        carInformations.parkedCar.manufacturer == 'Nicht erkennbar' ? defaultInformation : doneMessage
+      }
       value={carInformations?.parkedCar.manufacturer}
       data={data.carManufacturers.map((item: any) => item.manufacturerName)}
       onChange={handleManufacturer}

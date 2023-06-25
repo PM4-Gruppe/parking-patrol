@@ -17,7 +17,7 @@ export const LicensePlateTextBox: React.FC<LicensePlateTextBoxProps> = ({
       setInformationLicenseplate('Lade ein Bild hoch um es zu analysieren.')
     } else {
       const plate = carInformations.alprStats.results[0].plate.toUpperCase()
-      const score = carInformations.alprStats.results[0].score * 100
+      const score = (carInformations.alprStats.results[0].score * 100).toFixed(1)
 
       setInformationLicenseplate(
         `Vorhersage mit ${score}% Wahrscheinlichkeit (${plate})`

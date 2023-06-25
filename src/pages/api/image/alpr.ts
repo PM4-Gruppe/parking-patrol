@@ -30,7 +30,6 @@ const handler: NextApiHandler = async (req, res) => {
   body.append('upload', fs.createReadStream(compressedImagePath.filepath))
 
   try {
-    console.log('SERVER LOG: ', `Token ${process.env.PR_TOKEN as string}`)
     const alprResponse = await fetch(
       'https://api.platerecognizer.com/v1/plate-reader/',
       {
