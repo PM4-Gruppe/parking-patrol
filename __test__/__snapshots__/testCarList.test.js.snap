@@ -2,6 +2,6 @@
 
 exports[`Home should match snapshot 1`] = `
 <p>
-  Error...
+  Loading...
 </p>
 `;
