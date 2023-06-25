@@ -9,8 +9,6 @@ export default async function handler(
   const stream = await downloadImage(req.query.filename as string)
 
   try {
-    //const fileBuffer = await fs.promises.readFile({ path: filePath })
-
     res.setHeader('Content-Type', 'image/jpeg')
     res.setHeader(
       'Content-Disposition',
