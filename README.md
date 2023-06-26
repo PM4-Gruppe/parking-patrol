@@ -43,5 +43,6 @@ Tailwindcss: https://tailwindcss.com/docs/editor-setup
 ## Test Azure DevOps
 
 ## Deployment Links
+Es ist bekannt dass die Fotoanalyse auf dem iPhone im Hochformat weniger gut funktioniert. Auf Android und iPhone im Querformat funktioniert es besser.
 Digital Ocean (wurde bei der Präsentation verwendet): https://dev-pp-z9adh.ondigitalocean.app/ <br />
 Dev Branch (mit Kubernetes DevOps): https://npp-dev.pm4.init-lab.ch/
