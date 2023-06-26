@@ -7,7 +7,7 @@ export async function getPhotoInformations(photo: File): Promise<PhotoInformatio
   try {
     const geoInformations = await getGeoInformations(photo)
     const alprStats = await api.readAlprStats(photo)
-    
+
     if(!alprStats) return
     return {alprStats, location: geoInformations}
   } catch (error) {

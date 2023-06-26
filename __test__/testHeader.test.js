@@ -1,13 +1,18 @@
 /**
  * @jest-environment jsdom
  */
-import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Header from '../src/components/organism/Header';
 import { useUser } from '@auth0/nextjs-auth0/client';
 
 jest.mock('@auth0/nextjs-auth0/client');
+
+const mockUser = {
+    email: process.env.AUTH0_EMAIL,
+    email_verified: true,
+    sub: process.env.AUTH0_SUB,
+}
 
 describe('Header', () => {
 
@@ -21,7 +26,12 @@ describe('Header', () => {
         const { getByText } = render(<Header />);
 
         expect(getByText('Login')).toBeInTheDocument();
-        //expect(getByText('Response not successful:')).toBeInTheDocument();
-        //expect(getByText('Received status code 500')).toBeInTheDocument();
+    });
+
+    it('should render a header with a logout button if a user is logged in', () => {
+        useUser.mockReturnValue({ user: mockUser });
+        const { getByAltText } = render(<Header />);
+
+        expect(getByAltText('logoutIcon')).toBeInTheDocument();
     });
 });
