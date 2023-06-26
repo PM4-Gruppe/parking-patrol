@@ -41,3 +41,7 @@ ESLint as part of your continuous integration pipeline.
 Tailwindcss: https://tailwindcss.com/docs/editor-setup
 
 ## Test Azure DevOps
+
+## Deployment Links
+Digital Ocean (wurde bei der Präsentation verwendet): https://dev-pp-z9adh.ondigitalocean.app/ <br />
+Dev Branch (mit Kubernetes DevOps): https://npp-dev.pm4.init-lab.ch/
