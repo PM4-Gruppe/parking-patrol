@@ -23,10 +23,7 @@ export const saveCompressedImage = async (
   const imageName =
     `${thumbnail ? 'thumbnail' : 'compressed'}` + '_' + originalImageName
   const imagePath = path.join(process.cwd(), '/public/storage', imageName)
-  await sharp(originalImagePath)
-    .resize(maxWidth)
-    .jpeg({ quality })
-    .toFile(imagePath)
+  await sharp(originalImagePath).jpeg({ quality }).toFile(imagePath)
   return { filename: imageName, filepath: imagePath }
 }
 
